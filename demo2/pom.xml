@@ -7,7 +7,7 @@
     <parent>
         <groupId>cn.itlym</groupId>
         <artifactId>shoulder-parent</artifactId>
-        <version>0.7.1</version><!-- shoulder-version -->
+        <version>0.8-SNAPSHOT</version><!-- shoulder-version -->
     </parent>
 
     <groupId>com.example</groupId>
@@ -17,7 +17,7 @@
     <description>Demo project for Shoulder Framework</description>
 
     <properties>
-        <java.version>11</java.version>
+        <java.version>17</java.version>
     </properties>
 
     <dependencies>
@@ -53,7 +53,7 @@
             <groupId>cn.itlym</groupId>
             <artifactId>shoulder-starter-mysql</artifactId>
         </dependency>
-        <!-- shoulder 继承了 spring boot 的所有特性，引入 spring boot 的jar 一样不需要写版本号 -->
+        <!-- shoulder 继承了 Spring Boot 的所有特性，引入 Spring Boot 的jar 一样不需要写版本号 -->
 
         <!-- 热更新插件，修改代码无需重启 -->
 <!--        <dependency>-->
@@ -79,7 +79,7 @@
     </dependencies>
 
     <build>
-        <!-- spring boot 打包 -->
+        <!-- Spring Boot 打包 -->
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
  *
  * @author lym
  * @see org.shoulder.core.converter.EnumConverter#convert 默认使用名称匹配，可以自行继承来扩展 shoulder 提供的匹配方式
- * 注入 spring boot 的 EnumConverterFactory 可替换 shoulder 的实现
+ * 注入 Spring Boot 的 EnumConverterFactory 可替换 shoulder 的实现
  */
 @RestController
 @RequestMapping("enum")

@@ -5,12 +5,16 @@
     <parent>
         <groupId>cn.itlym</groupId>
         <artifactId>shoulder-parent</artifactId>
-        <version>0.7.1</version><!-- shoulder-version -->
+        <version>0.8-SNAPSHOT</version><!-- shoulder-version -->
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.example</groupId>
     <artifactId>demo8</artifactId>
+
+    <properties>
+        <java.version>17</java.version>
+    </properties>
 
     <dependencies>
 

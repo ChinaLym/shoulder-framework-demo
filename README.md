@@ -7,7 +7,7 @@
     - 通过对比使用 `Shoulder` 与原生的 `Spring Boot` 来展示 Shoulder 提供的能力与快速开发。
     - 包含：日志、错误码、多语言翻译、返回值自动包装、异常自动拦截、数据存储加解密、前后端传输加解密
     - 系统监控
-        - spring boot 自动监控
+        - Spring Boot 自动监控
         - 轻松实现监控自己的线程池状态，同步到监控与报警中心 Prometheus，Grafana 展示
 
 - [demo2](https://github.com/ChinaLym/shoulder-framework-demo/tree/main/demo2)（`数据库`）

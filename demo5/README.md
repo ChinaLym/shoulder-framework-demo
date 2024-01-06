@@ -1,19 +1,18 @@
-# 学习 **[shoulder-framework](https://gitee.com/ChinaLym/shoulder-framework)** - ECDH 与安全通讯
+# 学习进程间安全通讯
 
 ## 加密通信
+> 无侵入、无感知式高可扩展性的 HTTP 通信自动加解密方案，轻松满足不同国家的政策监管。
 
-建议根据以下的顺序了解 `Shoulder` 的使用
+在需要加密保护的接口/字段上加 `@Sensitive` 注解，Shoulder 将在接口请求/响应时对其进行加解密
 
-阅读 [Shoulder - 通讯加密方案](https://gitee.com/ChinaLym/shoulder-framework/tree/master/shoulder-build/shoulder-base/shoulder-crypto-negotiation)
-
-- 分别将demo5的两个应用使用 test1、test2 两个不同的profile分别启动后才能进行测试
-> 可以修改 application.properties 的 spring.profiles.active 属性启动
+### demo 体验
+- 借助Spring profile机制，将demo5应用使用 test1、test2 profile分别启动后进行测试
+> 如图
 ![demo5.png](demo5.png)
 
-- 开箱即用的数据通信自动加解密
-  - 只需了解一个 `@Sensitive` 注解，其他的 Shoulder 已经完成了
+### 原理说明
+ [Shoulder - 通讯加密方案](https://gitee.com/ChinaLym/shoulder-framework/tree/master/shoulder-build/shoulder-base/shoulder-crypto-negotiation)
 
----
-
-无侵入、无感知式 HTTP 通信加密，且为了便于满足不同国家的政策监管，通过注入对应的加密类即可切换加密算法，如中国要求 SM 算法、美国要求AES算法。
+### 扩展
+按照 Shoulder SPI 注入想要的加密算法类即可切换加密算法，如中国要求 SM 算法、美国要求AES算法。
 

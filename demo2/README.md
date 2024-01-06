@@ -1,4 +1,4 @@
-# 开始学习 Shoulder - 数据库访问！
+# 更舒服的DB访问：致敬 Spring Boot、Mybatis Plus，在其肩膀更上一层楼
 
 下载本项目
 

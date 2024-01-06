@@ -1,4 +1,4 @@
-# 开始学习 Shoulder - 核心能力！
+# 企业级封装：重温 Spring Boot WEB核心能力、体验 Shoulder 扩展思想，节省上万行代码！
 
 下载本项目
 

@@ -17,7 +17,7 @@
         - 验证码
         
 - demo4
-    - spring boot 自动监控
+    - Spring Boot 自动监控
     - 轻松实现监控自己的线程池状态，同步到监控与报警中心 Prometheus，Grafana 展示
     
 - demo5

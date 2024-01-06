@@ -1,4 +1,4 @@
-# 开始学习 Shoulder - Spring Security 安全与认证 ！
+# 跟着 Shoulder 学习使用 Spring Security 的最佳姿势
 
 下载本项目
 

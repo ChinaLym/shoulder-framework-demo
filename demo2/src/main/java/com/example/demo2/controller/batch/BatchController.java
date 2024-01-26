@@ -135,7 +135,7 @@ public class BatchController {
 
     /**
      * 查询数据导入进度，注意调用时候记得传入tastId
-     * http://localhost:8080/batch/progress?taskId=
+     * http://localhost:8080/batch/progress?taskId=41b7c2e8-936d-4434-958b-aef2baaae8e2
      */
     @RequestMapping(value = "progress", method = GET)
     public BaseResult<BatchProcessResult> queryOperationProcess(@Nullable String taskId) {

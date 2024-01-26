@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
  * BODY {}
  *
  * @author lym
- *
+ * <p>
  * extends {@link CrudController} 会暴露哪些接口？ 见其继承的接口
  * @see QueryController
  * @see SaveController
@@ -30,7 +30,14 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("user")
-public class UserController extends CrudController<IUserService, UserEntity, Long, UserEntity, UserEntity, UserEntity> {
+public class UserController extends CrudController<
+        IUserService,
+        UserEntity,
+        Long,
+        UserEntity,
+        UserEntity,
+        UserEntity,
+        UserEntity> {
 
 
 }

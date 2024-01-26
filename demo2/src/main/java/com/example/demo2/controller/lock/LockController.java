@@ -2,6 +2,7 @@ package com.example.demo2.controller.lock;
 
 import com.example.demo2.entity.UserEntity;
 import com.example.demo2.service.IUserService;
+import jakarta.annotation.PreDestroy;
 import org.shoulder.core.exception.CommonErrorCodeEnum;
 import org.shoulder.core.lock.LockInfo;
 import org.shoulder.core.lock.ReentrantServerLock;
@@ -21,7 +22,6 @@ import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
 
-import javax.annotation.PreDestroy;
 import javax.sql.DataSource;
 
 /**

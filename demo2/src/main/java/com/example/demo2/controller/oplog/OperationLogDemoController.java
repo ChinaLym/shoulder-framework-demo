@@ -22,6 +22,9 @@ public class OperationLogDemoController {
      * <a href="http://localhost:8080/oplog/1" />
      * 通过 @OperationLog 注解，快速生成一条操作日志
      * 只需加个注解、即可记录操作日志
+     *
+     * 查看日志: http://localhost:8080/h2-console
+     * 用户名/密码: shoulder / shoulder
      */
     @GetMapping("1")
     @OperationLog(operation = "testOpLogAnnotation")

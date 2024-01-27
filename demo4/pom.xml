@@ -48,6 +48,11 @@
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
         </dependency>
+        <dependency>
+            <!-- demo 工程 mock redis -->
+            <groupId>com.github.kstyrc</groupId>
+            <artifactId>embedded-redis</artifactId>
+        </dependency>
 
         <!-- 测试 -->
         <dependency>

@@ -8,9 +8,10 @@ spring:
 
   profiles:
     active: token # token / session
-  redis:
-    host: ${REDIS_ADDR}
-    password: ${REDIS_PWD}
+  data:
+    redis:
+      host: 127.0.0.1
+      #password: ${REDIS_PWD}
 
 shoulder:
   application:

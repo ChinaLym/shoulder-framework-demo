@@ -35,6 +35,16 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
+        <!-- demo 工程使用 h2 作为 DB -->
+        <!--<dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+        </dependency>-->
+        <dependency>
+            <!-- demo 工程 mock redis -->
+            <groupId>com.github.kstyrc</groupId>
+            <artifactId>embedded-redis</artifactId>
+        </dependency>
 
     </dependencies>
 

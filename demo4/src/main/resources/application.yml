@@ -29,8 +29,8 @@ spring:
     type: com.zaxxer.hikari.HikariDataSource
   data:
     redis:
-      host: ${REDIS_ADDR}
-      password: ${REDIS_PWD}
+      host: 127.0.0.1
+      #password: ${REDIS_PWD}
 
 
 shoulder:

@@ -19,7 +19,7 @@ import java.io.IOException;
  */
 @SpringBootApplication
 public class Demo3Application {
-
+// todo h2 数据库
     public static void main(String[] args) {
         SpringApplication.run(Demo3Application.class, args);
     }
@@ -27,6 +27,5 @@ public class Demo3Application {
     @Bean
     AccessDeniedHandlerImpl accessDeniedHandler() {
         return new AccessDeniedHandlerImpl();
-
     }
 }

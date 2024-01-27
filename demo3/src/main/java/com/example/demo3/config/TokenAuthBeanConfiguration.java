@@ -22,7 +22,7 @@ import java.util.Map;
  * @author lym
  */
 @Configuration
-@ConditionalOnAuthType(type = AuthenticationType.TOKEN)
+@ConditionalOnAuthType(type = AuthenticationType.TOKEN) // 该类激活条件：token模式才启用
 public class TokenAuthBeanConfiguration {
 
     public static final BaseClientDetails TEST_CLIENT_DETAIL;

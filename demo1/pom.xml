@@ -29,14 +29,6 @@
             <artifactId>shoulder-starter-web</artifactId>
         </dependency>
 
-        <!-- spring boot 版本升级属性迁移工具 -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-properties-migrator</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-
-
         <!-- 接口文档 -->
 <!--        <dependency>-->
 <!--            <groupId>io.springfox</groupId>-->

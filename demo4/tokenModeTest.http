@@ -1,0 +1,29 @@
+# 1. 模拟（APP/小程序）登录换token： browser 模式返回成功，token 模式返回 token
+POST http://localhost:8080/authentication/form
+Content-Type: application/x-www-form-urlencoded
+
+username=shoulder&password=shoulder
+
+###
+
+# 2. 使用http-1的响应 data.access_token 来调用接口
+# 若不先登录拿 token / token 不对，拒绝本次请求 （org.shoulder.security.authentication.handler.json.Restful401AuthenticationEntryPoint.commence）
+POST http://localhost:8080/user/1
+Content-Type: application/json
+Authorization: Bearer 3bc40EG5dPkLPamAeafbyd_CQ8U
+
+
+###
+
+# 3. OAuth2校验 token 是否有效 shoulder 自动添加的常用端口：IntrospectEndpoint
+POST http://localhost:8080/token/introspect
+Content-Type: application/json
+Authorization: Bearer 3bc40EG5dPkLPamAeafbyd_CQ8U
+
+
+###
+
+# 4. 用 token 调用
+GET http://localhost:8080/user/getOne?name=Shoulder
+Content-Type: application/json
+Authorization: Bearer 3bc40EG5dPkLPamAeafbyd_CQ8U

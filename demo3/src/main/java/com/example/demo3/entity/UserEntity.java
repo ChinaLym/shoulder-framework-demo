@@ -20,7 +20,7 @@ import org.shoulder.data.mybatis.template.entity.BaseEntity;
 @Setter
 @Accessors(chain = true)
 @ToString(callSuper = true)
-@TableName("tb_user")
+@TableName("user_info")
 public class UserEntity extends BaseEntity<Long> {
 
     @TableField(value = "username", fill = FieldFill.INSERT)

@@ -6,6 +6,8 @@
 git clone https://gitee.com/ChinaLym/shoulder-framework-demo
 ```
 
+IDEA 直接运行（默认8080端口）。为了演示方便，demo 运行时会启动内嵌 redis，h2 数据库，停止后自动结束。
+
 在自己的数据库，如mysql中建立 `demo_shoulder` 数据库
 - 导入建表语句 `user.ddl` 即可
 
@@ -76,6 +78,14 @@ git clone https://gitee.com/ChinaLym/shoulder-framework-demo
 假如手机号登录(`/login/phone`)、修改身份证号(`/changeIdCard`)需要校验短信验证码，只需配置
 
 `shoulder.security.validate-code.sms.urls=/login/phone,/changeIdCard`
+
+记住我 spring 是怎么实现的 ？
+https://springdoc.cn/spring-security/servlet/authentication/rememberme.html
+- UsernamePasswordAuthenticationFilter
+- RememberMeServices
+- PersistentTokenBasedRememberMeServices
+- PersistentTokenRepository
+- JdbcTokenRepositoryImpl
 
 当新的业务需要校验验证码时，只需要配一下即可。
 

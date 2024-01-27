@@ -43,6 +43,11 @@
             <groupId>cn.itlym</groupId>
             <artifactId>shoulder-starter-mysql</artifactId>
         </dependency>
+        <dependency>
+            <!-- demo 工程使用 h2 链接 -->
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+        </dependency>
 
         <!-- 测试 -->
         <dependency>

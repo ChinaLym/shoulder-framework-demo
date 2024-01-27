@@ -4,11 +4,12 @@ spring:
   application:
     name: demo3-session
 
-  resources:
-    cache:
-      period: 1
-    chain:
-      cache: true # 关闭 html 缓存，以修改后实时查看
+  web:
+    resources:
+      cache:
+        period: 1
+      chain:
+        cache: true
 
 shoulder:
   security:

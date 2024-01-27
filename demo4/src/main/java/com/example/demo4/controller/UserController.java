@@ -16,8 +16,14 @@ import org.springframework.web.bind.annotation.RestController;
 @SkipResponseWrap // 跳过包装方便演示
 @RestController
 @RequestMapping("user")
-public class UserController extends CrudController<IUserService, UserEntity, Long, UserEntity, UserEntity, UserEntity> {
-
+public class UserController extends CrudController<
+        IUserService,
+        UserEntity,
+        Long,
+        UserEntity,
+        UserEntity,
+        UserEntity,
+        UserEntity> {
 
     /**
      * 查询 id 为 1 的用户信息

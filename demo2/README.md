@@ -6,12 +6,7 @@
 git clone https://gitee.com/ChinaLym/shoulder-framework-demo
 ```
 
-在自己的数据库，如mysql中建立 `demo_shoulder` 数据库
-- 导入建表语句 `demo_shoulder.ddl` 即可
-
-打开 `demo2` 工程，修改 `application.yml` 中数据库配置信息：url、用户名、密码等
-
-将其在本地运行（默认8080端口）
+直接运行（默认8080端口）
 
 进入 `com.example.demo2.controller` 目录，打开对应的类，参照类上的注解进行测试与查看。（为了方便初学者快速浏览，在 IDE 中按住 `ctrl` 点击注释内 `url` 即可测试与访问）
 

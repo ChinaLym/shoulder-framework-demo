@@ -17,7 +17,7 @@
 <small>
     （该认证方式框架为 spring-security 中提供的，即默认从 UserDetailService#loadUserByUsername 中取用户信息。<br>
     demo3中的实现是通过查数据库 user 表。见 UserServiceImpl）<br>
-    注：user.ddl 中默认插入的数据的密码均为 shoulder
+    注：data.sql 中默认插入的数据的密码均为 shoulder
 </small>
 <form action="/authentication/form" method="post">
     <table>
@@ -26,7 +26,7 @@
             <td><input name="username" type="text" value="shoulder"></td>
         </tr>
         <tr>
-            <td>密码（默认为 shoulder）:</td>
+            <td>密码（默认 shoulder）:</td>
             <td><input name="password" type="password" value="shoulder"></td>
         </tr>
         <tr>
@@ -34,7 +34,7 @@
             <td>
                 <input name="imageCode" type="text">
                 <img src="/code?type=imageCode" onclick="this.src=this.src+'&k='+Math.random();">
-                <small>(引入 `learn-security-starter-code` 后，默认情况下，表单登录必须填正确的验证码才能成功登录。不引入则无校验规则)<br>
+                <small>(`pom.xml` 引入 `learn-security-starter-code` 后，表单登录在后端校验时默认必须填正确的验证码才能成功登录。去 pom.xml 试试吧)<br>
                     默认情况下，仅表单登录请求需要图片验证码，可通过修改 "shoulder.security.validate-code.image.urls" 来修改/新增需要校验的路径
                 </small>
             </td>
@@ -43,7 +43,7 @@
             <td colspan='2'>
                 <!-- name 固定，spring-security 定义 -->
                 <input name="remember-me" type="checkbox" value="true"/>记住我
-                <small>（勾选该项后，即使关闭浏览器，在1个月内，不必认证也可以直接访问，即自动登录，勾上然后重启服务器测试一下吧~）</small>
+                <small>（勾选该项后，即使关闭浏览器，在1个月内，不必认证也可以直接访问，即自动登录，勾上然后重启服务器测试一下吧~ ）</small>
             </td>
         </tr>
         <tr>
@@ -55,7 +55,7 @@
 </form>
 
 <h3>短信登录</h3>
-<small>(pom.xml 引入 `learn-security-starter-code` 后，支持短信验证码登录)
+<small>(`pom.xml` 引入 `learn-security-starter-code` 后，支持短信验证码登录)
 </small>
 <form action="/authentication/sms" method="post">
     <table>
@@ -82,9 +82,9 @@
 </form>
 <br>
 <h3>社交登录</h3>
-<a href="/auth/qq">QQ登录</a>
+<a href="/auth/qq" style="opacity: 0.4">QQ登录</a>
 
-<a href="/auth/weixin">微信登录</a>
+<a href="/auth/weixin" style="opacity: 0.4">微信登录</a>
 </body>
 <script>
     // 发送短信验证码

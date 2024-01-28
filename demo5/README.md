@@ -8,12 +8,8 @@ git clone https://gitee.com/ChinaLym/shoulder-framework-demo
 ```
 
 - 导入 `IDEA` 后，分别启动 [Demo5_Server.java](src%2Fmain%2Fjava%2Fcom%2Fexample%2Fdemo5%2FDemo5_Server.java)，[Demo5_Client.java](src%2Fmain%2Fjava%2Fcom%2Fexample%2Fdemo5%2FDemo5_Client.java)
-> 如图
-![demo5.png](demo5.png)
 
-学习 [controller](src%2Fmain%2Fjava%2Fcom%2Fexample%2Fdemo5%2Fcontroller) 的
-
-IDEA 打开 `[demo5.http](demo5.http)` 文件快速触发调用并体验
+打开 `[demo5.http](demo5.http)` 体验并前往 [controller](src%2Fmain%2Fjava%2Fcom%2Fexample%2Fdemo5%2Fcontroller) 学习代码使用
 
 > 为了演示方便，demo 运行时会启动内嵌 redis，数据库，停止后自动结束，第二次启动redis端口冲突报错不影响使用~。
 

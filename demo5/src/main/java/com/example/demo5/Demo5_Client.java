@@ -1,9 +1,10 @@
 package com.example.demo5;
 
-import org.shoulder.autoconfigure.redis.EnableRedisMock;
+import org.shoulder.autoconfigure.redis.EnableEmbeddedRedis;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Profile;
+import org.springframework.context.annotation.PropertySource;
 
 /**
  * 进程通信安全demo-server
@@ -11,8 +12,8 @@ import org.springframework.context.annotation.Profile;
  * @author lym
  */
 @SpringBootApplication
-@EnableRedisMock
-@Profile("client")// 额外激活 application-client.properties 配置文件，模拟 client 端（占用 8080端口）
+@EnableEmbeddedRedis
+@PropertySource("classpath:/application-client.properties")// 指定配置文件，模拟 client 端（占用 8080端口）
 public class Demo5_Client {
 
     public static void main(String[] args) {

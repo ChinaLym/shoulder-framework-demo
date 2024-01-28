@@ -4,7 +4,7 @@ import org.apache.commons.collections4.MapUtils;
 import org.shoulder.core.util.JsonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.core.env.Environment;
 import org.springframework.http.MediaType;
@@ -49,7 +49,7 @@ public class BaseWebTest implements EnvironmentAware {
     private static final String UTF_8 = "UTF-8";
 
 
-    public ResultActions doGetTest(String getUrl, String resultContains) throws Exception {
+    public ResultActions getAndResultContains(String getUrl, String resultContains) throws Exception {
         return doGetTest(getUrl)
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString(resultContains)));
@@ -61,8 +61,8 @@ public class BaseWebTest implements EnvironmentAware {
         return resultActions.andDo(print());
     }
 
-    public ResultActions doPostTest(String postUrl, String resultContains) throws Exception {
-        return doPostTest(postUrl, Collections.emptyMap(), resultContains);
+    public ResultActions postAndResultContains(String postUrl, String resultContains) throws Exception {
+        return postAndResultContains(postUrl, Collections.emptyMap(), resultContains);
     }
 
 
@@ -76,7 +76,7 @@ public class BaseWebTest implements EnvironmentAware {
         return resultActions.andDo(print());
     }
 
-    public ResultActions doPostTest(String postUrl, Map<String, Object> params, String resultContains) throws Exception {
+    public ResultActions postAndResultContains(String postUrl, Map<String, Object> params, String resultContains) throws Exception {
         MockHttpServletRequestBuilder requestBuilder = post(postUrl)
                 .characterEncoding(UTF_8)
                 .contentType(MediaType.APPLICATION_JSON);

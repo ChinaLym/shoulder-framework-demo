@@ -1,0 +1,19 @@
+# 【反例】 1. 直接调用会失败返回 400，因为调用敏感接口时，请求头未提前与服务端协商，调用时未携带协商会话标记，服务端拒绝
+POST http://localhost:80/simple/coding_server_like_me
+Content-Type: application/json
+
+{
+  "paramMark": "param",
+  "text": "12345",
+  "cipher": "123"
+}
+
+###
+
+# 正确发起进程通讯加密测试：调用 app_8080 ，然后 app_8080 通过 http 自动加密敏感字段后调用 app_80 recieve 接口
+GET http://localhost:8080/simple/coding_client_like_me
+
+###
+
+# 复杂对象也可以支持
+GET http://localhost:8080/complex/coding_client_like_me

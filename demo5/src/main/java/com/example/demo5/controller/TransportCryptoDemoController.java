@@ -36,6 +36,9 @@ import org.springframework.web.servlet.mvc.method.annotation.AbstractMessageConv
 @RequestMapping("simple")
 public class TransportCryptoDemoController {
 
+    /**
+     * 用法与 Spring {@link RestTemplate} 完全相同
+     */
     @Autowired
     private SecurityRestTemplate restTemplate;
 
@@ -43,7 +46,8 @@ public class TransportCryptoDemoController {
     private String port;
 
     /**
-     * 测试对另一个服务发起加密请求，自动进行密钥交换并加密传输  <a href="http://localhost:8080/simple/send"/>
+     * 客户端代码编写参考：对其他服务发起加密请求【将自动进行密钥交换并加密传输
+     * <a href="http://localhost:8080/simple/coding_client_like_me"/>
      *
      * @see SensitiveRequestEncryptMessageConverter#writeInternal 观察参数确实是自动加密处理的
      * @see SensitiveRequestEncryptMessageConverter#read 观察返回值确实是密文（或者看控制台日志也能看到是密文）
@@ -51,8 +55,8 @@ public class TransportCryptoDemoController {
      * @see HttpMessageConverterExtractor#messageConverters
      * 如果 client端拿到空响应，但是没报错，大概率就是 spring RestTemplate 传入的预期响应类型不正确，但Json.ObjectMapper使用了new Object
      */
-    @GetMapping("send")
-    public SimpleResult send() throws AsymmetricCryptoException {
+    @GetMapping("coding_client_like_me")
+    public SimpleResult coding_client_like_me() throws AsymmetricCryptoException {
         SimpleParam param = new SimpleParam();
         param.setCipher("123");
         param.setText("12345");
@@ -60,7 +64,7 @@ public class TransportCryptoDemoController {
         HttpEntity<SimpleParam> httpEntity = new HttpEntity<>(param, null);
         ParameterizedTypeReference<SimpleResult> resultType = new ParameterizedTypeReference<>() {
         };
-        ResponseEntity<SimpleResult> responseEntity = restTemplate.exchange("http://localhost:80/simple/receive", HttpMethod.POST,
+        ResponseEntity<SimpleResult> responseEntity = restTemplate.exchange("http://localhost:80/simple/coding_server_like_me", HttpMethod.POST,
                 httpEntity, resultType);
 
         SimpleResult apiResponse = responseEntity.getBody();
@@ -70,7 +74,7 @@ public class TransportCryptoDemoController {
 
 
     /**
-     * 测试直接请求加密接口  <a href="http://localhost:80/simple/receive"/>
+     * 测试直接请求加密接口  <a href="http://localhost:80/simple/coding_server_like_me"/>
      *
      * @see SensitiveRequestDecryptHandlerInterceptor 观察参数自动解密，和拒绝非握手的请求
      * @see AbstractMessageConverterMethodArgumentResolver#readWithMessageConverters this.getAdvice(). xxx 行，其中 body 就是实际收到的请求（未解密状态的）
@@ -78,8 +82,8 @@ public class TransportCryptoDemoController {
      * @see SensitiveResponseEncryptAdvice 观察返回值自动加密
      */
     @Sensitive
-    @RequestMapping(value = "receive", method = {RequestMethod.GET, RequestMethod.POST})
-    public SimpleResult receive(@RequestBody(required = false) SimpleParam param) {
+    @RequestMapping(value = "coding_server_like_me", method = {RequestMethod.GET, RequestMethod.POST})
+    public SimpleResult coding_server_like_me(@RequestBody(required = false) SimpleParam param) {
         System.out.println(param);
         SimpleResult result = new SimpleResult();
         result.setCipher("shoulder");

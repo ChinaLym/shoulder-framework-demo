@@ -25,9 +25,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 /**
- * 接口加密
+ * 接口加密-复杂 DTO 通信
  *
  * @author lym
  * @see DefaultAsymmetricCipher#ecc256
@@ -38,6 +39,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("complex")
 public class TransportCryptoComplexController {
 
+    /**
+     * 用法与 Spring {@link RestTemplate} 完全相同
+     */
     @Autowired
     private SecurityRestTemplate restTemplate;
 
@@ -45,13 +49,15 @@ public class TransportCryptoComplexController {
     private String port;
 
     /**
-     * 测试发起  <a href="http://localhost:80/complex/send"/>
+     * 客户端代码编写参考：对其他服务发起加密请求【将自动进行密钥交换并加密传输
+     * 嵌套的复杂对象也一样支持，同样是用 {@link Sensitive} 注解标记，见 {@link ComplexParam#innerCipher}
+     * <a href="http://localhost:80/complex/coding_client_like_me"/>
      *
      * @see SensitiveRequestEncryptMessageConverter#writeInternal 在这打断点，观察参数确实是自动加密处理的
      * @see SensitiveRequestEncryptMessageConverter#read 在这打断点，观察返回值确实是密文
      */
-    @GetMapping("send")
-    public ComplexResult send() throws AsymmetricCryptoException {
+    @GetMapping("coding_client_like_me")
+    public ComplexResult coding_client_like_me() throws AsymmetricCryptoException {
         SimpleParam inner = new SimpleParam();
         inner.setCipher("innerCipher");
         inner.setText("innerText");
@@ -63,7 +69,7 @@ public class TransportCryptoComplexController {
         HttpEntity<ComplexParam> httpEntity = new HttpEntity<>(param, null);
         ParameterizedTypeReference<ComplexResult> resultType = new ParameterizedTypeReference<>() {
         };
-        ResponseEntity<ComplexResult> responseEntity = restTemplate.exchange("http://localhost:80/complex/receive", HttpMethod.POST,
+        ResponseEntity<ComplexResult> responseEntity = restTemplate.exchange("http://localhost:80/complex/coding_server_like_me", HttpMethod.POST,
                 httpEntity, resultType);
 
         ComplexResult apiResponse = responseEntity.getBody();
@@ -73,14 +79,14 @@ public class TransportCryptoComplexController {
 
 
     /**
-     * 测试直接请求加密接口  <a href="http://localhost:80/complex/receive"/>
+     * 测试直接请求加密接口  <a href="http://localhost:80/complex/coding_server_like_me"/>
      *
      * @see SensitiveRequestDecryptHandlerInterceptor 观察服务端收到请求后，将敏感参数自动解密，或者 拒绝未握手/正确加密的请求
      * @see SensitiveResponseEncryptAdvice#beforeBodyWrite 观察返回值自动加密
      */
     @Sensitive
-    @RequestMapping(value = "receive", method = {RequestMethod.GET, RequestMethod.POST})
-    public ComplexResult receive(@RequestBody(required = false) ComplexParam param) {
+    @RequestMapping(value = "coding_server_like_me", method = {RequestMethod.GET, RequestMethod.POST})
+    public ComplexResult coding_server_like_me(@RequestBody(required = false) ComplexParam param) {
         System.out.println(param);
         SimpleResult inner = new SimpleResult();
         inner.setCipher("innerResult");

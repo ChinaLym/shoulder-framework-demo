@@ -1,10 +1,21 @@
 # 轻松学习 Spring Security 下 Oauth2 授权、OIDC 认证能力
 
-## 模块功能
+> 利用 Spring Security Oauth2 轻松实现 Oauth2 中 AuthServer、ResourceServer 角色
 
-基于 token 的认证实现
+1. 下载本项目
 
--
+```
+git clone https://gitee.com/ChinaLym/shoulder-framework-demo
+```
+
+2. 编辑 hosts 文件，添加以下内容（模拟不同域名 cookie 不共享）
+> Windows hosts 文件路径：`C:\Windows\System32\drivers\etc\hosts`
+> Mac/Linux hosts 文件路径：`/etc/hosts`
+```text
+127.0.0.1 resourceServer.com
+127.0.0.1 authServer.com
+
+```
 
 阅读 [shoulder-security](https://gitee.com/ChinaLym/shoulder-framework/tree/master/shoulder-build/shoulder-starter/shoulder-starter-auth-token)
 

@@ -30,7 +30,7 @@
             <artifactId>shoulder-crypto-negotiation</artifactId>
         </dependency>
 
-        <!-- 测试集群支持 -->
+        <!-- spring-boot-redis -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>

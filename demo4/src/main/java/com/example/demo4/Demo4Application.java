@@ -25,7 +25,6 @@ import java.util.Map;
 public class Demo4Application {
 
     public static void main(String[] args) {
-        AssertUtils.isTrue(false, CommonErrorCodeEnum.CODING, "0.7 版本不包含 demo3，可以去 0.6 分支查看使用");
         SpringApplication.run(Demo4Application.class, args);
     }
 

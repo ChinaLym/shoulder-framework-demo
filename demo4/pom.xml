@@ -49,7 +49,7 @@
         </dependency>
         <dependency>
             <!-- demo 工程 mock redis -->
-            <groupId>com.github.kstyrc</groupId>
+            <groupId>com.github.codemonstur</groupId>
             <artifactId>embedded-redis</artifactId>
         </dependency>
 

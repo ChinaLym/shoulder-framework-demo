@@ -30,7 +30,10 @@ shoulder:
   application:
     errorCodePrefix: '0x000b'
     id: ${spring.application.name}
-
+  web:
+    ext:
+      tag:
+        enable: true
   crypto:
     local:
       # 加密元数据放数据库

@@ -18,7 +18,7 @@ create table user_info
     group_id    int                                null comment '用户所属组id',
     group_name  varchar(64)                        not null comment '用户组名称',
     group_path  varchar(255)                       null comment '用户所属组路径',
-    creator     bigint                        not null comment '创建人编号',
+    creator     bigint                             not null comment '创建人编号',
     create_time datetime default CURRENT_TIMESTAMP null comment '创建时间',
     update_time datetime default CURRENT_TIMESTAMP null comment '最后修改时间',
     description varchar(255)                       null comment '用户描述'
@@ -29,7 +29,7 @@ create table user_info
 create table if not exists log_operation
 (
     id               bigint auto_increment comment '主键'
-    primary key,
+        primary key,
     app_id           varchar(32)                           not null comment '应用id',
     version          varchar(64)                           null comment '应用版本',
     instance_id      varchar(64)                           null comment '操作服务器节点标识（支持集群时用于定位具体哪台服务器执行）',
@@ -64,7 +64,7 @@ create table if not exists log_operation
     extended_field2  varchar(1024)                         null,
     extended_field3  varchar(1024)                         null,
     extended_field4  varchar(1024)                         null
-    )
+)
     comment '业务日志';
 
 create index idx_operation_time
@@ -89,7 +89,7 @@ create table if not exists crypto_info
     vector        varchar(64)                           null comment '初始偏移向量',
     create_time   datetime    default CURRENT_TIMESTAMP null comment '创建时间',
     primary key (app_id, header)
-    )
+)
     comment '加密元信息';
 
 ----
@@ -98,12 +98,14 @@ create table if not exists tb_tag
 (
     id             bigint unsigned auto_increment comment '主键'
         primary key,
-    biz_id         varchar(32)                               not null comment '业务唯一标识(不可修改；业务键拼接并哈希)',
+    biz_id         varchar(64)                               not null comment '业务唯一标识(不可修改；业务键拼接并哈希)',
     delete_version bigint unsigned default '0'               not null comment '删除标记：0-未删除；否则为删除时间',
     version        int             default 0                 not null comment '数据版本号：用于幂等防并发',
+    display_order  int             default 0                 not null comment '展示顺序',
     tenant         varchar(32)     default 'DEFAULT'         not null comment '租户',
-    type           varchar(64)                               not null comment '配置类型，通常可据此分库表',
+    tag_type       varchar(64)                               not null comment '配置类型，通常可据此分库表',
     name           varchar(64)                               null comment '标签名称',
+    display_name   varchar(64)                               null comment '标签名称-展示',
     description    varchar(255)                              null comment '备注:介绍为啥添加这一条',
     icon           varchar(255)                              null comment '图标地址',
     source         varchar(64)                               null comment '来源',
@@ -114,7 +116,24 @@ create table if not exists tb_tag
     update_time    datetime        default CURRENT_TIMESTAMP null comment '最后修改时间',
     ext            text                                      not null comment '业务数据，json 类型',
     constraint idx_tag_uni_biz_tenant_type_name_delete_version
-        unique (tenant, type, name, delete_version)
+        unique (tenant, tag_type, name, delete_version)
 )
     comment '标签表';
 
+create table if not exists tb_tag_mapping
+(
+    id             bigint unsigned auto_increment comment '主键'
+        primary key,
+    tag_id         varchar(32)                               not null comment '业务唯一标识(不可修改；业务键拼接并哈希)',
+    delete_version bigint unsigned default '0'               not null comment '删除标记：0-未删除；否则为删除时间',
+    ref_type       varchar(64)                               not null comment 'refType',
+    refIds         varchar(64)                               not null comment 'to be deleted',
+    oid            varchar(64)                               not null comment 'ref object Id',
+    creator        varchar(64)                               not null comment '创建人编号',
+    create_time    datetime        default CURRENT_TIMESTAMP null comment '创建时间',
+    modifier       varchar(64)                               not null comment '最近修改人编码',
+    update_time    datetime        default CURRENT_TIMESTAMP null comment '最后修改时间',
+    constraint idx_tag_mapping_uni_tag_ref_object
+        unique (tag_id, ref_type, oid)
+)
+    comment '标签映射表';

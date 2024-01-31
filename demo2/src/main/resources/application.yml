@@ -34,15 +34,15 @@ shoulder:
     ext:
       tag:
         enable: true
+    filter:
+      mock:
+        userId:
+          enable: true
   crypto:
     local:
       # 加密元数据放数据库
       repository: jdbc
 
-  web:
-    ext:
-      tag:
-        enable: true
   log:
     operation:
       logger:

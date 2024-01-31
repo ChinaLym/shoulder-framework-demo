@@ -111,10 +111,10 @@ create table if not exists tb_tag
     source         varchar(64)                               null comment '来源',
     status         varchar(32)                               null comment '状态',
     creator        varchar(64)                               not null comment '创建人编号',
-    create_time    datetime        default CURRENT_TIMESTAMP null comment '创建时间',
+    create_time    datetime        default CURRENT_TIMESTAMP not null comment '创建时间',
     modifier       varchar(64)                               not null comment '最近修改人编码',
-    update_time    datetime        default CURRENT_TIMESTAMP null comment '最后修改时间',
-    ext            text                                      not null comment '业务数据，json 类型',
+    update_time    datetime        default CURRENT_TIMESTAMP not null comment '最后修改时间',
+    ext            text                                      null comment '业务数据，json 类型',
     constraint idx_tag_uni_biz_tenant_type_name_delete_version
         unique (tenant, tag_type, name, delete_version)
 )

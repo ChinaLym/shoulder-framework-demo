@@ -1,3 +1,6 @@
+# user 是 demo2 编写的 controller，只需很少的代码即可拥有一个基本的 controller
+###
+
 # 查单个-id查询
 GET http://localhost:8080/user/1
 Content-Type: application/json
@@ -45,27 +48,4 @@ Content-Type: application/json
   "groupName": "a",
   "status": "123",
   "creator": 0
-}
-
-
-### 标签-查询
-
-GET http://localhost:8080/api/v1/tags/1
-
-
-### 标签-删除
-
-DELETE http://localhost:8080/api/v1/tags/1
-
-### 标签-新增
-POST http://localhost:8080/api/v1/tags
-Content-Type: application/json
-
-{
-  "bizId": "",
-  "type": "type",
-  "name": "name",
-  "display_name": "displayName",
-  "icon": "icon",
-  "description": "description"
 }

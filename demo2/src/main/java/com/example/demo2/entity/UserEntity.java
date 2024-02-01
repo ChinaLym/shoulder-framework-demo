@@ -1,6 +1,7 @@
 package com.example.demo2.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Getter;
 import lombok.Setter;
@@ -52,6 +53,10 @@ public class UserEntity extends BaseEntity<Long> {
 
     @TableField(value = "status")
     private Integer status;
+
+    @TableLogic(value = "0")
+    @TableField(value = "del")
+    private Integer del;
 
     @TableField(value = "creator")
     private Long creator;

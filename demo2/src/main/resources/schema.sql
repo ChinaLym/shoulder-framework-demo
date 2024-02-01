@@ -14,6 +14,7 @@ create table user_info
     phone_num   varchar(32)                        null comment '手机号',
     email       varchar(255)                       null comment '邮箱',
     status      int      default 0                 not null comment '用户是否启用：0-正常；1-禁用 2- 删除',
+    del      int      default 0                 not null comment 'shanchu',
     group_auth  int                                null comment '是否校验部门/组权限',
     group_id    int                                null comment '用户所属组id',
     group_name  varchar(64)                        not null comment '用户组名称',

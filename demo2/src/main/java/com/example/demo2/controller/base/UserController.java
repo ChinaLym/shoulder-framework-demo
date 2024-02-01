@@ -2,6 +2,7 @@ package com.example.demo2.controller.base;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.example.demo2.entity.UserEntity;
+import com.example.demo2.repository.UserMapper;
 import com.example.demo2.service.IUserService;
 import org.shoulder.web.template.crud.CrudController;
 import org.shoulder.web.template.crud.DeleteController;
@@ -62,6 +63,16 @@ public class UserController extends CrudController<
         LambdaQueryWrapper<UserEntity> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.like(UserEntity::getName, name);
         return service.getOne(queryWrapper);
+    }
+
+    /**
+     * 查询 name 为 input 的用户信息
+     * http://localhost:8080/user/getOne?name=Shoulder
+     */
+    @RequestMapping("logicDelete")
+    public String logicDelete(@RequestParam("id") String id) {
+        ((UserMapper)service.getBaseMapper()).omitById(id);
+        return "";
     }
 
 }

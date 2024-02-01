@@ -100,13 +100,13 @@ create table if not exists tb_tag
     id             bigint unsigned auto_increment comment '主键'
         primary key,
     biz_id         varchar(64)                               not null comment '业务唯一标识(不可修改；业务键拼接并哈希)',
-    delete_version bigint unsigned default '0'               not null comment '删除标记：0-未删除；否则为删除时间',
-    version        int             default 0                 not null comment '数据版本号：用于幂等防并发',
-    display_order  int             default 0                 not null comment '展示顺序',
-    tenant         varchar(32)     default 'DEFAULT'         not null comment '租户',
+    delete_version bigint unsigned                not null comment '删除标记：0-未删除；否则为删除时间',
+    version        int                           not null comment '数据版本号：用于幂等防并发',
+    display_order  int                              not null comment '展示顺序',
+    tenant         varchar(32)              not null comment '租户',
     tag_type       varchar(64)                               not null comment '配置类型，通常可据此分库表',
-    name           varchar(64)                               null comment '标签名称',
-    display_name   varchar(64)                               null comment '标签名称-展示',
+    name           varchar(64)                              not null comment '标签名称',
+    display_name   varchar(64)                              not  null comment '标签名称-展示',
     description    varchar(255)                              null comment '备注:介绍为啥添加这一条',
     icon           varchar(255)                              null comment '图标地址',
     source         varchar(64)                               null comment '来源',
@@ -116,8 +116,10 @@ create table if not exists tb_tag
     modifier       varchar(64)                               not null comment '最近修改人编码',
     update_time    datetime        default CURRENT_TIMESTAMP not null comment '最后修改时间',
     ext            text                                      null comment '业务数据，json 类型',
-    constraint idx_tag_uni_biz_tenant_type_name_delete_version
-        unique (tenant, tag_type, name, delete_version)
+    constraint idx_tag_uni_biz_id_tenant_delete_version
+    unique (biz_id, tenant, delete_version),
+    constraint idx_tag_uni_biz_type_name_tenant_delete_version
+        unique (tag_type, name, tenant, delete_version)
 )
     comment '标签表';
 

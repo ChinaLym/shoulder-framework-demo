@@ -1,13 +1,13 @@
 # shoulder 框架内嵌了 tagController，创建对应 tag 表 + 通过配置激活后，可以直接用 tag 相关功能
-###
 
-### 新增 todo version、delete 未赋值
+### 新增
 POST http://localhost:8080/api/v1/tags
 Content-Type: application/json
 
 {
   "type": "type",
   "name": "name",
+  "bizId": "type:name",
   "displayName": "displayName",
   "icon": "icon",
   "description": "description",
@@ -17,7 +17,7 @@ Content-Type: application/json
 }
 
 ### 查询
-GET http://localhost:8080/api/v1/tags/463790414072119296
+GET http://localhost:8080/api/v1/tags/{copy_your_id_here}
 
 ### 查询 page
 POST http://localhost:8080/api/v1/tags/page
@@ -48,7 +48,7 @@ Content-Type: application/json
   "tenant": "tenant",
   "displayOrder": 1,
   "source": "source_UPDATE",
-  "version": 1
+  "version": 3
 }
 
 ### 删除 byId

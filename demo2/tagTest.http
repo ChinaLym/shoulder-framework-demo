@@ -39,7 +39,7 @@ PUT http://localhost:8080/api/v1/tags
 Content-Type: application/json
 
 {
-  "id": 463790414072119296,
+  "id": 464117037422084096,
   "type": "type",
   "name": "name",
   "displayName": "displayName_UPDATEXXXX",
@@ -48,7 +48,7 @@ Content-Type: application/json
   "tenant": "tenant",
   "displayOrder": 1,
   "source": "source_UPDATE",
-  "version": 3
+  "version": 1
 }
 
 ### 删除 byId

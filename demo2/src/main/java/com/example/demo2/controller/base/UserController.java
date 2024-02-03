@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
  * 查询 id 为 1 的用户信息
  * http://localhost:8080/user/1
  * <p>
- * POST http://localhost:8080/user/listAll 【注意POST】todo 这类如何快捷访问
+ * POST http://localhost:8080/user/listAll?limit=20 【注意POST】todo 这类如何快捷访问
  * POST http://localhost:8080/user/page 【注意POST】
  * BODY {}
  *

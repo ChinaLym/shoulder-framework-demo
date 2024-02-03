@@ -19,10 +19,10 @@ public class Demo2Application {
 //    @Bean public PaginationInnerInterceptor pageInnerInterceptor() {
 //        return new PaginationInnerInterceptor();
 //    }
-//    //添加乐观锁拦截器
-//    @Bean public OptimisticLockerInnerInterceptor optimizationInnerInterceptor() {
-//        return new OptimisticLockerInnerInterceptor();
-//    }
+    //添加乐观锁拦截器
+    @Bean public OptimisticLockerInnerInterceptor optimizationInnerInterceptor() {
+        return new OptimisticLockerInnerInterceptor();
+    }
     public static void main(String[] args) {
         SpringApplication.run(Demo2Application.class, args);
     }

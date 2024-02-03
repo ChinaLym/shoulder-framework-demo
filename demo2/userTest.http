@@ -16,7 +16,7 @@ Content-Type: application/json
 ###
 
 # 查多个
-POST http://localhost:8080/user/listAll
+POST http://localhost:8080/user/listAll?limit=20
 Content-Type: application/json
 
 {

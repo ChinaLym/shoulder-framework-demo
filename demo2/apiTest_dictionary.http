@@ -1,0 +1,59 @@
+# shoulder 框架内嵌了 dictionaryController，创建对应 dictionary 表 + 通过配置激活后，可以直接用 dictionary 相关功能
+
+### 新增
+POST http://localhost:8080/api/v1/dictionary
+Content-Type: application/json
+
+{
+  "bizId": "shoulder:inner:user:sex",
+  "displayName": "性别",
+  "parentId": null,
+  "name": "sex",
+  "dictionaryType": "int",
+  "displayOrder": 1,
+  "description": "description",
+  "depth": 0
+}
+
+### 查询
+GET http://localhost:8080/api/v1/dictionary/shoulder:inner:user:sex
+
+### 查询-所有枚举类
+GET http://localhost:8080/api/v1/dictionary/allTypes
+
+### 查询 page
+POST http://localhost:8080/api/v1/dictionary/page
+Content-Type: application/json
+
+{
+  "pageNo": 1,
+  "pageSize": 20
+}
+
+### 查询 ALL
+POST http://localhost:8080/api/v1/dictionary/listAll?limit=20
+Content-Type: application/json
+
+{}
+
+### 更新 byId-注意version todo不存在未报错，字段覆盖更新，
+PUT http://localhost:8080/api/v1/dictionary
+Content-Type: application/json
+
+{
+  "bizId": "type:name",
+  "type": "type",
+  "name": "name",
+  "displayName": "displayName_UPDATEXXXX",
+  "icon": "icon_UPDATE",
+  "description": "description_UPDATE",
+  "tenant": "tenant",
+  "displayOrder": 1,
+  "source": "source_UPDATE",
+  "version": 0
+}
+
+### 删除 byId
+
+DELETE http://localhost:8080/api/v1/dictionary/type:name
+

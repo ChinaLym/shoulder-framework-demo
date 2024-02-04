@@ -1,7 +1,7 @@
 package com.example.demo1.enums;
 
 import com.example.demo1.config.DictionaryEnumConfiguration;
-import org.shoulder.web.template.dictionary.model.NameAsIdDictionaryEnum;
+import org.shoulder.web.template.dictionary.model.NameAsIdDictionaryItemEnum;
 
 /**
  * 让枚举实现 NameAsIdDictionaryEnum 接口，前段就可以调接口查询有哪些枚举啦
@@ -9,7 +9,7 @@ import org.shoulder.web.template.dictionary.model.NameAsIdDictionaryEnum;
  *
  * @author lym
  */
-public enum DictionaryTestEnum implements NameAsIdDictionaryEnum<DictionaryTestEnum> {
+public enum DictionaryTestEnum implements NameAsIdDictionaryItemEnum<DictionaryTestEnum> {
 
     /**
      *
@@ -29,7 +29,7 @@ public enum DictionaryTestEnum implements NameAsIdDictionaryEnum<DictionaryTestE
     }
 
     @Override
-    public long getDisplayOrder() {
+    public Integer getDisplayOrder() {
         return ordinal();
     }
 

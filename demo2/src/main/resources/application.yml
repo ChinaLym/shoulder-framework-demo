@@ -34,7 +34,9 @@ shoulder:
     ext:
       tag:
         enable: true
-    filter:
+      dictionary:
+        db:
+          enable: true
       mock:
         userId:
           enable: true

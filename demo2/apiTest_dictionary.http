@@ -5,7 +5,7 @@ POST http://localhost:8080/api/v1/dictionary
 Content-Type: application/json
 
 {
-  "bizId": "shoulder:inner:user:sex",
+  "code": "shoulder:inner:user:sex",
   "displayName": "性别",
   "parentId": null,
   "name": "sex",

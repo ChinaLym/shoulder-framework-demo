@@ -15,7 +15,6 @@ import java.time.LocalDateTime;
 /**
  * 用户实体，举例：主键为 uuid
  * 自动生成主键、创建者，创建时间，修改者，修改时间
- * todo 插件从 BaseEntity 类的注释上读取对象类型翻译用于操作日志 i18n
  *
  * @author lym
  * @objectType zh_CN=用户,en_US=UserInfo

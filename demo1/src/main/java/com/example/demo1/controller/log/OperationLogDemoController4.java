@@ -50,7 +50,7 @@ public class OperationLogDemoController4 {
         );
 
         OpLogContextHolder.getLog().setResult(OperationResult.of(operationRecords))
-                .setDetailItems(actionDetails);
+                .setDetailI18nItems(actionDetails);
 
         return OpLogContextHolder.getLog();
     }

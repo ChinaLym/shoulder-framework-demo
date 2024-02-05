@@ -6,7 +6,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
 /**
- * 高性能的自定義 bean 轉換工具，只需要写接口参数和返回值类型就可以了，一般认为性能是 dozer 的百倍以上
+ * 高性能的自定义 bean 轉換工具，只需要写接口参数和返回值类型就可以了，一般认为性能是 dozer 的百倍以上
  * 入门 https://blog.csdn.net/zhige_me/article/details/80699784
  *
  * @author lym

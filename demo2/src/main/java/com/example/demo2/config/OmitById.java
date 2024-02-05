@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.metadata.TableInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.mapping.MappedStatement;
 import org.apache.ibatis.mapping.SqlSource;
+import org.shoulder.core.util.ServletUtil;
 
 /**
  * mybatis-plus 高级用法：自定义方法注入

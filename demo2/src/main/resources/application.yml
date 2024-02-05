@@ -37,6 +37,7 @@ shoulder:
       dictionary:
         db:
           enable: true
+    filter:
       mock:
         userId:
           enable: true

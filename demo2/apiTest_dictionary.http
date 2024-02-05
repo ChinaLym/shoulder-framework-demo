@@ -1,7 +1,7 @@
 # shoulder 框架内嵌了 dictionaryController，创建对应 dictionary 表 + 通过配置激活后，可以直接用 dictionary 相关功能
 
-### 新增
-POST http://localhost:8080/api/v1/dictionary
+### 新增 type
+POST http://localhost:8080/api/v1/dictionary/type
 Content-Type: application/json
 
 {
@@ -12,21 +12,22 @@ Content-Type: application/json
   "dictionaryType": "int",
   "displayOrder": 1,
   "description": "description",
+  "source": "source_INSERT",
   "depth": 0
 }
 
-### 查询
-GET http://localhost:8080/api/v1/dictionary/shoulder:inner:user:sex
+### 查询 byBizId
+GET http://localhost:8080/api/v1/dictionary/type/shoulder:inner:user:sex
 ## GET http://localhost:8080/api/v1/dictionary/item/shoulder:inner:user:sex
 
 ### 查询-所有字典类（枚举）
-GET http://localhost:8080/api/v1/dictionary/allTypes
+GET http://localhost:8080/api/v1/dictionary/type/all
 
 ### 查看 page
-POST http://localhost:8080/api/v1/dictionary/page.html
+GET http://localhost:8080/ui/dictionary/page.html
 
 ### 查询 page
-POST http://localhost:8080/api/v1/dictionary/page
+POST http://localhost:8080/api/v1/dictionary/type/page
 Content-Type: application/json
 
 {
@@ -35,29 +36,55 @@ Content-Type: application/json
 }
 
 ### 查询 ALL
-POST http://localhost:8080/api/v1/dictionary/listAll?limit=20
+POST http://localhost:8080/api/v1/dictionary/type/listAll?limit=20
 Content-Type: application/json
 
 {}
 
-### 更新 byId-注意version todo不存在未报错，字段覆盖更新，
-PUT http://localhost:8080/api/v1/dictionary
+### 更新 byId-注意version要与数据库一致，否则更新不成功
+PUT http://localhost:8080/api/v1/dictionary/type
 Content-Type: application/json
 
 {
   "bizId": "type:name",
-  "type": "type",
-  "name": "name",
   "displayName": "displayName_UPDATEXXXX",
-  "icon": "icon_UPDATE",
   "description": "description_UPDATE",
   "tenant": "tenant",
   "displayOrder": 1,
-  "source": "source_UPDATE",
+  "source": "source_UPDATE_this_field_won't be update!",
   "version": 0
 }
 
-### 删除 byId
+### 新增 item
+POST http://localhost:8080/api/v1/dictionary/item
+Content-Type: application/json
 
-DELETE http://localhost:8080/api/v1/dictionary/type:name
+{
+  "dictionaryType": "shoulder:inner:user:sex",
+  "code": "M",
+  "displayName": "男性",
+  "parentCode": null,
+  "name": "male",
+  "displayOrder": 1,
+  "description": "man/male/M 男的",
+  "source": "source_INSERT"
+}
+
+### 查询ITEM ALL
+POST http://localhost:8080/api/v1/dictionary/item/listAll?limit=50
+Content-Type: application/json
+
+{
+  "dictionaryType": "shoulder:inner:user:sex"
+}
+
+
+### 删除 item byBizId
+
+DELETE http://localhost:8080/api/v1/dictionary/item/M
+
+
+### 删除 type byBizId
+
+DELETE http://localhost:8080/api/v1/dictionary/type/type:name
 

@@ -1,4 +1,4 @@
-create table user_info
+create table if not exists user_info
 (
     id          bigint unsigned auto_increment comment '主键'
         primary key,
@@ -12,11 +12,11 @@ create table user_info
     initials    varchar(128)                       null comment '真实姓名-首字母',
     spellings   varchar(255)                       null comment '真实姓名-汉语拼音全拼',
     phone_num   varchar(32)                        null comment '手机号',
-    email       varchar(255)                       null comment '邮箱',
+    email       varchar(128)                       null comment '邮箱',
     status      int      default 0                 not null comment '用户是否启用：0-正常；1-禁用 2- 删除',
-    del         int      default 0                 not null comment 'shanchu',
-    group_auth  int                                null comment '是否校验部门/组权限',
-    group_id    int                                null comment '用户所属组id',
+    del         int      default 0                 not null comment '仅用于demo，演示 OmitById，0-未删除，其他-已删除，本demo里，删除后值会同id',
+    group_auth  int                                null comment '是否校验用户所属组/部门权限',
+    group_id    int                                null comment '用户所属组/部门id',
     group_name  varchar(64)                        not null comment '用户组名称',
     group_path  varchar(255)                       null comment '用户所属组路径',
     creator     bigint                             not null comment '创建人编号',
@@ -49,12 +49,12 @@ create table if not exists log_operation
     terminal_info    varchar(255)                          null comment '操作者所在终端信息，如操作系统类型、浏览器、版本号等',
     object_type      varchar(128)                          null comment '操作对象类型；建议支持多语言',
     object_id        varchar(128)                          null comment '操作对象id',
-    object_name      varchar(255)                          null comment '操作对象名称',
-    operation_param  text                                  null comment '触发该操作的参数',
-    operation        varchar(255)                          not null comment '操作动作；建议支持多语言',
-    detail           text                                  null comment '操作详情。详细的描述用户的操作内容、json对象等',
-    detail_key       varchar(128)                          null comment '操作详情对应的多语言key',
-    detail_item      varchar(255)                          null comment '填充 detail_i18n_key 对应的多语言翻译。数组类型',
+    object_name      varchar(128)                          null comment '操作对象名称',
+    operation_param  text                                  null comment '触发该操作的参数, json 格式',
+    operation        varchar(128)                          not null comment '操作动作；建议支持多语言',
+    detail           text                                  null comment '操作详情。详细的描述用户的操作内容、json对象，仅在深入排差时查看',
+    detail_i18n_key       varchar(128)                          null comment '操作详情对应的多语言key',
+    detail_i18n_values      varchar(255)                          null comment '填充 detail_i18n_key 对应的多语言翻译。数组类型',
     result           int                                   not null comment '操作结果,0成功；1失败；2部分成功；建议支持多语言',
     error_code       varchar(32)                           null comment '错误码',
     operation_time   timestamp                             not null comment '操作触发时间，注意采集完成后替换为日志服务所在服务器时间',
@@ -145,37 +145,12 @@ create table if not exists tb_tag_mapping
 
 
 ----
-create table if not exists tb_dictionary_item
-(
-    id              bigint unsigned auto_increment comment '主键'
-        primary key,
-    biz_id          varchar(64)                        not null comment '业务唯一标识(不可修改；业务键拼接并哈希)',
 
-    version         int                                not null comment '数据版本号：用于幂等防并发',
-    description     varchar(255)                       null comment '备注:介绍为啥添加这一条记录，这条记录干啥的，哪里用，怎么用',
 
-    dictionary_type varchar(64)                        not null comment '字典类型编码',
-    name            varchar(64)                        not null comment '名称',
-    display_name    varchar(64)                        not null comment '展示名称',
-    display_order   int                                not null comment '顺序',
-    parentId        bigint                             not null comment '父节点id',
-
-    delete_version  bigint unsigned                    not null comment '删除标记：0-未删除；否则为删除时间',
-    creator         varchar(64)                        not null comment '创建人编号',
-    create_time     datetime default CURRENT_TIMESTAMP not null comment '创建时间',
-    modifier        varchar(64)                        not null comment '最近修改人编码',
-    update_time     datetime default CURRENT_TIMESTAMP not null comment '最后修改时间'
-)
-    comment 'tb_dictionary_item';
-
-create index idx_bizid on tb_dictionary_item (biz_id);
-create index idx_pid on tb_dictionary_item (parentId);
-
----- 建议读已
-create table if not exists tb_dictionary
+create table if not exists tb_dictionary_type
 (
     id             bigint unsigned auto_increment comment '主键'
-        primary key,
+    primary key,
     biz_id         varchar(64)                        not null comment '业务唯一标识(不可修改；业务键拼接并哈希)',
     version        int                                not null comment '数据版本号：用于幂等防并发',
     description    varchar(255)                       null comment '备注:介绍为啥添加这一条记录，这条记录干啥的，哪里用，怎么用',
@@ -189,12 +164,37 @@ create table if not exists tb_dictionary
     create_time    datetime default CURRENT_TIMESTAMP not null comment '创建时间',
     modifier       varchar(64)                        not null comment '最近修改人编码',
     update_time    datetime default CURRENT_TIMESTAMP not null comment '最后修改时间'
-)
-    comment 'tb_dictionary';
-
+    )
+    comment 'tb_dictionary_type';
 -- H2 数据库中，索引名需要全局唯一，一般数据库的索引名只需要表内唯一即可
-create index idx_dic_bizid on tb_dictionary (biz_id);
-create index idx_dic_display_order on tb_dictionary (display_order);
+create index idx_dic_type_bizid on tb_dictionary_type (biz_id);
+create index idx_dic_type_order on tb_dictionary_type (display_order);
+
+create table if not exists tb_dictionary_item
+(
+    id              bigint unsigned auto_increment comment '主键'
+        primary key,
+    biz_id          varchar(64)                        not null comment '业务唯一标识(不可修改；业务键拼接并哈希)',
+
+    version         int                                not null comment '数据版本号：用于幂等防并发',
+    description     varchar(255)                       null comment '备注:介绍为啥添加这一条记录，这条记录干啥的，哪里用，怎么用',
+
+    dictionary_type varchar(64)                        not null comment '字典类型编码',
+    name            varchar(64)                        not null comment '名称',
+    display_name    varchar(64)                        not null comment '展示名称',
+    display_order   int                                not null comment '顺序',
+    parent_id        bigint                            null comment '父节点id',
+
+    delete_version  bigint unsigned                    not null comment '删除标记：0-未删除；否则为删除时间',
+    creator         varchar(64)                        not null comment '创建人编号',
+    create_time     datetime default CURRENT_TIMESTAMP not null comment '创建时间',
+    modifier        varchar(64)                        not null comment '最近修改人编码',
+    update_time     datetime default CURRENT_TIMESTAMP not null comment '最后修改时间'
+)
+    comment 'tb_dictionary_item';
+
+create index idx_bizid on tb_dictionary_item (biz_id);
+create index idx_pid on tb_dictionary_item (parent_id);
 
 -- create table if not exists dict_hierarchy
 -- (

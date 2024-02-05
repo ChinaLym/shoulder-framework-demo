@@ -3,9 +3,9 @@ package com.example.demo1.controller.i18n;
 import org.shoulder.core.context.AppContext;
 import org.shoulder.core.i18.ReloadableLocaleDirectoryMessageSource;
 import org.shoulder.core.i18.Translator;
-import org.shoulder.core.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -46,12 +46,12 @@ public class ShoulderI18nDemoController {
     @GetMapping("spring")
     public String messageSource(String toBeTranslate, String args, String locale) {
 
-        Locale aimLocale = org.springframework.util.StringUtils.parseLocale(locale);
+        Locale aimLocale = StringUtils.parseLocale(locale);
         if (aimLocale == null) {
             aimLocale = Locale.getDefault();
         }
         String[] trArgs = null;
-        if (!org.springframework.util.StringUtils.isEmpty(args)) {
+        if (StringUtils.hasText(args)) {
             trArgs = args.split(",");
         }
         return messageSource.getMessage(toBeTranslate, trArgs, aimLocale);
@@ -60,7 +60,6 @@ public class ShoulderI18nDemoController {
 
     /**
      * Shoulder 中的推荐用法  <a href="http://localhost:8080/i18n/shoulder?toBeTranslate=shoulder.test.hi" />
-     *
      * 在 Spring 之上简化了使用，不必再填写 Locale，将自动获取
      *
      * @param toBeTranslate 待翻译的 多语言标识 code
@@ -69,7 +68,7 @@ public class ShoulderI18nDemoController {
      */
     @GetMapping("shoulder")
     public String translator(String toBeTranslate, String args) {
-        Object[] trArgs = StringUtils.isNotEmpty(args) ? args.split(",") : null;
+        Object[] trArgs = StringUtils.hasText(args) ? args.split(",") : null;
 
         return translator.getMessage(toBeTranslate, trArgs);
     }

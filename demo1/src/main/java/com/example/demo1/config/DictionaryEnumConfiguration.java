@@ -15,16 +15,14 @@ public class DictionaryEnumConfiguration {
 
     /**
      * 枚举自带 api
-     * 查询有哪些字典（枚举）<a href="http://localhost:8080/api/v1/dictionary/allTypes"/>
-     * 查询枚举有哪些字段 <a href="http://localhost:8080/api/v1/dictionary/item/listByType/DictionaryTestEnum"/>
-     * 查询枚举有哪些字段，一次查多个枚举（批量性能更好） <a href="http://localhost:8080/api/v1/dictionary/item/listByTypes?dictionaryTypeList=DictionaryTestEnum,DictionaryTestEnum2"/>
+     * 查询有哪些字典（枚举）<a href="http://localhost:8080/api/v1/dictionary/type/all"/>
+     * 查询枚举有哪些字段 <a href="http://localhost:8080/api/v1/dictionary/listByType/DictionaryTestEnum"/>
+     * 查询枚举有哪些字段，一次查多个枚举（批量性能更好） <a href="http://localhost:8080/api/v1/dictionary/listByTypes?dictionaryTypeList=DictionaryTestEnum,DictionaryTestEnum2"/>
      *
-     * DB 类型 api
-     * <a href="http://localhost:8080/api/v1/dictionary/queryOne/DictionaryTestEnum"/>
-     * POST! <a href="http://localhost:8080/api/v1/dictionary/DictionaryTestEnum"/>
+     * DB 类型 api see demo2
      *
      * @return DictionaryEnumRepositoryCustomizer
-     * @see org.shoulder.web.template.dictionary.DictionaryController
+     * @see org.shoulder.web.template.dictionary.controller.DictionaryEnumController
      */
     @Bean
     public DictionaryEnumRepositoryCustomizer dictionaryEnumRepositoryCustomizer() {

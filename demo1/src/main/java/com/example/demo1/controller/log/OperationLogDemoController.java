@@ -84,7 +84,7 @@ public class OperationLogDemoController {
 
                 // 描述是什么操作，补充详情
                 .setOperation("op.operation.shop.update.display")
-                .setDetailKey("log.actionMessageId.foobar.displayName")
+                .setDetailI18nKey("log.actionMessageId.foobar.displayName")
                 // 由于详情可以翻译，填充详情中的占位符
                 .addDetailItem(operableBo.getBoss().getName())
                 .addDetailItem(operableBo.getColor().name())

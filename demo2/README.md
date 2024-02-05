@@ -26,3 +26,6 @@ git clone https://gitee.com/ChinaLym/shoulder-framework-demo
 
 - 批处理
     快速实现一些业务的批量处理 / 导入 / 导出
+
+## 扩展：
+H2 数据库链接参数：https://ossezhu.medium.com/hibernate-h2-%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E9%85%8D%E7%BD%AE-url-%E8%A7%A3%E8%AF%BB-d237a29c544c

@@ -147,28 +147,29 @@ create table if not exists tb_tag_mapping
 ----
 create table if not exists tb_dictionary_item
 (
-    id             bigint unsigned auto_increment comment '主键'
+    id              bigint unsigned auto_increment comment '主键'
         primary key,
-    biz_id         varchar(64)                        not null comment '业务唯一标识(不可修改；业务键拼接并哈希)',
+    biz_id          varchar(64)                        not null comment '业务唯一标识(不可修改；业务键拼接并哈希)',
 
-    version        int                                not null comment '数据版本号：用于幂等防并发',
-    description    varchar(255)                       null comment '备注:介绍为啥添加这一条记录，这条记录干啥的，哪里用，怎么用',
+    version         int                                not null comment '数据版本号：用于幂等防并发',
+    description     varchar(255)                       null comment '备注:介绍为啥添加这一条记录，这条记录干啥的，哪里用，怎么用',
 
-    dictionary_id  varchar(64)                        not null comment '',
-    name           varchar(64)                        not null comment '名称',
-    display_name   varchar(64)                        not null comment '展示名称',
-    display_order  int                                not null comment '顺序',
+    dictionary_type varchar(64)                        not null comment '字典类型编码',
+    name            varchar(64)                        not null comment '名称',
+    display_name    varchar(64)                        not null comment '展示名称',
+    display_order   int                                not null comment '顺序',
+    parentId        bigint                             not null comment '父节点id',
 
-    delete_version bigint unsigned                    not null comment '删除标记：0-未删除；否则为删除时间',
-    creator        varchar(64)                        not null comment '创建人编号',
-    create_time    datetime default CURRENT_TIMESTAMP not null comment '创建时间',
-    modifier       varchar(64)                        not null comment '最近修改人编码',
-    update_time    datetime default CURRENT_TIMESTAMP not null comment '最后修改时间'
+    delete_version  bigint unsigned                    not null comment '删除标记：0-未删除；否则为删除时间',
+    creator         varchar(64)                        not null comment '创建人编号',
+    create_time     datetime default CURRENT_TIMESTAMP not null comment '创建时间',
+    modifier        varchar(64)                        not null comment '最近修改人编码',
+    update_time     datetime default CURRENT_TIMESTAMP not null comment '最后修改时间'
 )
     comment 'tb_dictionary_item';
 
 create index idx_bizid on tb_dictionary_item (biz_id);
-create index idx_dicid on tb_dictionary_item (dictionary_id);
+create index idx_pid on tb_dictionary_item (parentId);
 
 ---- 建议读已
 create table if not exists tb_dictionary
@@ -180,13 +181,9 @@ create table if not exists tb_dictionary
     description    varchar(255)                       null comment '备注:介绍为啥添加这一条记录，这条记录干啥的，哪里用，怎么用',
     delete_version bigint unsigned                    not null comment '删除标记：0-未删除；否则为删除时间',
 
-    name           varchar(64)                        not null comment '名称',
-    parentId       bigint                             not null comment '父节点id',
-    depth          int                                not null comment '层级深度',
+    display_name   varchar(64)                        not null comment '名称',
     display_order  int                                not null comment '顺序',
-
-    display_name   varchar(64)                        not null comment '展示名',
-    value_type     varchar(64)                        not null comment '类型',
+    source         varchar(64)                        not null comment '数据来源',
 
     creator        varchar(64)                        not null comment '创建人编号',
     create_time    datetime default CURRENT_TIMESTAMP not null comment '创建时间',
@@ -197,5 +194,15 @@ create table if not exists tb_dictionary
 
 -- H2 数据库中，索引名需要全局唯一，一般数据库的索引名只需要表内唯一即可
 create index idx_dic_bizid on tb_dictionary (biz_id);
-create index idx_dic_name on tb_dictionary (name);
-create index idx_pid_depth_order on tb_dictionary (parentId, depth, display_order);
+create index idx_dic_display_order on tb_dictionary (display_order);
+
+-- create table if not exists dict_hierarchy
+-- (
+--    id            bigint unsigned auto_increment comment '主键',
+--    ancestor_id   INT NOT NULL comment '数据版本号：用于幂等防并发',
+--    descendant_id INT NOT NULL comment '数据版本号：用于幂等防并发',
+--    depth         INT NOT NULL comment '深度差/距离',
+--    PRIMARY KEY (ancestor_id, descendant_id)
+--                                FOREIGN KEY (ancestor_id) REFERENCES dictionary(dict_id),
+--                                FOREIGN KEY (descendant_id) REFERENCES dictionary(dict_id)
+-- );

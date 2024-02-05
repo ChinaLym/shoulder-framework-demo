@@ -15,7 +15,7 @@ spring:
       schema-locations: classpath:schema.sql
       data-locations: classpath:data.sql
   datasource:
-    url: jdbc:h2:mem:dbtest;DATABASE_TO_UPPER=false;MODE=MYSQL;DB_CLOSE_ON_EXIT=FALSE;
+    url: jdbc:h2:mem:dbtest;DATABASE_TO_UPPER=false;MODE=MYSQL;DB_CLOSE_ON_EXIT=FALSE;DB_CLOSE_DELAY=-1;
     username: shoulder
     password: shoulder
     driver-class-name: org.h2.Driver

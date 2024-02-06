@@ -38,9 +38,8 @@ shoulder:
         db:
           enable: true
     filter:
-      mock:
-        userId:
-          enable: true
+      user:
+        mockIfMissing: true
   crypto:
     local:
       # 加密元数据放数据库

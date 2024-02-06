@@ -37,7 +37,7 @@ public class ThreadEnhancerDemoController {
         return "ok";
     }
 
-    public static interface SomeBusinessOperation extends Runnable {
+    public interface SomeBusinessOperation extends Runnable {
 
     }
 

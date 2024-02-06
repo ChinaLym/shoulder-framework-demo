@@ -15,8 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
-;
-
 /**
  * 延迟任务使用示例
  *

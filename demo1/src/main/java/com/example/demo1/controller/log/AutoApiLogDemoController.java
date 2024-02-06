@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -52,8 +53,8 @@ public class AutoApiLogDemoController {
         a.add("123");
         a.add("a");
         a.add("b");
-        System.out.println(a.toString());
-        System.out.println(a.toArray().toString());
+        System.out.println(a);
+        System.out.println(Arrays.toString(a.toArray()));
         System.out.println(JsonUtils.toJson(a));
     }
 }

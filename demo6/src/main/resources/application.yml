@@ -20,6 +20,3 @@ shoulder:
   crypto:
     local:
       repository: redis # 将加密元数据放入 redis 避免每次重启导致的解密失败
-
-  web:
-    handleGlobalException: false

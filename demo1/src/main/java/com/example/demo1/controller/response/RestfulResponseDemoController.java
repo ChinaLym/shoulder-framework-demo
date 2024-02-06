@@ -2,7 +2,9 @@ package com.example.demo1.controller.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.shoulder.autoconfigure.web.WebAdvanceAutoConfiguration;
 import org.shoulder.core.dto.response.BaseResult;
 import org.shoulder.web.annotation.SkipResponseWrap;
@@ -99,21 +101,13 @@ public class RestfulResponseDemoController {
      *
      * @param <T>
      */
-    public static class CustomizedResponse<T> extends BaseResult<T> {
+    @Getter @Setter public static class CustomizedResponse<T> extends BaseResult<T> {
 
         /**
          * 在 shoulder 标准之上额外定义了一个通用返回字段
          * 如为了兼容某个前端框架，新增一个专门用于填充 msg 占位符的子弹
          */
         private List<String> args = new LinkedList<>();
-
-        public List<String> getArgs() {
-            return args;
-        }
-
-        public void setArgs(List<String> args) {
-            this.args = args;
-        }
 
         public void addArgs(String... args) {
             this.args.addAll(Arrays.asList(args));

@@ -33,42 +33,42 @@ CREATE INDEX idx_email ON user_info (email);
 ----
 create table if not exists log_operation
 (
-    id               bigint auto_increment comment '主键'
+    id                 bigint auto_increment comment '主键'
         primary key,
-    app_id           varchar(32)                           not null comment '应用id',
-    version          varchar(64)                           null comment '应用版本',
-    instance_id      varchar(64)                           null comment '操作服务器节点标识（支持集群时用于定位具体哪台服务器执行）',
-    user_id          varchar(64)                           not null comment '用户标识',
-    user_name        varchar(64)                           null comment '用户名',
-    user_real_name   varchar(128)                          null comment '用户真实姓名',
-    user_org_id      varchar(64)                           null comment '用户组标识',
-    user_org_name    varchar(64)                           null comment '用户组名',
-    terminal_type    int                                   not null comment '终端类型。0:服务内部定时任务等触发；1:浏览器；2:客户端；3:移动App；4:小程序。推荐前端支持多语言',
-    terminal_address varchar(64)                           null comment '操作者所在终端地址，如 IPv4(15) IPv6(46)',
-    terminal_id      varchar(64)                           null comment '操作者所在终端标识，如PC的 MAC；手机的 IMSI、IMEI、ESN、MEID；甚至持久化的 UUID',
-    terminal_info    varchar(255)                          null comment '操作者所在终端信息，如操作系统类型、浏览器、版本号等',
-    object_type      varchar(128)                          null comment '操作对象类型；建议支持多语言',
-    object_id        varchar(128)                          null comment '操作对象id',
-    object_name      varchar(128)                          null comment '操作对象名称',
-    operation_param  text                                  null comment '触发该操作的参数, json 格式',
-    operation        varchar(128)                          not null comment '操作动作；建议支持多语言',
-    detail           text                                  null comment '操作详情。详细的描述用户的操作内容、json对象，仅在深入排差时查看',
-    detail_i18n_key       varchar(128)                          null comment '操作详情对应的多语言key',
-    detail_i18n_values      varchar(255)                          null comment '填充 detail_i18n_key 对应的多语言翻译。数组类型',
-    result           int                                   not null comment '操作结果,0成功；1失败；2部分成功；建议支持多语言',
-    error_code       varchar(32)                           null comment '错误码',
-    operation_time   timestamp                             not null comment '操作触发时间，注意采集完成后替换为日志服务所在服务器时间',
-    end_time         timestamp                             null comment '操作结束时间',
-    duration         bigint                                null comment '操作持续时间，冗余字段，单位 ms',
-    trace_id         varchar(64)                           null comment '调用链id',
-    relation_id      varchar(64)                           null comment '关联的调用链id/业务id',
-    tenant_code      varchar(20) default ''                null comment '租户编码',
-    insert_time      timestamp   default CURRENT_TIMESTAMP null comment '数据入库时间',
-    extended_field0  varchar(1024)                         null,
-    extended_field1  varchar(1024)                         null,
-    extended_field2  varchar(1024)                         null,
-    extended_field3  varchar(1024)                         null,
-    extended_field4  varchar(1024)                         null
+    app_id             varchar(32)                           not null comment '应用id',
+    version            varchar(64)                           null comment '应用版本',
+    instance_id        varchar(64)                           null comment '操作服务器节点标识（支持集群时用于定位具体哪台服务器执行）',
+    user_id            varchar(64)                           not null comment '用户标识',
+    user_name          varchar(64)                           null comment '用户名',
+    user_real_name     varchar(128)                          null comment '用户真实姓名',
+    user_org_id        varchar(64)                           null comment '用户组标识',
+    user_org_name      varchar(64)                           null comment '用户组名',
+    terminal_type      int                                   not null comment '终端类型。0:服务内部定时任务等触发；1:浏览器；2:客户端；3:移动App；4:小程序。推荐前端支持多语言',
+    terminal_address   varchar(64)                           null comment '操作者所在终端地址，如 IPv4(15) IPv6(46)',
+    terminal_id        varchar(64)                           null comment '操作者所在终端标识，如PC的 MAC；手机的 IMSI、IMEI、ESN、MEID；甚至持久化的 UUID',
+    terminal_info      varchar(255)                          null comment '操作者所在终端信息，如操作系统类型、浏览器、版本号等',
+    object_type        varchar(128)                          null comment '操作对象类型；建议支持多语言',
+    object_id          varchar(128)                          null comment '操作对象id',
+    object_name        varchar(128)                          null comment '操作对象名称',
+    operation_param    text                                  null comment '触发该操作的参数, json 格式',
+    operation          varchar(128)                          not null comment '操作动作；建议支持多语言',
+    detail             text                                  null comment '操作详情。详细的描述用户的操作内容、json对象，仅在深入排差时查看',
+    detail_i18n_key    varchar(128)                          null comment '操作详情对应的多语言key',
+    detail_i18n_values varchar(255)                          null comment '填充 detail_i18n_key 对应的多语言翻译。数组类型',
+    result             int                                   not null comment '操作结果,0成功；1失败；2部分成功；建议支持多语言',
+    error_code         varchar(32)                           null comment '错误码',
+    operation_time     timestamp                             not null comment '操作触发时间，注意采集完成后替换为日志服务所在服务器时间',
+    end_time           timestamp                             null comment '操作结束时间',
+    duration           bigint                                null comment '操作持续时间，冗余字段，单位 ms',
+    trace_id           varchar(64)                           null comment '调用链id',
+    relation_id        varchar(64)                           null comment '关联的调用链id/业务id',
+    tenant_code        varchar(20) default ''                null comment '租户编码',
+    insert_time        timestamp   default CURRENT_TIMESTAMP null comment '数据入库时间',
+    extended_field0    varchar(1024)                         null,
+    extended_field1    varchar(1024)                         null,
+    extended_field2    varchar(1024)                         null,
+    extended_field3    varchar(1024)                         null,
+    extended_field4    varchar(1024)                         null
 )
     comment '业务日志';
 
@@ -150,7 +150,7 @@ create table if not exists tb_tag_mapping
 create table if not exists tb_dictionary_type
 (
     id             bigint unsigned auto_increment comment '主键'
-    primary key,
+        primary key,
     biz_id         varchar(64)                        not null comment '业务唯一标识(不可修改；业务键拼接并哈希)',
     version        int                                not null comment '数据版本号：用于幂等防并发',
     description    varchar(255)                       null comment '备注:介绍为啥添加这一条记录，这条记录干啥的，哪里用，怎么用',
@@ -164,7 +164,7 @@ create table if not exists tb_dictionary_type
     create_time    datetime default CURRENT_TIMESTAMP not null comment '创建时间',
     modifier       varchar(64)                        not null comment '最近修改人编码',
     update_time    datetime default CURRENT_TIMESTAMP not null comment '最后修改时间'
-    )
+)
     comment 'tb_dictionary_type';
 -- H2 数据库中，索引名需要全局唯一，一般数据库的索引名只需要表内唯一即可
 create index idx_dic_type_bizid on tb_dictionary_type (biz_id);
@@ -183,7 +183,7 @@ create table if not exists tb_dictionary_item
     name            varchar(64)                        not null comment '名称',
     display_name    varchar(64)                        not null comment '展示名称',
     display_order   int                                not null comment '顺序',
-    parent_id        bigint                            null comment '父节点id',
+    parent_id       bigint                             null comment '父节点id',
 
     delete_version  bigint unsigned                    not null comment '删除标记：0-未删除；否则为删除时间',
     creator         varchar(64)                        not null comment '创建人编号',
@@ -206,3 +206,46 @@ create index idx_pid on tb_dictionary_item (parent_id);
 --                                FOREIGN KEY (ancestor_id) REFERENCES dictionary(dict_id),
 --                                FOREIGN KEY (descendant_id) REFERENCES dictionary(dict_id)
 -- );
+
+-- ------------------
+create table if not exists system_lock
+(
+    resource     varchar(64)             not null comment '锁定的资源，组件标识:模块标识:资源/操作标识'
+        primary key,
+    owner        varchar(64)             not null comment '持有者，可通过该值解析持有应用 / 机器 / 线程 等',
+    token        varchar(64)             not null comment '令牌，用于操作锁（获取、解锁、修改）在达到 ttl 之前，必须通过该令牌，才能对锁进行操作',
+    version      int          default 0  not null comment '版本号',
+    lock_time    datetime                not null comment '上锁时间',
+    release_time datetime                not null comment '超时自动释放时间',
+    description  varchar(128) default '' not null comment '备注：描述这个锁的目的'
+)
+    comment '全局锁';
+
+-- shoulder-batch
+
+create table if not exists batch_record
+(
+    id          varchar(48)                        not null comment '主键'
+        primary key,
+    data_type   varchar(64)                        not null comment '导入数据类型，建议可翻译。对应 导入数据库表名 / 领域对象名称，如用户、人员、订单',
+    operation   varchar(64)                        null comment '业务操作类型，如校验、同步、导入、更新，可空',
+    total_num   int                                not null comment '总数据数量',
+    success_num int                                not null comment '执行成功条数',
+    fail_num    int                                not null comment '执行失败条数',
+    creator     varchar(64)                        not null comment '创建人编号',
+    create_time datetime default CURRENT_TIMESTAMP null comment '创建时间'
+)
+    comment '批量任务执行记录';
+
+create table batch_record_detail
+(
+    id          int auto_increment comment '主键'
+        primary key,
+    record_id   varchar(48)   not null comment '批量任务执行表id',
+    `index`     int           not null comment '该任务中，本数据行对应的行号 / 下标值',
+    operation   varchar(64)   not null comment '业务操作类型，如校验、同步、导入、更新',
+    status      int           not null comment '结果 0 执行成功 1 执行失败、2 跳过',
+    fail_reason varchar(1024) null comment '失败原因，推荐支持多语言',
+    source      text          null comment '导入的原数据'
+)
+    comment '批量任务执行详情';

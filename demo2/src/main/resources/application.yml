@@ -35,11 +35,10 @@ shoulder:
       tag:
         enable: true
       dictionary:
-        db:
           enable: true
     filter:
-      user:
-        mockIfMissing: true
+      mockUser:
+        enable: true
   crypto:
     local:
       # 加密元数据放数据库

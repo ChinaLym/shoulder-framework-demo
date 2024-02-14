@@ -1,6 +1,7 @@
 package com.example.demo2.controller.batch;
 
 import com.example.demo2.dto.PersonRecord;
+import jakarta.servlet.http.HttpServletResponse;
 import org.apache.commons.collections4.CollectionUtils;
 import org.shoulder.batch.constant.BatchConstants;
 import org.shoulder.batch.dto.param.ExecuteOperationParam;
@@ -8,14 +9,19 @@ import org.shoulder.batch.dto.param.QueryImportResultDetailParam;
 import org.shoulder.batch.dto.result.BatchProcessResult;
 import org.shoulder.batch.dto.result.BatchRecordResult;
 import org.shoulder.batch.enums.ProcessStatusEnum;
-import org.shoulder.batch.model.*;
+import org.shoulder.batch.model.BatchData;
+import org.shoulder.batch.model.BatchDataSlice;
+import org.shoulder.batch.model.BatchProgressRecord;
+import org.shoulder.batch.model.BatchRecord;
+import org.shoulder.batch.model.BatchRecordDetail;
+import org.shoulder.batch.model.DataItem;
 import org.shoulder.batch.model.convert.BatchModelConvert;
 import org.shoulder.batch.service.BatchService;
 import org.shoulder.batch.service.ExportService;
 import org.shoulder.batch.service.RecordService;
-import org.shoulder.batch.service.ext.BatchTaskSliceHandler;
 import org.shoulder.batch.service.impl.BatchManager;
 import org.shoulder.batch.service.impl.BatchProcessor;
+import org.shoulder.batch.spi.BatchTaskSliceHandler;
 import org.shoulder.core.context.AppContext;
 import org.shoulder.core.dto.response.BaseResult;
 import org.shoulder.core.dto.response.ListResult;
@@ -23,8 +29,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -35,8 +43,6 @@ import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
-import jakarta.servlet.http.HttpServletResponse;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
@@ -50,11 +56,11 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
  * 3. batchService.queryBatchProgress(taskId)        // 根据 taskId 查询实施进度
  *
  * 内部细节原理：
+ *
+ * @author lym
  * @see BatchData 整体任务，会由 {@link BatchManager} 封装成 {@link BatchProcessor}(Runnable)，其会根据 {@link BatchTaskSliceHandler} 拆成多个 BatchDataSlice
  * @see BatchDataSlice 是任务的一个分片，但一个分片可能含有多个原子数据 {@link DataItem}
  * @see DataItem 被处理的原子数据（可能是一行数据、也可能是一个对象等）
- *
- * @author lym
  */
 @RestController
 @RequestMapping("batch")
@@ -78,12 +84,10 @@ public class BatchController {
     @Autowired
     private RecordService recordService;
 
-
     /**
      * 模拟场景：上传一个 csv，导入一批数据（这里为 person 信息），真正导入数据库前会先校验，而因为数据很多，校验比较慢，需要返回给前端一个进度条
      * 1. http://localhost:8080/batch/validate  调用完该接口会快速同步返回一个任务id
      * 2. 可以在控制台日志看到查询的请求如何发 http://localhost:8080/batch/progress?taskId=xxxxx_change_me
-     *
      */
     @RequestMapping(value = "validate")
     public BaseResult<String> doValidate() throws Exception {
@@ -118,6 +122,18 @@ public class BatchController {
         return randomDataList;
     }
 
+    /**
+     * 模拟场景：批量导入
+     * http://localhost:8080/batch/template?templateId=testBatchDataType
+     */
+    @RequestMapping(value = "template")
+    public BaseResult<String> template(@RequestParam String templateId, HttpServletResponse resp) throws Exception {
+        ByteArrayOutputStream out = new ByteArrayOutputStream(2048000);
+        exportService.export(out, BatchConstants.CSV, Collections.emptyList(), templateId);
+        String s = out.toString();
+        System.out.println(s);
+        return BaseResult.success(s);
+    }
 
     /**
      * 模拟场景：批量导入
@@ -205,6 +221,5 @@ public class BatchController {
                 condition.getTaskId(), CollectionUtils.emptyIfNull(condition.getStatusList())
                         .stream().map(ProcessStatusEnum::of).collect(Collectors.toList()));
     }
-
 
 }

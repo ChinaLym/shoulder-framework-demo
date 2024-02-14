@@ -5,7 +5,7 @@ import lombok.SneakyThrows;
 import org.shoulder.batch.enums.ProcessStatusEnum;
 import org.shoulder.batch.model.BatchDataSlice;
 import org.shoulder.batch.model.BatchRecordDetail;
-import org.shoulder.batch.service.ext.BatchTaskSliceHandler;
+import org.shoulder.batch.spi.BatchTaskSliceHandler;
 import org.shoulder.core.log.Logger;
 import org.shoulder.core.log.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -17,7 +17,6 @@ import java.util.concurrent.ThreadLocalRandom;
 /**
  * 批处理插件：实现 BatchTaskSliceHandler 接口，可以在处理某些任务时候进行分片
  *
- *
  * @author lym
  */
 @Component
@@ -28,7 +27,7 @@ public class PersonBatchTaskSliceHandler implements BatchTaskSliceHandler {
     @Override
     public boolean support(String dataType, String operationType) {
         return DemoBatchConstants.DATA_TYPE_PERSON.equals(dataType)
-                && DemoBatchConstants.OPERATION_VALIDATE.equals(operationType);
+               && DemoBatchConstants.OPERATION_VALIDATE.equals(operationType);
     }
 
     @SneakyThrows

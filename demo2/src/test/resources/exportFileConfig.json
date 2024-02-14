@@ -1,0 +1,33 @@
+[
+  {
+    "id": "testBatchDataType",
+    "exportMapping": null,
+    "headersI18n": null,
+    "headers": [
+      "First",
+      "Second"
+    ],
+    "columns": [
+      {
+        "modelFieldName": "First",
+        "columnNameI18n": null,
+        "descriptionI18n": null,
+        "description": null,
+        "columnName": "First"
+      },
+      {
+        "modelFieldName": "Second",
+        "columnNameI18n": null,
+        "descriptionI18n": null,
+        "description": null,
+        "columnName": "Second"
+      }
+    ],
+    "encode": null,
+    "separator": ",",
+    "lineSeparator": "\n",
+    "comment": "#",
+    "quote": "\"",
+    "quoteEscape": "\""
+  }
+]

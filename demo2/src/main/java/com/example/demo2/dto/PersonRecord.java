@@ -2,7 +2,7 @@ package com.example.demo2.dto;
 
 import lombok.Data;
 import lombok.ToString;
-import org.shoulder.batch.model.DataItem;
+import org.shoulder.batch.spi.DataItem;
 
 import java.io.Serializable;
 

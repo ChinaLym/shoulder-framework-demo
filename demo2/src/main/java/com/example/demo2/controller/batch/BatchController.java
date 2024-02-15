@@ -8,21 +8,22 @@ import org.shoulder.batch.dto.param.ExecuteOperationParam;
 import org.shoulder.batch.dto.param.QueryImportResultDetailParam;
 import org.shoulder.batch.dto.result.BatchProcessResult;
 import org.shoulder.batch.dto.result.BatchRecordResult;
+import org.shoulder.batch.endpoint.ImportController;
 import org.shoulder.batch.enums.ProcessStatusEnum;
 import org.shoulder.batch.model.BatchData;
 import org.shoulder.batch.model.BatchDataSlice;
-import org.shoulder.batch.model.BatchProgressRecord;
 import org.shoulder.batch.model.BatchRecord;
 import org.shoulder.batch.model.BatchRecordDetail;
-import org.shoulder.batch.model.DataItem;
-import org.shoulder.batch.model.convert.BatchModelConvert;
+import org.shoulder.batch.progress.BatchProgressRecord;
 import org.shoulder.batch.service.BatchService;
 import org.shoulder.batch.service.ExportService;
 import org.shoulder.batch.service.RecordService;
 import org.shoulder.batch.service.impl.BatchManager;
 import org.shoulder.batch.service.impl.BatchProcessor;
 import org.shoulder.batch.spi.BatchTaskSliceHandler;
+import org.shoulder.batch.spi.DataItem;
 import org.shoulder.core.context.AppContext;
+import org.shoulder.core.converter.ShoulderConversionService;
 import org.shoulder.core.dto.response.BaseResult;
 import org.shoulder.core.dto.response.ListResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,17 +48,18 @@ import java.util.stream.Stream;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 /**
- * 批处理 api 学习&测试
+ * shoulder-batch 学习&测试
  * shoulder.Batch 不仅仅提供了一个自动适应且支持单机/集群模式的 进度条查询能力，且提供了一套较完整的批处理框架、并在导入导出这里提供了较完整的解决方案：
- *
+ * <hr>
  * 使用：
  * 1. new BatchData();                               // new BatchData 并设置值
  * 2. taskId = batchService.doProcess(batchData)     // 提交处理，拿到 taskId
  * 3. batchService.queryBatchProgress(taskId)        // 根据 taskId 查询实施进度
  *
- * 内部细节原理：
- *
  * @author lym
+ * <hr>
+ * 内部细节原理：
+ * @see ImportController 这是框架内的标准示例，框架里提供了默认的导入导出能力实现，导入功能中-异步校验、异步保存就使用了 shoulder-batch
  * @see BatchData 整体任务，会由 {@link BatchManager} 封装成 {@link BatchProcessor}(Runnable)，其会根据 {@link BatchTaskSliceHandler} 拆成多个 BatchDataSlice
  * @see BatchDataSlice 是任务的一个分片，但一个分片可能含有多个原子数据 {@link DataItem}
  * @see DataItem 被处理的原子数据（可能是一行数据、也可能是一个对象等）
@@ -82,7 +84,12 @@ public class BatchController {
      * 批量记录查询
      */
     @Autowired
-    private RecordService recordService;
+    private RecordService             recordService;
+    /**
+     * 批量记录查询
+     */
+    @Autowired
+    private ShoulderConversionService conversionService;
 
     /**
      * 模拟场景：上传一个 csv，导入一批数据（这里为 person 信息），真正导入数据库前会先校验，而因为数据很多，校验比较慢，需要返回给前端一个进度条
@@ -156,7 +163,7 @@ public class BatchController {
     @RequestMapping(value = "progress", method = GET)
     public BaseResult<BatchProcessResult> queryOperationProcess(@Nullable String taskId) {
         BatchProgressRecord process = batchService.queryBatchProgress(taskId);
-        return BaseResult.success(BatchModelConvert.CONVERT.toDTO(process));
+        return BaseResult.success(conversionService.convert(process, BatchProcessResult.class));
     }
 
     // ----------------------------------- 更完整的功能__进度管理 --------------------------------
@@ -170,7 +177,7 @@ public class BatchController {
     public BaseResult<ListResult<BatchRecordResult>> queryImportRecord() {
         return BaseResult.success(
                 Stream.of(recordService.findLastRecord("dataType", AppContext.getUserName()))
-                        .map(BatchModelConvert.CONVERT::toDTO).collect(Collectors.toList())
+                        .map(record -> conversionService.convert(record, BatchRecordResult.class)).collect(Collectors.toList())
         );
     }
 
@@ -184,7 +191,7 @@ public class BatchController {
         BatchRecord record = recordService.findRecordById("xxx");
         List<BatchRecordDetail> details = recordService.findAllRecordDetail(condition.getTaskId());
         record.setDetailList(details);
-        BatchRecordResult result = BatchModelConvert.CONVERT.toDTO(record);
+        BatchRecordResult result = conversionService.convert(record, BatchRecordResult.class);
         return BaseResult.success(result);
     }
 

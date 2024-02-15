@@ -12,5 +12,5 @@ Content-Type: text/csv;charset=utf-8
 ------WebKitFormBoundaryabcdef--
 
 ### 查询进度
-GET http://localhost:8080/api/v1/batch/testBatchDataType/progress/1
+GET http://localhost:8080/api/v1/batch/testBatchDataType/progress/a6c36d6e-a736-48e8-8b43-481655bb6d60
 Content-Type: application/json

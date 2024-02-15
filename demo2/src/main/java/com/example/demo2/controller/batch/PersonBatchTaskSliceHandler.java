@@ -44,13 +44,13 @@ public class PersonBatchTaskSliceHandler implements BatchTaskSliceHandler {
 
             // 设置每条处理结果信息
             BatchRecordDetail result = new BatchRecordDetail();
-            result.setStatus(ProcessStatusEnum.IMPORT_SUCCESS.getCode());
+            result.setStatus(ProcessStatusEnum.SUCCESS.getCode());
             // 考虑简化结果 index？目前无大必要性
             result.setIndex(personRecord.getIndex());
 
             if (ThreadLocalRandom.current().nextInt(4) % 3 == 0) {
                 result.setFailReason("随机失败几个");
-                result.setStatus(ProcessStatusEnum.VALIDATE_FAILED.getCode());
+                result.setStatus(ProcessStatusEnum.SKIP_FOR_INVALID.getCode());
             }
 
             processResult.add(result);

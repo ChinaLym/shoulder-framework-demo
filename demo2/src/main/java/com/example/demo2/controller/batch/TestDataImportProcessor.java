@@ -15,6 +15,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
+ * 导入导出功能 学习&测试
+ *
+ * 如果只需要导入导出，不需要异步处理，只看该类即可
+ *
  * @author lym
  */
 @Component
@@ -25,13 +29,13 @@ public class TestDataImportProcessor implements BatchTaskSliceHandler {
     }
 
     @Override public List<BatchRecordDetail> handle(BatchDataSlice task) {
-        return task.getBatchList().stream().map(data -> {
-            System.out.println("mock save data: " + data);
-            return BatchRecordDetail.builder()
-                    .index(data.getIndex())
-                    .status(ProcessStatusEnum.VALIDATE_SUCCESS.getCode())
-                    .build();
-        }).collect(Collectors.toList());
+        System.out.println("mockValidate, dataType=" + task.getDataType()
+                           + ", operation=" + task.getOperationType()
+                           + ", total=" + task.getBatchList().size());
+        return task.getBatchList().stream()
+                .peek(data -> System.out.println("mock save data: " + data))
+                .map(data -> new BatchRecordDetail(data.getIndex(), ProcessStatusEnum.SUCCESS.getCode()))
+                .collect(Collectors.toList());
     }
 
 }

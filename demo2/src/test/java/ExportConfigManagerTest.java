@@ -1,7 +1,8 @@
 import com.example.demo2.Demo2Application;
+import com.example.demo2.controller.batch.DemoBatchConstants;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.shoulder.autoconfigure.batch.BatchTaskAutoConfiguration;
+import org.shoulder.autoconfigure.batch.ShoulderBatchAutoConfiguration;
 import org.shoulder.batch.config.DefaultExportConfigManager;
 import org.shoulder.batch.config.ExportConfigManager;
 import org.shoulder.batch.config.model.ExportColumnConfig;
@@ -22,11 +23,11 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @SpringBootTest(classes = Demo2Application.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@Import({BatchTaskAutoConfiguration.class, BatchTaskAutoConfiguration.DefaultMemoryBatchRecordAutoConfiguration.class})
+@Import({ ShoulderBatchAutoConfiguration.class, ShoulderBatchAutoConfiguration.DefaultMemoryBatchRecordAutoConfiguration.class })
 @EnableCaching
 public class ExportConfigManagerTest {
 
-    private static String templateId = "testBatchDataType";
+    private static final String templateId = DemoBatchConstants.DATA_TYPE_TEST;
 
     static ExportConfigManager exportConfigManager = new DefaultExportConfigManager();
 

@@ -4,6 +4,7 @@
  */
 package com.example.demo2.controller.batch;
 
+import lombok.SneakyThrows;
 import org.shoulder.batch.enums.ProcessStatusEnum;
 import org.shoulder.batch.model.BatchDataSlice;
 import org.shoulder.batch.model.BatchRecordDetail;
@@ -16,24 +17,28 @@ import java.util.stream.Collectors;
 
 /**
  * 导入导出功能 学习&测试
- *
- * 如果只需要导入导出，不需要异步处理，只看该类即可
+ * <p>
+ * 处理数据导入
  *
  * @author lym
  */
 @Component
-public class TestDataImportProcessor implements BatchTaskSliceHandler {
+public class TestDataImportValidator implements BatchTaskSliceHandler {
 
     @Override public boolean support(String dataType, String operationType) {
-        return "testBatchDataType".equals(dataType) && Operations.UPLOAD_AND_VALIDATE.equals(operationType);
+        return DemoBatchConstants.DATA_TYPE_TEST.equals(dataType)
+               && Operations.UPLOAD_AND_VALIDATE.equals(operationType);
     }
 
-    @Override public List<BatchRecordDetail> handle(BatchDataSlice task) {
+    @SneakyThrows @Override public List<BatchRecordDetail> handle(BatchDataSlice task) {
         System.out.println("mockValidate, dataType=" + task.getDataType()
                            + ", operation=" + task.getOperationType()
                            + ", total=" + task.getBatchList().size());
+        // 模拟校验比较耗时，校验字段、业务校验、查数据库、调接口等...
+        Thread.sleep(1000);
+
         return task.getBatchList().stream()
-                .peek(data -> System.out.println("mock save data: " + data))
+                .peek(data -> System.out.println("mock validate data: " + data))
                 .map(data -> new BatchRecordDetail(data.getIndex(), ProcessStatusEnum.SUCCESS.getCode()))
                 .collect(Collectors.toList());
     }

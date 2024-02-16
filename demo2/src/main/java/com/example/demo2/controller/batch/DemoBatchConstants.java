@@ -10,4 +10,6 @@ public interface DemoBatchConstants {
 
     String OPERATION_VALIDATE = "validate";
 
+
+    String DATA_TYPE_TEST = "testBatchDataType";
 }

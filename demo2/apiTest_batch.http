@@ -11,6 +11,22 @@ Content-Type: text/csv;charset=utf-8
 < /Users/liuyanming/IdeaProjects/openSource/shoulder-framework-demo/demo2/src/test/resources/batchImportTest.csv
 ------WebKitFormBoundaryabcdef--
 
-### 查询进度
-GET http://localhost:8080/api/v1/batch/testBatchDataType/progress/a6c36d6e-a736-48e8-8b43-481655bb6d60
+### 查询进度（校验）
+GET http://localhost:8080/api/v1/batch/testBatchDataType/progress/a1cb4ac2-ed45-4056-8c40-33a28f50366e
+Content-Type: application/json
+
+### 执行处理
+POST http://localhost:8080/api/v1/batch/testBatchDataType/advance
+Content-Type: application/json
+
+{
+  "batchId": "bf41998a-ac0b-447c-9924-7f5a8d5aa089",
+  "dataType": "testBatchDataType",
+  "currentOperation": "upload_validate",
+  "nextOperation": "import",
+  "updateRepeat": false
+}
+
+### 查询进度（处理）
+GET http://localhost:8080/api/v1/batch/testBatchDataType/progress/bf41998a-ac0b-447c-9924-7f5a8d5aa089
 Content-Type: application/json

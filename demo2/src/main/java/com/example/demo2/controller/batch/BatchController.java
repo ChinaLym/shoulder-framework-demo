@@ -4,7 +4,7 @@ import com.example.demo2.dto.PersonRecord;
 import jakarta.servlet.http.HttpServletResponse;
 import org.apache.commons.collections4.CollectionUtils;
 import org.shoulder.batch.constant.BatchConstants;
-import org.shoulder.batch.dto.param.ExecuteOperationParam;
+import org.shoulder.batch.dto.param.PromoteBatchParam;
 import org.shoulder.batch.dto.param.QueryImportResultDetailParam;
 import org.shoulder.batch.dto.result.BatchProcessResult;
 import org.shoulder.batch.dto.result.BatchRecordResult;
@@ -49,12 +49,6 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 /**
  * shoulder-batch 学习&测试
- * shoulder.Batch 不仅仅提供了一个自动适应且支持单机/集群模式的 进度条查询能力，且提供了一套较完整的批处理框架、并在导入导出这里提供了较完整的解决方案：
- * <hr>
- * 使用：
- * 1. new BatchData();                               // new BatchData 并设置值
- * 2. taskId = batchService.doProcess(batchData)     // 提交处理，拿到 taskId
- * 3. batchService.queryBatchProgress(taskId)        // 根据 taskId 查询实施进度
  *
  * @author lym
  * <hr>
@@ -72,14 +66,12 @@ public class BatchController {
      * 一般是业务类，这里注入的是框架自带的 csv 导入导出能力
      */
     @Autowired
-    private BatchService batchService;
-
+    private BatchService              batchService;
     /**
      * 导出
      */
     @Autowired
-    private ExportService exportService;
-
+    private ExportService             exportService;
     /**
      * 批量记录查询
      */
@@ -94,7 +86,7 @@ public class BatchController {
     /**
      * 模拟场景：上传一个 csv，导入一批数据（这里为 person 信息），真正导入数据库前会先校验，而因为数据很多，校验比较慢，需要返回给前端一个进度条
      * 1. http://localhost:8080/batch/validate  调用完该接口会快速同步返回一个任务id
-     * 2. 可以在控制台日志看到查询的请求如何发 http://localhost:8080/batch/progress?taskId=xxxxx_change_me
+     * 2. 可以在控制台日志看到查询的请求如何发 http://localhost:8080/batch/progress?batchId=xxxxx_change_me
      */
     @RequestMapping(value = "validate")
     public BaseResult<String> doValidate() throws Exception {
@@ -111,9 +103,9 @@ public class BatchController {
         batchData.setPersistentRecord(false);
 
         // 示例：解析文件，然后校验，返回校验任务标识
-        String taskId = batchService.doProcess(batchData);
-        System.out.println("可以在这里查询批处理进度:  http://localhost:8080/batch/progress?taskId=" + taskId);
-        return BaseResult.success(taskId);
+        String batchId = batchService.doProcess(batchData);
+        System.out.println("可以在这里查询批处理进度:  http://localhost:8080/batch/progress?batchId=" + batchId);
+        return BaseResult.success(batchId);
     }
 
     private List<PersonRecord> randomData(int num) {
@@ -144,10 +136,10 @@ public class BatchController {
 
     /**
      * 模拟场景：批量导入
-     * http://localhost:8080/batch/validate?taskId=
+     * http://localhost:8080/batch/validate?batchId=
      */
     @RequestMapping(value = "import")
-    public BaseResult<String> doImport(@RequestBody ExecuteOperationParam executeOperationParam) {
+    public BaseResult<String> doImport(@RequestBody PromoteBatchParam promoteBatchParam) {
         // 示例：从缓存中拿出校验结果，根据校验结果组装为 BatchData，执行导入
 
         BatchData batchData = new BatchData();
@@ -158,11 +150,11 @@ public class BatchController {
 
     /**
      * 查询数据导入进度，注意调用时候记得传入tastId
-     * http://localhost:8080/batch/progress?taskId=41b7c2e8-936d-4434-958b-aef2baaae8e2
+     * http://localhost:8080/batch/progress?batchId=41b7c2e8-936d-4434-958b-aef2baaae8e2
      */
     @RequestMapping(value = "progress", method = GET)
-    public BaseResult<BatchProcessResult> queryOperationProcess(@Nullable String taskId) {
-        BatchProgressRecord process = batchService.queryBatchProgress(taskId);
+    public BaseResult<BatchProcessResult> queryOperationProcess(@Nullable String batchId) {
+        BatchProgressRecord process = batchService.queryBatchProgress(batchId);
         return BaseResult.success(conversionService.convert(process, BatchProcessResult.class));
     }
 
@@ -189,7 +181,7 @@ public class BatchController {
     public BaseResult<BatchRecordResult> queryImportRecordDetail(
             @RequestBody QueryImportResultDetailParam condition) {
         BatchRecord record = recordService.findRecordById("xxx");
-        List<BatchRecordDetail> details = recordService.findAllRecordDetail(condition.getTaskId());
+        List<BatchRecordDetail> details = recordService.findAllRecordDetail(condition.getBatchId());
         record.setDetailList(details);
         BatchRecordResult result = conversionService.convert(record, BatchRecordResult.class);
         return BaseResult.success(result);
@@ -225,7 +217,7 @@ public class BatchController {
      */
     public void exportRecordDetail(HttpServletResponse response, QueryImportResultDetailParam condition) throws IOException {
         exportService.exportBatchDetail(response.getOutputStream(), BatchConstants.CSV, condition.getBusinessType(),
-                condition.getTaskId(), CollectionUtils.emptyIfNull(condition.getStatusList())
+                condition.getBatchId(), CollectionUtils.emptyIfNull(condition.getStatusList())
                         .stream().map(ProcessStatusEnum::of).collect(Collectors.toList()));
     }
 

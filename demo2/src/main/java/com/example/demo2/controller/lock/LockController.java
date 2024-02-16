@@ -287,9 +287,12 @@ public class LockController extends BaseControllerImpl<IUserService, UserEntity>
     public void autoCleanForDemo() {
         try {
             unlock(true);
-        } catch (Exception ignored){}
+        } catch (Exception ignored){
+            ignored.printStackTrace();
+        }
         try {
             unlock(false);
-        } catch (Exception ignored){}
+        } catch (Exception ignored){
+            ignored.printStackTrace();}
     }
 }

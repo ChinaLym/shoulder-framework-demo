@@ -1,4 +1,4 @@
-package com.example.demo2.controller.batch;
+package com.example.demo2.batch;
 
 /**
  * @author lym

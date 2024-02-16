@@ -2,7 +2,7 @@
  * Alipay.com Inc.
  * Copyright (c) 2004-2024 All Rights Reserved.
  */
-package com.example.demo2.controller.batch;
+package com.example.demo2.batch;
 
 import lombok.SneakyThrows;
 import org.shoulder.batch.enums.ProcessStatusEnum;

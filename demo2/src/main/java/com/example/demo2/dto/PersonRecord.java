@@ -3,6 +3,7 @@ package com.example.demo2.dto;
 import lombok.Data;
 import lombok.ToString;
 import org.shoulder.batch.spi.DataItem;
+import org.shoulder.core.util.JsonUtils;
 
 import java.io.Serializable;
 
@@ -22,4 +23,8 @@ public class PersonRecord implements DataItem, Serializable {
     private Integer age;
 
     private int index;
+
+    @Override public String serialize() {
+        return JsonUtils.toJson(this);
+    }
 }

@@ -1,5 +1,5 @@
 import com.example.demo2.Demo2Application;
-import com.example.demo2.controller.batch.DemoBatchConstants;
+import com.example.demo2.batch.DemoBatchConstants;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.shoulder.autoconfigure.batch.ShoulderBatchAutoConfiguration;

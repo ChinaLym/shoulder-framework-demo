@@ -2,7 +2,7 @@
  * Alipay.com Inc.
  * Copyright (c) 2004-2024 All Rights Reserved.
  */
-package com.example.demo2.controller.batch;
+package com.example.demo2.batch;
 
 import org.shoulder.batch.enums.ProcessStatusEnum;
 import org.shoulder.batch.model.BatchRecordDetail;
@@ -32,7 +32,11 @@ public class TestDataImportHandler extends BaseImportHandler {
         return toUpdateList.stream()
                 .peek(data -> System.out.println("mock UPDATE data: " + data))
                 // select for update，check data version，update or fail
-                .map(data -> new BatchRecordDetail(data.getIndex(), ProcessStatusEnum.UPDATE_REPEAT.getCode()))
+                .map(data -> BatchRecordDetail.builder()
+                        .index(data.getIndex())
+                        .status(ProcessStatusEnum.UPDATE_REPEAT.getCode())
+                        .source(data.getSource())
+                        .build())
                 .collect(Collectors.toList());
     }
 
@@ -40,7 +44,11 @@ public class TestDataImportHandler extends BaseImportHandler {
         return toImportList.stream()
                 .peek(data -> System.out.println("mock SAVE data: " + data.getSource()))
                 // insert into...
-                .map(data -> new BatchRecordDetail(data.getIndex(), ProcessStatusEnum.SUCCESS.getCode()))
+                .map(data -> BatchRecordDetail.builder()
+                        .index(data.getIndex())
+                        .status(ProcessStatusEnum.SUCCESS.getCode())
+                        .source(data.getSource())
+                        .build())
                 .collect(Collectors.toList());
     }
 

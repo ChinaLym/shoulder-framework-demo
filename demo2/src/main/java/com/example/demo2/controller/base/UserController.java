@@ -52,6 +52,16 @@ public class UserController extends CrudController<
         // 自动根据当前 Controller 泛型注入对应的 IService（IUserService），可通过 service 调用
         return service.getById(1);
     }
+    /**
+     * 查询 id 为 1 的用户信息
+     * http://localhost:8080/user/2
+     */
+    @RequestMapping("2")
+    public void test() {
+        // 自动根据当前 Controller 泛型注入对应的 IService（IUserService），可通过 service 调用
+        System.out.println("ok");
+        return ;
+    }
 
     /**
      * 查询 name 为 input 的用户信息

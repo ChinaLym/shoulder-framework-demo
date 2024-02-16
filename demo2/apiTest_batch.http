@@ -1,4 +1,7 @@
 # shoulder 框架内嵌了 batchController，可以直接用异步导入、导出、查询批处理（导入）记录等功能
+### 下载导入模板
+GET http://localhost:8080/api/v1/batch/testBatchDataType/template/download
+
 
 ### 上传并校验
 POST http://localhost:8080/api/v1/batch/testBatchDataType/validate
@@ -8,19 +11,19 @@ Content-Type: multipart/form-data; boundary=----WebKitFormBoundaryabcdef
 Content-Disposition: form-data; name="file"; filename="batchImportTest.csv"
 Content-Type: text/csv;charset=utf-8
 
-< /Users/liuyanming/IdeaProjects/openSource/shoulder-framework-demo/demo2/src/test/resources/batchImportTest.csv
+< ./src/test/resources/batchImportTest.csv
 ------WebKitFormBoundaryabcdef--
 
 ### 查询进度（校验）
-GET http://localhost:8080/api/v1/batch/testBatchDataType/progress/a1cb4ac2-ed45-4056-8c40-33a28f50366e
+GET http://localhost:8080/api/v1/batch/testBatchDataType/progress/acea8375-f52f-43f8-b963-3e56fde5c269
 Content-Type: application/json
 
-### 执行处理
+### 执行处理 (导入校验通过的)
 POST http://localhost:8080/api/v1/batch/testBatchDataType/advance
 Content-Type: application/json
 
 {
-  "batchId": "bf41998a-ac0b-447c-9924-7f5a8d5aa089",
+  "batchId": "015effc5-d203-4bf1-8934-c706e37adf4e",
   "dataType": "testBatchDataType",
   "currentOperation": "upload_validate",
   "nextOperation": "import",
@@ -28,5 +31,27 @@ Content-Type: application/json
 }
 
 ### 查询进度（处理）
-GET http://localhost:8080/api/v1/batch/testBatchDataType/progress/bf41998a-ac0b-447c-9924-7f5a8d5aa089
+GET http://localhost:8080/api/v1/batch/testBatchDataType/progress/91597a81-e378-4d42-adbd-fe0b2a4bef88
 Content-Type: application/json
+
+
+### 列出导入记录列表 FIXME 怎么只有一次校验的？导入的呢？
+GET http://localhost:8080/api/v1/batch/testBatchDataType/record/list
+Content-Type: application/json
+
+### 列出某次导入详情列表
+GET http://localhost:8080/api/v1/batch/testBatchDataType/record/detail/list?businessType=testBatchDataType&batchId=f68b52b8-20db-4720-80af-5a1be3ee9dfa
+Content-Type: application/json
+
+
+### 导出导入详情
+GET http://localhost:8080/api/v1/batch/testBatchDataType/record/detail/export?businessType=testBatchDataType&batchId=33a2763f-44c6-4d59-af36-3efc25150fc5
+Content-Type: application/json
+
+### 导出测试
+GET http://localhost:8080/api/v1/batch/testBatchDataType/export
+Content-Type: application/json
+
+{
+
+}

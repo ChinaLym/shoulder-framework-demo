@@ -15,7 +15,7 @@ Content-Type: text/csv;charset=utf-8
 ------WebKitFormBoundaryabcdef--
 
 ### 查询进度（校验）
-GET http://localhost:8080/api/v1/batch/testBatchDataType/progress/acea8375-f52f-43f8-b963-3e56fde5c269
+GET http://localhost:8080/api/v1/batch/testBatchDataType/progress/e7eddb62-cc72-4009-ba6d-0a8af3357c5a
 Content-Type: application/json
 
 ### 执行处理 (导入校验通过的)
@@ -23,7 +23,7 @@ POST http://localhost:8080/api/v1/batch/testBatchDataType/advance
 Content-Type: application/json
 
 {
-  "batchId": "015effc5-d203-4bf1-8934-c706e37adf4e",
+  "batchId": "e7eddb62-cc72-4009-ba6d-0a8af3357c5a",
   "dataType": "testBatchDataType",
   "currentOperation": "upload_validate",
   "nextOperation": "import",
@@ -31,7 +31,7 @@ Content-Type: application/json
 }
 
 ### 查询进度（处理）
-GET http://localhost:8080/api/v1/batch/testBatchDataType/progress/91597a81-e378-4d42-adbd-fe0b2a4bef88
+GET http://localhost:8080/api/v1/batch/testBatchDataType/progress/bd386377-796b-4b9c-bcd9-08aaa62cb8d2
 Content-Type: application/json
 
 

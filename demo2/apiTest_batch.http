@@ -1,3 +1,4 @@
+// IDEA.http工具语法：https://www.jetbrains.com/help/idea/oauth-2-0-authorization.html
 # shoulder 框架内嵌了 batchController，可以直接用异步导入、导出、查询批处理（导入）记录等功能
 ### 下载导入模板
 GET http://localhost:8080/api/v1/batch/testBatchDataType/template/download
@@ -14,8 +15,12 @@ Content-Type: text/csv;charset=utf-8
 < ./src/test/resources/batchImportTest.csv
 ------WebKitFormBoundaryabcdef--
 
+> {%
+    client.global.set("validate_batch_id", response.body.data);
+%}
+
 ### 查询进度（校验）
-GET http://localhost:8080/api/v1/batch/testBatchDataType/progress/e7eddb62-cc72-4009-ba6d-0a8af3357c5a
+GET http://localhost:8080/api/v1/batch/testBatchDataType/progress/{{validate_batch_id}}
 Content-Type: application/json
 
 ### 执行处理 (导入校验通过的)
@@ -23,15 +28,19 @@ POST http://localhost:8080/api/v1/batch/testBatchDataType/advance
 Content-Type: application/json
 
 {
-  "batchId": "e7eddb62-cc72-4009-ba6d-0a8af3357c5a",
+  "batchId": "{{validate_batch_id}}",
   "dataType": "testBatchDataType",
   "currentOperation": "upload_validate",
   "nextOperation": "import",
   "updateRepeat": false
 }
 
+> {%
+    client.global.set("import_batch_id", response.body.data);
+%}
+
 ### 查询进度（处理）
-GET http://localhost:8080/api/v1/batch/testBatchDataType/progress/bd386377-796b-4b9c-bcd9-08aaa62cb8d2
+GET http://localhost:8080/api/v1/batch/testBatchDataType/progress/{{import_batch_id}}
 Content-Type: application/json
 
 
@@ -40,12 +49,13 @@ GET http://localhost:8080/api/v1/batch/testBatchDataType/record/list
 Content-Type: application/json
 
 ### 列出某次导入详情列表
-GET http://localhost:8080/api/v1/batch/testBatchDataType/record/detail/list?businessType=testBatchDataType&batchId=f68b52b8-20db-4720-80af-5a1be3ee9dfa
+GET http://localhost:8080/api/v1/batch/testBatchDataType/record/detail/list?businessT
+    ype=testBatchDataType&batchId={{import_batch_id}}
 Content-Type: application/json
 
 
 ### 导出导入详情
-GET http://localhost:8080/api/v1/batch/testBatchDataType/record/detail/export?businessType=testBatchDataType&batchId=33a2763f-44c6-4d59-af36-3efc25150fc5
+GET http://localhost:8080/api/v1/batch/testBatchDataType/record/detail/export?businessType=testBatchDataType&batchId={{import_batch_id}}
 Content-Type: application/json
 
 ### 导出测试

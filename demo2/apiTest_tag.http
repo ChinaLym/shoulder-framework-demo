@@ -34,7 +34,7 @@ Content-Type: application/json
 
 {}
 
-### 更新 byId-注意version todo不存在未报错，字段覆盖更新，
+### 更新 byId-注意version
 PUT http://localhost:8080/api/v1/tags
 Content-Type: application/json
 

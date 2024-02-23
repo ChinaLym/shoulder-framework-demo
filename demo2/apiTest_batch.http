@@ -44,18 +44,21 @@ GET http://localhost:8080/api/v1/batch/testBatchDataType/progress/{{import_batch
 Content-Type: application/json
 
 
-### 列出导入记录列表 FIXME 怎么只有一次校验的？导入的呢？
+### 列出本人最近一次导入记录
 GET http://localhost:8080/api/v1/batch/testBatchDataType/record/list
 Content-Type: application/json
 
 ### 列出某次导入详情列表
-GET http://localhost:8080/api/v1/batch/testBatchDataType/record/detail/list?businessT
-    ype=testBatchDataType&batchId={{import_batch_id}}
+GET http://localhost:8080/api/v1/batch/testBatchDataType/record/detail/list?
+    businessType=testBatchDataType&
+    batchId={{import_batch_id}}
 Content-Type: application/json
 
 
 ### 导出导入详情
-GET http://localhost:8080/api/v1/batch/testBatchDataType/record/detail/export?businessType=testBatchDataType&batchId={{import_batch_id}}
+GET http://localhost:8080/api/v1/batch/testBatchDataType/record/detail/export?
+    businessType=testBatchDataType&
+    batchId={{import_batch_id}}
 Content-Type: application/json
 
 ### 导出测试
@@ -63,5 +66,4 @@ GET http://localhost:8080/api/v1/batch/testBatchDataType/export
 Content-Type: application/json
 
 {
-
 }

@@ -17,15 +17,14 @@ git clone https://gitee.com/ChinaLym/shoulder-framework-demo
 **demo2** 工程包含数据库快捷开发，该部分提供了Mybatis、JPA的简单增强
 
 - Mybatis 方式：
-    - 引入了 `Mybatis Plus`，具体使用方法可以查看 mybatis-plus 官网
-    - TODO 使用方式
-- JPA：
-    - 提供了常用的类型转换，如 varchar(jsonStr) 与 list、set、枚举类型转换
+    - 引入了 `Mybatis Plus`，并提供了bizId、version 等高级封装，具体使用方法可以查看 [mybatis-plus 官网](https://baomidou.com/)
 
 - 全局锁（分布式锁-基于数据库）
 
-- 批处理
-    快速实现一些业务的批量处理 / 导入 / 导出
+- 批处理: 快速实现一些业务的批量处理 / 导入 / 导出，见 TestDataImportHandler，IDEA 内启动后 [测试](apiTest_batch.http)
+- 标签模块: 快速开启标签功能，测试见 [apiTest_tag.http](apiTest_tag.http)
+- 字典模块: 快速开启标签功能，测试见 [apiTest_dictionary.http](apiTest_dictionary.http)
+- 批处理: 快速实现一些业务的批量处理 / 导入 / 导出，见 TestDataImportHandler，IDEA 内启动后 [测试](apiTest_batch.http)
 
 ## 扩展：
 H2 数据库链接参数：https://ossezhu.medium.com/hibernate-h2-%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E9%85%8D%E7%BD%AE-url-%E8%A7%A3%E8%AF%BB-d237a29c544c

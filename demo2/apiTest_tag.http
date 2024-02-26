@@ -51,6 +51,14 @@ Content-Type: application/json
   "version": 0
 }
 
+### 打标签
+# 尽管标签不存在，但会自动创建
+POST http://localhost:8080/user/attachTag?uid=1&type=age&name=20_30
+
+### 根据标签搜索
+POST http://localhost:8080/user/searchByTag?tagId=
+
+
 ### 删除 byBizId
 
 DELETE http://localhost:8080/api/v1/tags/type:name

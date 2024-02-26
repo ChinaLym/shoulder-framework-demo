@@ -108,7 +108,7 @@ create table if not exists tb_tag
     version        int                                not null comment '数据版本号：用于幂等防并发',
     display_order  int                                not null comment '展示顺序',
     tenant         varchar(32)                        not null comment '租户',
-    tag_type       varchar(64)                        not null comment '配置类型，通常可据此分库表',
+    biz_type       varchar(64)                        not null comment '配置类型，通常可据此分库表',
     name           varchar(64)                        not null comment '标签名称',
     display_name   varchar(64)                        not null comment '标签名称-展示',
     description    varchar(255)                       null comment '备注:介绍为啥添加这一条',
@@ -124,7 +124,7 @@ create table if not exists tb_tag
     comment '标签表';
 
 create index idx_tag_uni_bizid_tenant on tb_tag (biz_id, tenant);
-create index idx_tag_uni_type_name_tenant on tb_tag (tag_type, name, tenant);
+create index idx_tag_uni_type_name_tenant on tb_tag (biz_type, name, tenant);
 
 create table if not exists tb_tag_mapping
 (

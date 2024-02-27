@@ -17,10 +17,12 @@ import org.shoulder.web.template.tag.model.TagEntity;
 import org.shoulder.web.template.tag.model.TagMappingEntity;
 import org.shoulder.web.template.tag.service.TagCoreService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -106,15 +108,32 @@ public class UserController extends CrudController<
      * 查询被 tagId 打标的所有用户信息
      * http://localhost:8080/user/searchByTag?tagId=1
      */
-    @RequestMapping("searchByTag")
-    public ListResult<UserEntity> searchByTag(@RequestParam("tagBizId") Long tagBizId) {
-        List<TagMappingEntity> tagMappingList = tagCoreService.queryAllRefIdByStorageSourceAndTagId("USER", tagBizId);
+    @RequestMapping("searchByTagId")
+    public ListResult<UserEntity> searchByTagId(@RequestParam("tagId") Long tagId) {
+        List<TagMappingEntity> tagMappingList = tagCoreService.queryAllRefIdByRefTypeAndTagId("USER", tagId);
+        return queryUserByTagMapping(tagMappingList);
+    }
+
+    private ListResult<UserEntity> queryUserByTagMapping(List<TagMappingEntity> tagMappingList) {
+        if(CollectionUtils.isEmpty(tagMappingList)) {
+            return ListResult.empty();
+        }
         List<Long> userIds = tagMappingList.stream()
                 .map(TagMappingEntity::getOid)
                 .map(Long::valueOf)
                 .toList();
         List<UserEntity> userList = service.listByIds(userIds);
         return ListResult.of(userList);
+    }
+
+    /**
+     * 查询被 tagId 打标的所有用户信息
+     * http://localhost:8080/user/searchByTag?tagId=1
+     */
+    @RequestMapping("searchByTagName")
+    public ListResult<UserEntity> searchByTagName(@RequestParam("type") String tagType, @RequestParam("name") String tagName) {
+        List<TagMappingEntity> tagMappingList = tagCoreService.queryAllRefIdByRefTypeAndTagName("USER", tagType, tagName);
+        return queryUserByTagMapping(tagMappingList);
     }
 
     /**

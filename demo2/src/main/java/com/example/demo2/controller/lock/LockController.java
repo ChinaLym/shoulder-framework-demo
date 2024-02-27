@@ -26,20 +26,20 @@ import javax.sql.DataSource;
 
 /**
  * Shoulder 锁的使用介绍
- *
+ * <p>
  * 为了让同一套代码应用在单机、集群模式时尽量不改代码, Shoulder允许你仅变更配置，即可适配部署模式！并基于JDK自身接口{@link Lock}提供了一些列实现:
- *    {@link ServerLock}并适配了多种底层模式：JDK ReentrantLock、MemoryLock、JDBC、Redis..
- *    这些实现除了支持各种通用 api ，还考虑了分布式的高性能、高可靠：死锁规避-宕机自动释放、死锁规避-可重入...
- *
- *    Shoulder甚至贴心的为使用者提供了方便自行扩展的代理类： {@link ServerLockAcquireProxy}（快速获得更好的分布式性能）、{@link ReentrantServerLock}(快速获得可重入能力)
- *
+ * {@link ServerLock}并适配了多种底层模式：JDK ReentrantLock、MemoryLock、JDBC、Redis..
+ * 这些实现除了支持各种通用 api ，还考虑了分布式的高性能、高可靠：死锁规避-宕机自动释放、死锁规避-可重入...
+ * <p>
+ * Shoulder甚至贴心的为使用者提供了方便自行扩展的代理类： {@link ServerLockAcquireProxy}（快速获得更好的分布式性能）、{@link ReentrantServerLock}(快速获得可重入能力)
+ * <p>
  * 目的：让使用者在开发时可以专注业务，而不必同时关注部署模式、底层技术差异！
- *      （因为这些技术的学习完全可以用 shoulder 帮你省下来的时间更专注的学习，高效利用自己的时间和宝贵生命）
- *
+ * （因为这些技术的学习完全可以用 shoulder 帮你省下来的时间更专注的学习，高效利用自己的时间和宝贵生命）
+ * <p>
  * 注意：
  * 1. 每个接口仅演示单个方法，测完需要注意记得 unlock ！！！！！
  * 2. 锁是非常重要的，不仅仅要直到如何使用，还要知道锁的原理是什么才不容易出 bug
- *      shoulder 框架提供的锁，锁的持有者标志：资源id + 线程id + appId + appInstanceId；
+ * shoulder 框架提供的锁，锁的持有者标志：资源id + 线程id + appId + appInstanceId；
  * 3. 由于这里演示 jdbc lock，故宕机后仍然持锁
  *
  * @author lym
@@ -102,7 +102,7 @@ public class LockController extends BaseControllerImpl<IUserService, UserEntity>
         } finally {
             jdkLock.unlock();
         }
-        return  locked ? "尝试拿JDK锁-没拿到，直接返回了" : "尝试拿JDK锁-成功，拿到后持有共计10s后释放了";
+        return locked ? "尝试拿JDK锁-没拿到，直接返回了" : "尝试拿JDK锁-成功，拿到后持有共计10s后释放了";
     }
 
 
@@ -118,7 +118,7 @@ public class LockController extends BaseControllerImpl<IUserService, UserEntity>
             boolean locked = jdkLock.tryLock(5, TimeUnit.SECONDS);
             stopWatch.stop();
             String costTip = "用时 " + stopWatch.getTotalTimeMillis() + "ms";
-            return  locked ? "尝试拿JDK锁-" + costTip + "-没拿到，直接返回了" : "尝试拿JDK锁" + costTip + "-成功，拿到后直接释放了";
+            return locked ? "尝试拿JDK锁-" + costTip + "-没拿到，直接返回了" : "尝试拿JDK锁" + costTip + "-成功，拿到后直接释放了";
         } finally {
             jdkLock.unlock();
         }
@@ -153,6 +153,7 @@ public class LockController extends BaseControllerImpl<IUserService, UserEntity>
     /**
      * 尝试获取 DB 锁，持有时间=HLOD_LOCK_DURATION（5min）
      * http://localhost:8080/lock/tryLock
+     *
      * @return 是否获取成功
      */
     @RequestMapping("tryLock")
@@ -161,7 +162,7 @@ public class LockController extends BaseControllerImpl<IUserService, UserEntity>
         LockInfo lockInfo = new LockInfo(shareKey, HLOD_LOCK_DURATION);
         boolean locked = jdbcLock.tryLock(lockInfo);
         String tip = "但锁已被使用，【未拿到】";
-        if(locked) {
+        if (locked) {
             // 暂存token，方便后续unlock使用
             globalOperationToken = lockInfo.getToken();
             tip = "【拿到】，将于 5min 后自动释放"; //HLOD_LOCK_DURATION
@@ -241,9 +242,9 @@ public class LockController extends BaseControllerImpl<IUserService, UserEntity>
 
     /**
      * 可重入测试：http://localhost:8080/lock/jdbc/reentrant
-     *
+     * <p>
      * 不正经的可重入：持锁线程可以再次直接获取锁，不管获取多少次，释放一次就释放
-     *
+     * <p>
      * JDK可重入定义：持锁线程可以再次直接获取锁，且释放锁的次数需要与获取锁的次数相同才认为是释放锁 【Shoulder采用】
      */
     @RequestMapping("/jdbc/reentrant")
@@ -285,14 +286,19 @@ public class LockController extends BaseControllerImpl<IUserService, UserEntity>
      */
     @PreDestroy
     public void autoCleanForDemo() {
-        try {
-            unlock(true);
-        } catch (Exception ignored){
-            ignored.printStackTrace();
+        if (holdLock(true)) {
+            try {
+                unlock(true);
+            } catch (Exception ignored) {
+                ignored.printStackTrace();
+            }
         }
-        try {
-            unlock(false);
-        } catch (Exception ignored){
-            ignored.printStackTrace();}
+        if (holdLock(false)) {
+            try {
+                unlock(false);
+            } catch (Exception ignored) {
+                ignored.printStackTrace();
+            }
+        }
     }
 }

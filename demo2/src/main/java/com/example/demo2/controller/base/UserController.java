@@ -12,6 +12,7 @@ import org.shoulder.web.template.crud.DeleteController;
 import org.shoulder.web.template.crud.QueryController;
 import org.shoulder.web.template.crud.SaveController;
 import org.shoulder.web.template.crud.UpdateController;
+import org.shoulder.web.template.tag.dto.TagDTO;
 import org.shoulder.web.template.tag.model.TagEntity;
 import org.shoulder.web.template.tag.model.TagMappingEntity;
 import org.shoulder.web.template.tag.service.TagCoreService;
@@ -93,12 +94,12 @@ public class UserController extends CrudController<
      * http://localhost:8080/user/attachTag?uid=2&type=age&name=20_30
      */
     @RequestMapping("attachTag")
-    public TagEntity attachTag(@RequestParam("uid") String uid, @RequestParam("type") String type, @RequestParam("name") String name) {
+    public TagDTO attachTag(@RequestParam("uid") String uid, @RequestParam("type") String type, @RequestParam("name") String name) {
 
         UserEntity userInDb = service.getById(uid);
         AssertUtils.notNull(userInDb, CommonErrorCodeEnum.DATA_NOT_EXISTS);
         TagEntity tag = tagCoreService.attachTag("USER", uid, type, name);
-        return tag;
+        return conversionService.convert(tag, TagDTO.class);
     }
 
     /**
@@ -106,8 +107,8 @@ public class UserController extends CrudController<
      * http://localhost:8080/user/searchByTag?tagId=1
      */
     @RequestMapping("searchByTag")
-    public ListResult<UserEntity> searchByTag(@RequestParam("tagId") Long tagId) {
-        List<TagMappingEntity> tagMappingList = tagCoreService.queryAllRefIdByStorageSourceAndTagId("USER", tagId);
+    public ListResult<UserEntity> searchByTag(@RequestParam("tagBizId") Long tagBizId) {
+        List<TagMappingEntity> tagMappingList = tagCoreService.queryAllRefIdByStorageSourceAndTagId("USER", tagBizId);
         List<Long> userIds = tagMappingList.stream()
                 .map(TagMappingEntity::getOid)
                 .map(Long::valueOf)

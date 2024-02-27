@@ -103,23 +103,23 @@ create table if not exists tb_tag
 (
     id             bigint unsigned auto_increment comment '主键'
         primary key,
-    biz_id         varchar(64)                        not null comment '业务唯一标识(不可修改；业务键拼接并哈希)',
-    delete_version bigint unsigned                    not null comment '删除标记：0-未删除；否则为删除时间',
-    version        int                                not null comment '数据版本号：用于幂等防并发',
-    display_order  int                                not null comment '展示顺序',
-    tenant         varchar(32)                        not null comment '租户',
-    biz_type       varchar(64)                        not null comment '配置类型，通常可据此分库表',
-    name           varchar(64)                        not null comment '标签名称',
-    display_name   varchar(64)                        not null comment '标签名称-展示',
-    description    varchar(255)                       null comment '备注:介绍为啥添加这一条',
-    icon           varchar(255)                       null comment '图标地址',
-    source         varchar(64)                        null comment '来源',
-    status         varchar(32)                        null comment '状态',
-    creator        varchar(64)                        not null comment '创建人编号',
-    create_time    datetime default CURRENT_TIMESTAMP not null comment '创建时间',
-    modifier       varchar(64)                        not null comment '最近修改人编码',
-    update_time    datetime default CURRENT_TIMESTAMP not null comment '最后修改时间',
-    ext            text                               null comment '业务数据，json 类型'
+    biz_id         varchar(64)                               not null comment '业务唯一标识(不可修改；业务键拼接并哈希)',
+    delete_version bigint unsigned default 0                 not null comment '删除标记：0-未删除；否则为删除时间',
+    version        int             default 0                 not null comment '数据版本号：用于幂等防并发',
+    display_order  int                                       not null comment '展示顺序',
+    tenant         varchar(32)                               not null comment '租户',
+    biz_type       varchar(64)                               not null comment '配置类型，通常可据此分库表',
+    name           varchar(64)                               not null comment '标签名称',
+    display_name   varchar(64)                               not null comment '标签名称-展示',
+    description    varchar(255)                              null comment '备注:介绍为啥添加这一条',
+    icon           varchar(255)                              null comment '图标地址',
+    source         varchar(64)                               null comment '来源',
+    status         varchar(32)                               null comment '状态',
+    creator        varchar(64)                               not null comment '创建人编号',
+    create_time    datetime        default CURRENT_TIMESTAMP not null comment '创建时间',
+    modifier       varchar(64)                               not null comment '最近修改人编码',
+    update_time    datetime        default CURRENT_TIMESTAMP not null comment '最后修改时间',
+    ext            text                                      null comment '业务数据，json 类型'
 )
     comment '标签表';
 
@@ -131,9 +131,8 @@ create table if not exists tb_tag_mapping
     id             bigint unsigned auto_increment comment '主键'
         primary key,
     tag_id         varchar(32)                               not null comment '业务唯一标识(不可修改；业务键拼接并哈希)',
-    delete_version bigint unsigned default '0'               not null comment '删除标记：0-未删除；否则为删除时间',
+    delete_version bigint unsigned default 0                 not null comment '删除标记：0-未删除；否则为删除时间',
     ref_type       varchar(64)                               not null comment 'refType',
-    refIds         varchar(64)                               not null comment 'to be deleted',
     oid            varchar(64)                               not null comment 'ref object Id',
     creator        varchar(64)                               not null comment '创建人编号',
     create_time    datetime        default CURRENT_TIMESTAMP null comment '创建时间',
@@ -144,26 +143,26 @@ create table if not exists tb_tag_mapping
     comment '标签映射表';
 
 
-----
+---- ref_id         varchar(64)                               not null comment 'to be deleted',
 
 
 create table if not exists tb_dictionary_type
 (
     id             bigint unsigned auto_increment comment '主键'
         primary key,
-    biz_id         varchar(64)                        not null comment '业务唯一标识(不可修改；业务键拼接并哈希)',
-    version        int                                not null comment '数据版本号：用于幂等防并发',
-    description    varchar(255)                       null comment '备注:介绍为啥添加这一条记录，这条记录干啥的，哪里用，怎么用',
-    delete_version bigint unsigned                    not null comment '删除标记：0-未删除；否则为删除时间',
+    biz_id         varchar(64)                               not null comment '业务唯一标识(不可修改；业务键拼接并哈希)',
+    version        int             default 0                 not null comment '数据版本号：用于幂等防并发',
+    description    varchar(255)                              null comment '备注:介绍为啥添加这一条记录，这条记录干啥的，哪里用，怎么用',
+    delete_version bigint unsigned default 0                 not null comment '删除标记：0-未删除；否则为删除时间',
 
-    display_name   varchar(64)                        not null comment '名称',
-    display_order  int                                not null comment '顺序',
-    source         varchar(64)                        not null comment '数据来源',
+    display_name   varchar(64)                               not null comment '名称',
+    display_order  int                                       not null comment '顺序',
+    source         varchar(64)                               not null comment '数据来源',
 
-    creator        varchar(64)                        not null comment '创建人编号',
-    create_time    datetime default CURRENT_TIMESTAMP not null comment '创建时间',
-    modifier       varchar(64)                        not null comment '最近修改人编码',
-    update_time    datetime default CURRENT_TIMESTAMP not null comment '最后修改时间'
+    creator        varchar(64)                               not null comment '创建人编号',
+    create_time    datetime        default CURRENT_TIMESTAMP not null comment '创建时间',
+    modifier       varchar(64)                               not null comment '最近修改人编码',
+    update_time    datetime        default CURRENT_TIMESTAMP not null comment '最后修改时间'
 )
     comment 'tb_dictionary_type';
 -- H2 数据库中，索引名需要全局唯一，一般数据库的索引名只需要表内唯一即可
@@ -174,22 +173,22 @@ create table if not exists tb_dictionary_item
 (
     id              bigint unsigned auto_increment comment '主键'
         primary key,
-    biz_id          varchar(64)                        not null comment '业务唯一标识(不可修改；业务键拼接并哈希)',
+    biz_id          varchar(64)                               not null comment '业务唯一标识(不可修改；业务键拼接并哈希)',
 
-    version         int                                not null comment '数据版本号：用于幂等防并发',
-    description     varchar(255)                       null comment '备注:介绍为啥添加这一条记录，这条记录干啥的，哪里用，怎么用',
+    version         int             default 0                 not null comment '数据版本号：用于幂等防并发',
+    description     varchar(255)                              null comment '备注:介绍为啥添加这一条记录，这条记录干啥的，哪里用，怎么用',
 
-    dictionary_type varchar(64)                        not null comment '字典类型编码',
-    name            varchar(64)                        not null comment '名称',
-    display_name    varchar(64)                        not null comment '展示名称',
-    display_order   int                                not null comment '顺序',
-    parent_id       bigint                             null comment '父节点id',
+    dictionary_type varchar(64)                               not null comment '字典类型编码',
+    name            varchar(64)                               not null comment '名称',
+    display_name    varchar(64)                               not null comment '展示名称',
+    display_order   int                                       not null comment '顺序',
+    parent_id       bigint                                    null comment '父节点id',
 
-    delete_version  bigint unsigned                    not null comment '删除标记：0-未删除；否则为删除时间',
-    creator         varchar(64)                        not null comment '创建人编号',
-    create_time     datetime default CURRENT_TIMESTAMP not null comment '创建时间',
-    modifier        varchar(64)                        not null comment '最近修改人编码',
-    update_time     datetime default CURRENT_TIMESTAMP not null comment '最后修改时间'
+    delete_version  bigint unsigned default 0                 not null comment '删除标记：0-未删除；否则为删除时间',
+    creator         varchar(64)                               not null comment '创建人编号',
+    create_time     datetime        default CURRENT_TIMESTAMP not null comment '创建时间',
+    modifier        varchar(64)                               not null comment '最近修改人编码',
+    update_time     datetime        default CURRENT_TIMESTAMP not null comment '最后修改时间'
 )
     comment 'tb_dictionary_item';
 

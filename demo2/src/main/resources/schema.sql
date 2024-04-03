@@ -31,6 +31,21 @@ CREATE INDEX idx_phone_num ON user_info (phone_num);
 CREATE INDEX idx_email ON user_info (email);
 
 ----
+
+create table tb_sequence
+(
+    name          varchar(64) comment '主键：序列号名（业务标记）' primary key,
+    min_value     int default 0                               not null comment '最小值：达到最大值后会重置为min_value作为初始值',
+    max_value     int default                                not null comment '最大值：序号不会比该值更大，达到后将重置',
+    step          int                                not null comment 'step',
+    current_value int                                not null comment 'current_value',
+    create_time   datetime default CURRENT_TIMESTAMP null comment '创建时间',
+    update_time   datetime default CURRENT_TIMESTAMP null comment '最后修改时间',
+    description   varchar(255)                       null comment '用户描述'
+)
+    comment 'sequence';
+
+
 create table if not exists log_operation
 (
     id               bigint auto_increment comment '主键'

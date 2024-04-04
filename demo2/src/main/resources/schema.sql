@@ -44,6 +44,7 @@ create table tb_sequence
     description   varchar(255)                       null comment '用户描述'
 )
     comment 'sequence';
+--     constraint uk_sequence_name unique (name)
 
 
 create table if not exists log_operation

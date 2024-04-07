@@ -1,10 +1,12 @@
 package com.example.demo2.controller.base;
 
-import org.shoulder.data.dal.sequence.dao.SequenceDao;
+import org.shoulder.data.sequence.SequenceGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * id 生成器测试
@@ -16,37 +18,39 @@ import org.springframework.web.bind.annotation.RestController;
 public class SequenceController {
 
     @Autowired
-    private SequenceDao sequenceDAO;
+    private SequenceGenerator sequenceGenerator;
 
     /**
      * 生成 user 业务下的一个递增id
      * <a href="http://localhost:8080/id-generator/sequence/user">http://localhost:8080/id-generator/sequence/user</a>
      */
     @RequestMapping("sequence/{biz}")
-    public Long sequence(@PathVariable("biz") String biz) throws Exception {
-        return sequenceDAO.getNextSequence(biz).genNextValue();
+    public Long sequence(@PathVariable("biz") String biz) {
+        return sequenceGenerator.next(biz);
     }
 
     /**
-     * 生成 user 业务下的一个递增id，一次请求并发调用100次
+     * 生成 user 业务下的100个递增id
      * <a href="http://localhost:8080/id-generator/sequence/multi/user">http://localhost:8080/id-generator/sequence/multi/user</a>
      */
     @RequestMapping("sequence/multi/{biz}")
-    public Long sequenceMulti(@PathVariable("biz") String biz) throws Exception {
-        new Thread(() -> {
-            try {
-                get50Times(biz);
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-        });
+    public List<Long> sequenceMulti(@PathVariable("biz") String biz) {
+        return sequenceGenerator.next(biz, 100);
+    }
+    /**
+     * 生成 user 业务下的一个递增id，一次请求并发调用100次
+     * <a href="http://localhost:8080/id-generator/sequence/concurrent/user">http://localhost:8080/id-generator/sequence/concurrent/user</a>
+     */
+    @RequestMapping("sequence/concurrent/{biz}")
+    public Long sequenceConcurrent(@PathVariable("biz") String biz) {
+        new Thread(() -> get50Times(biz));
         return get50Times(biz);
     }
 
-    public Long get50Times(String biz) throws Exception {
+    public Long get50Times(String biz) {
         for (int i = 0; i < 49; i++) {
-            sequenceDAO.getNextSequence(biz).genNextValue();
+            sequenceGenerator.next(biz);
         }
-        return sequenceDAO.getNextSequence(biz).genNextValue();
+        return sequenceGenerator.next(biz);
     }
 }

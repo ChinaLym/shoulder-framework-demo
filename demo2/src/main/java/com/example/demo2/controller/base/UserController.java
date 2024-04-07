@@ -7,7 +7,6 @@ import com.example.demo2.service.IUserService;
 import org.shoulder.core.dto.response.ListResult;
 import org.shoulder.core.exception.CommonErrorCodeEnum;
 import org.shoulder.core.util.AssertUtils;
-import org.shoulder.data.dal.sequence.dao.SequenceDao;
 import org.shoulder.web.template.crud.CrudController;
 import org.shoulder.web.template.crud.DeleteController;
 import org.shoulder.web.template.crud.QueryController;
@@ -57,9 +56,6 @@ public class UserController extends CrudController<
     @Autowired
     private TagCoreService tagCoreService;
 
-    @Autowired
-    private SequenceDao sequenceDAO;
-
     /**
      * 查询 id 为 1 的用户信息
      * http://localhost:8080/user/1
@@ -67,7 +63,6 @@ public class UserController extends CrudController<
     @RequestMapping("1")
     public UserEntity get() throws Exception {
         // 自动根据当前 Controller 泛型注入对应的 IService（IUserService），可通过 service 调用
-        System.out.println(sequenceDAO.getNextSequence("test").genNextValue());
         return service.getById(1);
     }
 

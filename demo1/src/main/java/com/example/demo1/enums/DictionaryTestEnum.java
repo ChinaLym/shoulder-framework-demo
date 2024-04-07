@@ -1,7 +1,7 @@
 package com.example.demo1.enums;
 
 import com.example.demo1.config.DictionaryEnumConfiguration;
-import org.shoulder.web.template.dictionary.model.NameAsIdDictionaryItemEnum;
+import org.shoulder.core.dictionary.model.NameAsIdDictionaryItemEnum;
 
 /**
  * 让枚举实现 NameAsIdDictionaryEnum 接口，前段就可以调接口查询有哪些枚举啦

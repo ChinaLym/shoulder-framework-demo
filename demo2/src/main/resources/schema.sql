@@ -49,8 +49,7 @@ create table tb_sequence
 
 create table if not exists log_operation
 (
-    id               bigint auto_increment comment '主键'
-        primary key,
+    id               bigint auto_increment comment '主键' primary key,
     app_id           varchar(32)                           not null comment '应用id',
     version          varchar(64)                           null comment '应用版本',
     instance_id      varchar(64)                           null comment '操作服务器节点标识（支持集群时用于定位具体哪台服务器执行）',
@@ -79,7 +78,8 @@ create table if not exists log_operation
     trace_id         varchar(64)                           null comment '调用链id',
     relation_id      varchar(64)                           null comment '关联的调用链id/业务id',
     tenant_code      varchar(20) default ''                null comment '租户编码',
-    insert_time      timestamp   default CURRENT_TIMESTAMP null comment '数据入库时间',
+    create_time      timestamp   default CURRENT_TIMESTAMP null comment '数据入库时间',
+    update_time      timestamp   default CURRENT_TIMESTAMP null comment '数据更新时间，日志表在非必要的订正前提下，一般不更新',
     extended_field0  varchar(1024)                         null,
     extended_field1  varchar(1024)                         null,
     extended_field2  varchar(1024)                         null,

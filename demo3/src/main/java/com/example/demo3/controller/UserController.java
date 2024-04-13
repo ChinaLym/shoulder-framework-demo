@@ -3,6 +3,7 @@ package com.example.demo3.controller;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.example.demo3.entity.UserEntity;
 import com.example.demo3.service.IUserService;
+import org.shoulder.core.converter.ShoulderConversionService;
 import org.shoulder.web.annotation.SkipResponseWrap;
 import org.shoulder.web.template.crud.CrudController;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,5 +28,8 @@ public class UserController extends CrudController<
         UserEntity> {
 
 
+    public UserController(IUserService service, ShoulderConversionService conversionService) {
+        super(service, conversionService);
+    }
 
 }

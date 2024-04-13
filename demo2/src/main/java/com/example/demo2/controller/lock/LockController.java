@@ -3,6 +3,7 @@ package com.example.demo2.controller.lock;
 import com.example.demo2.entity.UserEntity;
 import com.example.demo2.service.IUserService;
 import jakarta.annotation.PreDestroy;
+import org.shoulder.core.converter.ShoulderConversionService;
 import org.shoulder.core.exception.CommonErrorCodeEnum;
 import org.shoulder.core.lock.LockInfo;
 import org.shoulder.core.lock.ReentrantServerLock;
@@ -54,7 +55,8 @@ public class LockController extends BaseControllerImpl<IUserService, UserEntity>
     private final ServerLock jdkLock = new JdkLock();
 
 
-    public LockController(DataSource dataSource) {
+    public LockController(IUserService service, ShoulderConversionService conversionService, DataSource dataSource) {
+        super(service, conversionService);
         jdbcLock = new JdbcLock(dataSource);
     }
 

@@ -3,6 +3,7 @@ package com.example.demo4.controller;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.example.demo4.entity.UserEntity;
 import com.example.demo4.service.IUserService;
+import org.shoulder.core.converter.ShoulderConversionService;
 import org.shoulder.web.annotation.SkipResponseWrap;
 import org.shoulder.web.template.crud.CrudController;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +25,11 @@ public class UserController extends CrudController<
         UserEntity,
         UserEntity,
         UserEntity> {
+
+
+    public UserController(IUserService service, ShoulderConversionService conversionService) {
+        super(service, conversionService);
+    }
 
     /**
      * 查询 id 为 1 的用户信息

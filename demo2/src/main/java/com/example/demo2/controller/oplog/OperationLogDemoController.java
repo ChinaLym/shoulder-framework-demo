@@ -1,5 +1,7 @@
 package com.example.demo2.controller.oplog;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.shoulder.log.operation.annotation.OperationLog;
 import org.shoulder.web.annotation.SkipResponseWrap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 @SkipResponseWrap // 该类所有方法的返回值将不被包装
 @RestController
 @RequestMapping("oplog")
+@Tag(name = "操作日志演示")
 public class OperationLogDemoController {
 
     /**
@@ -27,6 +30,7 @@ public class OperationLogDemoController {
      * 用户名/密码: shoulder / shoulder
      */
     @GetMapping("1")
+    @Operation(summary = "日志测试")
     @OperationLog(operation = "testOpLogAnnotation")
     public String case1() {
         return "log has insertInTo your database.";

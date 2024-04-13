@@ -70,6 +70,11 @@
             <artifactId>h2</artifactId>
         </dependency>
         <!-- shoulder 继承了 Spring Boot 的所有特性，引入 Spring Boot 的jar 一样不需要写版本号 -->
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+            <version>2.5.0</version>
+        </dependency>
 
         <!-- 热更新插件，修改代码无需重启 -->
 <!--        <dependency>-->

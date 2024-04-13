@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.example.demo2.entity.UserEntity;
 import com.example.demo2.repository.UserMapper;
 import com.example.demo2.service.IUserService;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import org.shoulder.core.converter.ShoulderConversionService;
 import org.shoulder.core.dto.response.ListResult;
 import org.shoulder.core.exception.CommonErrorCodeEnum;
 import org.shoulder.core.util.AssertUtils;
@@ -55,6 +57,10 @@ public class UserController extends CrudController<
 
     @Autowired
     private TagCoreService tagCoreService;
+
+    public UserController(IUserService service, ShoulderConversionService conversionService) {
+        super(service, conversionService);
+    }
 
     /**
      * 查询 id 为 1 的用户信息

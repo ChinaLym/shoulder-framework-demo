@@ -46,7 +46,7 @@ create table if not exists log_operation
     trace_id         varchar(64)                           null comment '调用链id',
     relation_id      varchar(64)                           null comment '关联的调用链id/业务id',
     tenant_code      varchar(20) default ''                null comment '租户编码',
-    insert_time      timestamp   default CURRENT_TIMESTAMP null comment '数据入库时间',
+    create_time      timestamp   default CURRENT_TIMESTAMP null comment '数据入库时间',
     extended_field0  varchar(1024)                         null,
     extended_field1  varchar(1024)                         null,
     extended_field2  varchar(1024)                         null,

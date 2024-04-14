@@ -1,4 +1,4 @@
-create table if not exists user_info
+CREATE TABLE IF NOT EXISTS user_info
 (
     id          bigint unsigned auto_increment comment '主键'
         primary key,
@@ -26,13 +26,22 @@ create table if not exists user_info
 )
     comment '用户信息表';
 
-create index idx_name on user_info (name);
-CREATE INDEX idx_phone_num ON user_info (phone_num);
-CREATE INDEX idx_email ON user_info (email);
+-- SET @index_exists = (SELECT COUNT(*) FROM information_schema.statistics
+--                      WHERE table_schema = DATABASE()
+--                      AND table_name = 'user_info'
+--                      AND index_name = 'idx_name');
+-- 
+-- IF @index_exists = 0 THEN
+-- CREATE INDEX idx_name ON user_info (name);
+-- END IF;
+
+CREATE INDEX IF NOT EXISTS idx_name ON user_info (name);
+CREATE INDEX IF NOT EXISTS idx_phone_num ON user_info (phone_num);
+CREATE INDEX IF NOT EXISTS idx_email ON user_info (email);
 
 ----
 
-create table tb_sequence
+CREATE TABLE IF NOT EXISTS tb_sequence
 (
     name          varchar(64) comment '主键：序列号名（业务标记）' primary key,
     min_value     int default 0                               not null comment '最小值：达到最大值后会重置为min_value作为初始值',
@@ -47,7 +56,7 @@ create table tb_sequence
 --     constraint uk_sequence_name unique (name)
 
 
-create table if not exists log_operation
+CREATE TABLE IF NOT EXISTS log_operation
 (
     id               bigint auto_increment comment '主键' primary key,
     app_id           varchar(32)                           not null comment '应用id',
@@ -88,20 +97,20 @@ create table if not exists log_operation
 )
     comment '业务日志';
 
-create index idx_operation_time
+CREATE INDEX IF NOT EXISTS idx_operation_time
     on log_operation (operation_time);
 
-create index idx_terminal_address
+CREATE INDEX IF NOT EXISTS idx_terminal_address
     on log_operation (terminal_address);
 
-create index idx_trace_id
+CREATE INDEX IF NOT EXISTS idx_trace_id
     on log_operation (trace_id);
 
-create index idx_user_id
+CREATE INDEX IF NOT EXISTS idx_user_id
     on log_operation (user_id);
 
 ----
-create table if not exists crypto_info
+CREATE TABLE IF NOT EXISTS crypto_info
 (
     app_id        varchar(32)                           not null comment '应用标识',
     header        varchar(32) default ''                not null comment '密文前缀/算法标识/版本标志',
@@ -115,7 +124,7 @@ create table if not exists crypto_info
 
 ----
 
-create table if not exists tb_tag
+CREATE TABLE IF NOT EXISTS tb_tag
 (
     id             bigint unsigned auto_increment comment '主键'
         primary key,
@@ -139,10 +148,10 @@ create table if not exists tb_tag
 )
     comment '标签表';
 
-create index idx_tag_uni_bizid_tenant on tb_tag (biz_id, tenant);
-create index idx_tag_uni_type_name_tenant on tb_tag (biz_type, name, tenant);
+CREATE INDEX IF NOT EXISTS idx_tag_uni_bizid_tenant on tb_tag (biz_id, tenant);
+CREATE INDEX IF NOT EXISTS idx_tag_uni_type_name_tenant on tb_tag (biz_type, name, tenant);
 
-create table if not exists tb_tag_mapping
+CREATE TABLE IF NOT EXISTS tb_tag_mapping
 (
     id             bigint unsigned auto_increment comment '主键'
         primary key,
@@ -162,7 +171,7 @@ create table if not exists tb_tag_mapping
 ---- ref_id         varchar(64)                               not null comment 'to be deleted',
 
 
-create table if not exists tb_dictionary_type
+CREATE TABLE IF NOT EXISTS tb_dictionary_type
 (
     id             bigint unsigned auto_increment comment '主键'
         primary key,
@@ -182,10 +191,10 @@ create table if not exists tb_dictionary_type
 )
     comment 'tb_dictionary_type';
 -- H2 数据库中，索引名需要全局唯一，一般数据库的索引名只需要表内唯一即可
-create index idx_dic_type_bizid on tb_dictionary_type (biz_id);
-create index idx_dic_type_order on tb_dictionary_type (display_order);
+CREATE INDEX IF NOT EXISTS idx_dic_type_bizid on tb_dictionary_type (biz_id);
+CREATE INDEX IF NOT EXISTS idx_dic_type_order on tb_dictionary_type (display_order);
 
-create table if not exists tb_dictionary_item
+CREATE TABLE IF NOT EXISTS tb_dictionary_item
 (
     id              bigint unsigned auto_increment comment '主键'
         primary key,
@@ -208,10 +217,10 @@ create table if not exists tb_dictionary_item
 )
     comment 'tb_dictionary_item';
 
-create index idx_bizid on tb_dictionary_item (biz_id);
-create index idx_pid on tb_dictionary_item (parent_id);
+CREATE INDEX IF NOT EXISTS idx_bizid on tb_dictionary_item (biz_id);
+CREATE INDEX IF NOT EXISTS idx_pid on tb_dictionary_item (parent_id);
 
--- create table if not exists dict_hierarchy
+-- CREATE TABLE IF NOT EXISTS dict_hierarchy
 -- (
 --    id            bigint unsigned auto_increment comment '主键',
 --    ancestor_id   INT NOT NULL comment '数据版本号：用于幂等防并发',
@@ -223,7 +232,7 @@ create index idx_pid on tb_dictionary_item (parent_id);
 -- );
 
 -- ------------------
-create table if not exists system_lock
+CREATE TABLE IF NOT EXISTS system_lock
 (
     resource     varchar(64)             not null comment '锁定的资源，组件标识:模块标识:资源/操作标识'
         primary key,
@@ -238,7 +247,7 @@ create table if not exists system_lock
 
 -- shoulder-batch
 
-create table if not exists batch_record
+CREATE TABLE IF NOT EXISTS batch_record
 (
     id          varchar(48)                        not null comment '主键'
         primary key,
@@ -252,7 +261,7 @@ create table if not exists batch_record
 )
     comment '批量任务执行记录';
 
-create table batch_record_detail
+CREATE TABLE IF NOT EXISTS batch_record_detail
 (
     id          int auto_increment comment '主键'
         primary key,

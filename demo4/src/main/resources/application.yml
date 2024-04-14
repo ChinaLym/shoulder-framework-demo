@@ -17,7 +17,7 @@ spring:
   sql:
     init:
       platform: h2
-      mode: always
+      mode: EMBEDDED
       continue-on-error: false
       schema-locations: classpath:schema.sql
       data-locations: classpath:data.sql

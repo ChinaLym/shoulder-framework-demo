@@ -15,6 +15,7 @@ import org.shoulder.core.util.AssertUtils;
 import org.shoulder.web.annotation.SkipResponseWrap;
 import org.shoulder.web.template.crud.BaseControllerImpl;
 import org.springframework.util.StopWatch;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -76,7 +77,7 @@ public class LockController extends BaseControllerImpl<IUserService, UserEntity>
     /**
      * http://localhost:8080/lock/jdk/lockAndHold10s
      */
-    @RequestMapping("jdk/lockAndHold10s")
+    @GetMapping("jdk/lockAndHold10s")
     public String jdk_lockAndHold10s() {
         jdkLock.lock();
         try {
@@ -94,7 +95,7 @@ public class LockController extends BaseControllerImpl<IUserService, UserEntity>
      * http://localhost:8080/lock/jdk/tryLockAndHold10s
      * 可以连续访问该接口，10s内只有一次可以
      */
-    @RequestMapping("jdk/tryLockAndHold10s")
+    @GetMapping("jdk/tryLockAndHold10s")
     public String jdkTryLock() {
         boolean locked = jdkLock.tryLock();
         try {
@@ -112,7 +113,7 @@ public class LockController extends BaseControllerImpl<IUserService, UserEntity>
      * 尝试加锁，最大等待时间为 5s，5s拿不到，则返回false，且不自动释放，需要下一个 api释放
      * http://localhost:8080/lock/jdk/tryLockMax5s__notReleaseLock
      */
-    @RequestMapping("jdk/tryLockMax5s__notReleaseLock")
+    @GetMapping("jdk/tryLockMax5s__notReleaseLock")
     public String tryLockMax5s_jdk() throws InterruptedException {
         try {
             StopWatch stopWatch = new StopWatch();
@@ -129,7 +130,7 @@ public class LockController extends BaseControllerImpl<IUserService, UserEntity>
     /**
      * 可重入测试：http://localhost:8080/lock/jdk/reentrant
      */
-    @RequestMapping("jdk/reentrant")
+    @GetMapping("jdk/reentrant")
     public String reentrant_jdk() throws InterruptedException {
         jdkLock.lock();
         try {
@@ -158,7 +159,7 @@ public class LockController extends BaseControllerImpl<IUserService, UserEntity>
      *
      * @return 是否获取成功
      */
-    @RequestMapping("tryLock")
+    @GetMapping("tryLock")
     public String tryLock() {
         // new LockInfo 不填会自动设置随机 UUID token，简化了使用
         LockInfo lockInfo = new LockInfo(shareKey, HLOD_LOCK_DURATION);
@@ -177,7 +178,7 @@ public class LockController extends BaseControllerImpl<IUserService, UserEntity>
      * 5秒 http://localhost:8080/lock/tryLockWithWait?holdTime=pt5s
      * 100s http://localhost:8080/lock/tryLockWithWait?holdTime=pt100s
      */
-    @RequestMapping("tryLockWithWait")
+    @GetMapping("tryLockWithWait")
     public String tryLock(String holdTime) throws InterruptedException {
         LockInfo lockInfo = new LockInfo(shareKey, Duration.parse(holdTime));
 
@@ -200,7 +201,7 @@ public class LockController extends BaseControllerImpl<IUserService, UserEntity>
      * 如果可以上锁，会立马返回 true
      * 否则将一直等待，直到有人 unlock
      */
-    @RequestMapping("lock")
+    @GetMapping("lock")
     public String lock() {
         StopWatch stopWatch = new StopWatch();
         stopWatch.start();
@@ -218,7 +219,7 @@ public class LockController extends BaseControllerImpl<IUserService, UserEntity>
      *
      * @param global 是否用全局的共享锁
      */
-    @RequestMapping("holdLock")
+    @GetMapping("holdLock")
     public boolean holdLock(Boolean global) {
         LockInfo shareLock = new LockInfo(shareKey);
         if (Boolean.TRUE.equals(global)) {
@@ -231,7 +232,7 @@ public class LockController extends BaseControllerImpl<IUserService, UserEntity>
      * http://localhost:8080/lock/unlock?global=true 持有锁会释放
      * http://localhost:8080/lock/unlock?global=false 未持有锁（token不对）无法释放，抛异常
      */
-    @RequestMapping("unlock")
+    @GetMapping("unlock")
     public String unlock(Boolean global) {
         LockInfo shareLock = new LockInfo(shareKey);
         if (Boolean.TRUE.equals(global)) {
@@ -249,7 +250,7 @@ public class LockController extends BaseControllerImpl<IUserService, UserEntity>
      * <p>
      * JDK可重入定义：持锁线程可以再次直接获取锁，且释放锁的次数需要与获取锁的次数相同才认为是释放锁 【Shoulder采用】
      */
-    @RequestMapping("/jdbc/reentrant")
+    @GetMapping("/jdbc/reentrant")
     public String reentrant_jdbc() throws InterruptedException {
         LockInfo shareLock = new LockInfo(shareKey, HLOD_LOCK_DURATION);
         ReentrantServerLock jdbcLockx = new ReentrantServerLock(jdbcLock);

@@ -20,7 +20,7 @@ import java.util.Map;
 @RestController
 public class LogFileTestController {
 
-    @RequestMapping("log/test")
+    @GetMapping("log/test")
     public String testLog(){
         Map<String, Field> fieldMap = ReflectUtil.getFieldMap(ShoulderLoggers.class);
         fieldMap.forEach((name, field) -> {

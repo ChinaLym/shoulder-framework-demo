@@ -22,8 +22,8 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @SkipResponseWrap // 该类所有方法的返回值将不被包装
 @OperationLogConfig(objectType = "类注解上的objectType") // 这里多了个 Config 注解！！！！
-@RequestMapping("oplog/config")
 @RestController
+@RequestMapping("oplog/config")
 public class OperationLogDemoController2 {
 
 

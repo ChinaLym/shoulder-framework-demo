@@ -2,6 +2,7 @@ package com.example.demo2.controller.base;
 
 import org.shoulder.data.sequence.SequenceGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,7 +25,7 @@ public class SequenceController {
      * 生成 user 业务下的一个递增id
      * <a href="http://localhost:8080/id-generator/sequence/user">http://localhost:8080/id-generator/sequence/user</a>
      */
-    @RequestMapping("sequence/{biz}")
+    @GetMapping("sequence/{biz}")
     public Long sequence(@PathVariable("biz") String biz) {
         return sequenceGenerator.next(biz);
     }
@@ -33,7 +34,7 @@ public class SequenceController {
      * 生成 user 业务下的100个递增id
      * <a href="http://localhost:8080/id-generator/sequence/multi/user">http://localhost:8080/id-generator/sequence/multi/user</a>
      */
-    @RequestMapping("sequence/multi/{biz}")
+    @GetMapping("sequence/multi/{biz}")
     public List<Long> sequenceMulti(@PathVariable("biz") String biz) {
         return sequenceGenerator.next(biz, 100);
     }
@@ -41,7 +42,7 @@ public class SequenceController {
      * 生成 user 业务下的一个递增id，一次请求并发调用100次
      * <a href="http://localhost:8080/id-generator/sequence/concurrent/user">http://localhost:8080/id-generator/sequence/concurrent/user</a>
      */
-    @RequestMapping("sequence/concurrent/{biz}")
+    @GetMapping("sequence/concurrent/{biz}")
     public Long sequenceConcurrent(@PathVariable("biz") String biz) {
         new Thread(() -> get50Times(biz));
         return get50Times(biz);

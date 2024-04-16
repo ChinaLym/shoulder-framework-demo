@@ -55,7 +55,7 @@ public class TransportCryptoDemoController {
      * @see HttpMessageConverterExtractor#messageConverters
      * 如果 client端拿到空响应，但是没报错，大概率就是 spring RestTemplate 传入的预期响应类型不正确，但Json.ObjectMapper使用了new Object
      */
-    @GetMapping("coding_client_like_me")
+    @RequestMapping(value = "coding_client_like_me", method = {RequestMethod.GET, RequestMethod.POST})
     public SimpleResult coding_client_like_me() throws AsymmetricCryptoException {
         SimpleParam param = new SimpleParam();
         param.setCipher("123");

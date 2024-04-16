@@ -10,14 +10,14 @@ spring:
   sql:
     init:
       platform: h2
-      mode: EMBEDDED
+      mode: ALWAYS
       continue-on-error: false
       schema-locations: classpath:schema.sql
       data-locations: classpath:data.sql
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     #url: jdbc:h2:mem:dbtest;DATABASE_TO_UPPER=false;MODE=MYSQL;DB_CLOSE_ON_EXIT=FALSE;DB_CLOSE_DELAY=-1;
-    url: jdbc:h2:file:C:/Users/Admin/AppData/Roaming/dbFile;DATABASE_TO_UPPER=false;MODE=MYSQL;DB_CLOSE_ON_EXIT=FALSE;DB_CLOSE_DELAY=-1;
+    url: jdbc:h2:file:~/demo2db;DATABASE_TO_UPPER=false;MODE=MYSQL;DB_CLOSE_ON_EXIT=FALSE;DB_CLOSE_DELAY=-1;
     username: shoulder
     password: shoulder
     driver-class-name: org.h2.Driver

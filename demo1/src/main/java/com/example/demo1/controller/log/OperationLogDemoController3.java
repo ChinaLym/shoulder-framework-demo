@@ -22,8 +22,8 @@ import java.util.concurrent.Executor;
  * @author lym
  */
 @SkipResponseWrap // 该类所有方法的返回值将不被包装
-@RequestMapping("oplog/context")
 @RestController
+@RequestMapping("oplog/context")
 public class OperationLogDemoController3 {
 
     /**

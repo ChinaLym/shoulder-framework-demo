@@ -110,7 +110,7 @@ public class OperationLogDemoController {
                 .setOperationTime(Instant.now())
                 .setEndTime(Instant.now())
                 // 可能从调用链中取
-                .setTraceId(AppContext.getTranceId());
+                .setTraceId(AppContext.getTraceId());
 
         // 记录这条日志，关于记录日志的方式也封装了
         // 如记录到 xxx.operation.log 文件（也封装了格式、并支持扩展） / 发送 http 请求到日志中心 / 向 MQ 中发送消息 / 保存到数据库

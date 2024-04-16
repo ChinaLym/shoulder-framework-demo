@@ -4,7 +4,6 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.example.demo2.entity.UserEntity;
 import com.example.demo2.repository.UserMapper;
 import com.example.demo2.service.IUserService;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import org.shoulder.core.converter.ShoulderConversionService;
 import org.shoulder.core.dto.response.ListResult;
 import org.shoulder.core.exception.CommonErrorCodeEnum;
@@ -20,6 +19,7 @@ import org.shoulder.web.template.tag.model.TagMappingEntity;
 import org.shoulder.web.template.tag.service.TagCoreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -66,7 +66,7 @@ public class UserController extends CrudController<
      * 查询 id 为 1 的用户信息
      * http://localhost:8080/user/1
      */
-    @RequestMapping("1")
+    @GetMapping("1")
     public UserEntity get() throws Exception {
         // 自动根据当前 Controller 泛型注入对应的 IService（IUserService），可通过 service 调用
         return service.getById(1);
@@ -76,7 +76,7 @@ public class UserController extends CrudController<
      * 查询 id 为 1 的用户信息
      * http://localhost:8080/user/2
      */
-    @RequestMapping("2")
+    @GetMapping("2")
     public void test() {
         // 自动根据当前 Controller 泛型注入对应的 IService（IUserService），可通过 service 调用
         System.out.println("ok");
@@ -87,7 +87,7 @@ public class UserController extends CrudController<
      * 查询 name 为 input 的用户信息
      * http://localhost:8080/user/getOne?name=Shoulder
      */
-    @RequestMapping("getOne")
+    @GetMapping("getOne")
     public UserEntity getOne(@RequestParam("name") String name) {
         // 已经自动注入 service，即 IUserService
         LambdaQueryWrapper<UserEntity> queryWrapper = new LambdaQueryWrapper<>();
@@ -100,7 +100,7 @@ public class UserController extends CrudController<
      * http://localhost:8080/user/attachTag?uid=1&type=age&name=20_30
      * http://localhost:8080/user/attachTag?uid=2&type=age&name=20_30
      */
-    @RequestMapping("attachTag")
+    @GetMapping("attachTag")
     public TagDTO attachTag(@RequestParam("uid") String uid, @RequestParam("type") String type, @RequestParam("name") String name) {
 
         UserEntity userInDb = service.getById(uid);
@@ -113,7 +113,7 @@ public class UserController extends CrudController<
      * 查询被 tagId 打标的所有用户信息
      * http://localhost:8080/user/searchByTag?tagId=1
      */
-    @RequestMapping("searchByTagId")
+    @GetMapping("searchByTagId")
     public ListResult<UserEntity> searchByTagId(@RequestParam("tagId") Long tagId) {
         List<TagMappingEntity> tagMappingList = tagCoreService.queryAllRefIdByRefTypeAndTagId("USER", tagId);
         return queryUserByTagMapping(tagMappingList);
@@ -135,7 +135,7 @@ public class UserController extends CrudController<
      * 查询被 tagId 打标的所有用户信息
      * http://localhost:8080/user/searchByTag?tagId=1
      */
-    @RequestMapping("searchByTagName")
+    @GetMapping("searchByTagName")
     public ListResult<UserEntity> searchByTagName(@RequestParam("type") String tagType, @RequestParam("name") String tagName) {
         List<TagMappingEntity> tagMappingList = tagCoreService.queryAllRefIdByRefTypeAndTagName("USER", tagType, tagName);
         return queryUserByTagMapping(tagMappingList);
@@ -145,7 +145,7 @@ public class UserController extends CrudController<
      * 查询 name 为 input 的用户信息
      * http://localhost:8080/user/getOne?name=Shoulder
      */
-    @RequestMapping("logicDelete")
+    @GetMapping("logicDelete")
     public String logicDelete(@RequestParam("id") String id) {
         ((UserMapper) service.getBaseMapper()).omitById(id);
         return "";

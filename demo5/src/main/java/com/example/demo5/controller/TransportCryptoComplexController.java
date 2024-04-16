@@ -20,7 +20,6 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -56,7 +55,7 @@ public class TransportCryptoComplexController {
      * @see SensitiveRequestEncryptMessageConverter#writeInternal 在这打断点，观察参数确实是自动加密处理的
      * @see SensitiveRequestEncryptMessageConverter#read 在这打断点，观察返回值确实是密文
      */
-    @GetMapping("coding_client_like_me")
+    @RequestMapping(value = "coding_client_like_me", method = {RequestMethod.GET, RequestMethod.POST})
     public ComplexResult coding_client_like_me() throws AsymmetricCryptoException {
         SimpleParam inner = new SimpleParam();
         inner.setCipher("innerCipher");

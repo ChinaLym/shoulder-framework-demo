@@ -3,6 +3,7 @@ package com.example.demo1.controller.validate;
 import org.shoulder.core.util.RegexpUtils;
 import org.shoulder.validate.annotation.FileType;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -33,7 +34,7 @@ public class FileUploadController {
      * 正常写法举例，框架不会嵌套包装
      * 注意表单中参数名也需要是 'uploadFile' 或添加 @Param 注解
      */
-    @RequestMapping("0")
+    @PostMapping("0")
     public String notRecommended(MultipartFile uploadFile) throws IOException {
         if (uploadFile == null) {
             System.out.println("fileName: null");
@@ -87,7 +88,7 @@ public class FileUploadController {
      * 框架自动校验
      * 只需一个注解 @FileType
      */
-    @RequestMapping("1")
+    @PostMapping("1")
     public String case1(@FileType(allowSuffix = "png", maxSize = "10MB") MultipartFile uploadFile) {
         // 你的业务代码 ...
 
@@ -98,7 +99,7 @@ public class FileUploadController {
      * 框架自动校验
      * 只需一个注解 @FileType
      */
-    @RequestMapping("2")
+    @PostMapping("2")
     public String case2(@FileType(allowSuffix = {"yml", "properties"}, maxSize = "1MB") MultipartFile uploadFile) {
         // 你的业务代码 ...
 

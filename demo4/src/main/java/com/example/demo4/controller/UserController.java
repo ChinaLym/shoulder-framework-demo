@@ -35,7 +35,7 @@ public class UserController extends CrudController<
      * 查询 id 为 1 的用户信息
      * http://localhost:8080/user/1
      */
-    @RequestMapping("1")
+    @GetMapping("1")
     public UserEntity get() {
         // 自动根据当前 Controller 泛型注入对应的 IService（IUserService），可通过 service 调用
         return service.getById(1);
@@ -45,7 +45,7 @@ public class UserController extends CrudController<
      * 查询 name 为 input 的用户信息
      * http://localhost:8080/user/getOne?name=Shoulder
      */
-    @RequestMapping("getOne")
+    @GetMapping("getOne")
     public UserEntity getOne(String name) {
         // 已经自动注入 service，即 IUserService
         LambdaQueryWrapper<UserEntity> queryWrapper = new LambdaQueryWrapper<>();
@@ -57,7 +57,7 @@ public class UserController extends CrudController<
      * 查询 name 为 input 的用户信息
      * http://localhost:8080/user/me
      */
-    @RequestMapping("me")
+    @GetMapping("me")
     public UserEntity me() {
         return getOne("shoulder");
     }

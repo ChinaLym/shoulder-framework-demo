@@ -2,6 +2,7 @@ package com.example.demo2.controller.base;
 
 import org.shoulder.core.exception.BaseRuntimeException;
 import org.shoulder.web.annotation.SkipResponseWrap;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,7 +24,7 @@ public class SecurityExceptionController {
      *
      * @return {"code":"0x0000012c","msg":"UNKNOWN ERROR.","data":null}
      */
-    @RequestMapping("jdkRuntime")
+    @GetMapping("jdkRuntime")
     public String jdkRuntime() {
         throw new RuntimeException("just a test Ex");
     }
@@ -32,7 +33,7 @@ public class SecurityExceptionController {
      * 异常 message 设置为 xxx
      * http://localhost:8080/ex/base
      */
-    @RequestMapping("base")
+    @GetMapping("base")
     public String base() {
         throw new BaseRuntimeException("123", "Test customer ex message.");
     }
@@ -42,7 +43,7 @@ public class SecurityExceptionController {
      * 访问这个方法，可以看到 shoulder 不会对其包装 http://localhost:8080/ex/thread
      * 因为异步线程排差问题往往依赖上下文信息，如错误根因、耗时、哪一步出错，影响量，业务等，故一定需要开发者手动去控制打印内容
      */
-    @RequestMapping("thread")
+    @GetMapping("thread")
     public String thread() {
         new Thread(() -> {
             throw new RuntimeException("这部分因异步线程，错误码不会自动包装~");

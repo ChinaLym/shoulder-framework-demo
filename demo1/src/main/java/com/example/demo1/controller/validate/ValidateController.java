@@ -1,5 +1,12 @@
 package com.example.demo1.controller.validate;
 
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,12 +15,10 @@ import org.shoulder.validate.annotation.Enum;
 import org.shoulder.validate.groups.Update;
 import org.shoulder.web.validate.ValidateRuleEndPoint;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.*;
 
 /**
  * 测试上传文件，合法校验
@@ -36,7 +41,7 @@ public class ValidateController {
     /**
      * 正常写法举例，框架不会嵌套包装
      */
-    @RequestMapping("0")
+    @GetMapping("0")
     public BaseResult<String> notRecommended() {
         BaseResult<String> response = new BaseResult<>();
         response.setCode("0");
@@ -49,7 +54,7 @@ public class ValidateController {
      * 正常写法举例
      * http://localhost:8080/validate/1?value=x
      */
-    @RequestMapping("1")
+    @GetMapping("1")
     public String caseEnum(@Enum(enums = {"abc", "def"}) String value) {
         System.out.println(value);
         return "ok";
@@ -60,7 +65,7 @@ public class ValidateController {
      * 正常写法举例
      * http://localhost:8080/validate/jsr/1?value=x
      */
-    @RequestMapping("jsr/1")
+    @GetMapping("jsr/1")
     public String caseJsr(@Validated @Valid @NotNull @NotBlank String value) {
         System.out.println(value);
         return "ok";

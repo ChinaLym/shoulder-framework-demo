@@ -1,5 +1,6 @@
 package com.example.demo2.controller.base;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.shoulder.data.sequence.SequenceGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +17,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("id-generator")
+@Tag(name = "[DEMO2-SequenceController]-id/sequence序列 使用演示", description = "id/sequence序列-使用演示")
 public class SequenceController {
 
     @Autowired

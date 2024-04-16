@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 @SkipResponseWrap // 该类所有方法的返回值将不被包装
 @RestController
 @RequestMapping("oplog")
-@Tag(name = "操作日志演示")
+@Tag(name = "[DEMO2-OperationLogDemoController]-OperationLog 使用演示", description = "操作日志使用演示")
 public class OperationLogDemoController {
 
     /**

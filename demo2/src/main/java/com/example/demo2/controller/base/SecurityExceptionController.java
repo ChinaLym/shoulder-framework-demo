@@ -1,5 +1,6 @@
 package com.example.demo2.controller.base;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.shoulder.core.exception.BaseRuntimeException;
 import org.shoulder.web.annotation.SkipResponseWrap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 @SkipResponseWrap
 @RestController
 @RequestMapping("ex")
+@Tag(name = "[DEMO2-SecurityExceptionController]-全局异常 使用演示", description = "全局异常-使用演示")
 public class SecurityExceptionController {
 
     /**

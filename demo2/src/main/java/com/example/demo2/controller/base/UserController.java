@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.example.demo2.entity.UserEntity;
 import com.example.demo2.repository.UserMapper;
 import com.example.demo2.service.IUserService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.shoulder.core.converter.ShoulderConversionService;
 import org.shoulder.core.dto.response.ListResult;
 import org.shoulder.core.exception.CommonErrorCodeEnum;
@@ -44,6 +45,7 @@ import java.util.List;
  * @see UpdateController
  * @see DeleteController
  */
+@Tag(name = "[DEMO2-UserController]-USER 接口演示", description = "USER 接口演示")
 @RestController
 @RequestMapping("user")
 public class UserController extends CrudController<

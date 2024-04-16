@@ -2,6 +2,7 @@ package com.example.demo2.controller.lock;
 
 import com.example.demo2.entity.UserEntity;
 import com.example.demo2.service.IUserService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.PreDestroy;
 import org.shoulder.core.converter.ShoulderConversionService;
 import org.shoulder.core.exception.CommonErrorCodeEnum;
@@ -49,6 +50,7 @@ import javax.sql.DataSource;
 @SkipResponseWrap // 跳过包装方便演示
 @RestController
 @RequestMapping("lock")
+@Tag(name = "[DEMO2-LockController]-Lock 使用演示", description = "Lock 使用演示")
 public class LockController extends BaseControllerImpl<IUserService, UserEntity> {
 
     // 实际一般都是注入，不会用new，这里为了演示方便，所以才用了两个不同字段

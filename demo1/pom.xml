@@ -30,10 +30,11 @@
         </dependency>
 
         <!-- 接口文档 -->
-<!--        <dependency>-->
-<!--            <groupId>io.springfox</groupId>-->
-<!--            <artifactId>springfox-boot-starter</artifactId>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+            <version>2.5.0</version>
+        </dependency>
 <!--        <dependency>-->
 <!--            <groupId>com.github.xiaoymin</groupId>-->
 <!--            <artifactId>knife4j-spring-boot-starter</artifactId>-->
@@ -45,11 +46,6 @@
             <artifactId>shoulder-crypto</artifactId>
         </dependency>
 
-        <!-- 加密通信 -->
-        <dependency>
-            <groupId>cn.itlym</groupId>
-            <artifactId>shoulder-crypto-negotiation</artifactId>
-        </dependency>
 
         <!-- shoulder 改写的 lombok，额外提供 @SLog -->
         <dependency>

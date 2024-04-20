@@ -1,7 +1,5 @@
 package com.example.demo4;
 
-import org.shoulder.core.exception.CommonErrorCodeEnum;
-import org.shoulder.core.util.AssertUtils;
 import org.shoulder.security.authentication.endpoint.JwkSetEndpoint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;

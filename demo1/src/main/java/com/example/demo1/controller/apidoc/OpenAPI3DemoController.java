@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 /**
  * 介绍如何使用 OpenAPI 3 的注解
  *
+ * http://localhost:8080/swagger-ui/index.html#/
+ *
  * @author lym
  */
 @Tag(name = "api 文档 demo 相关接口")

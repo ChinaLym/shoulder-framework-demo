@@ -19,25 +19,25 @@ import java.util.Date;
 public class ApiDocV3 {
 
     @NotEmpty(message = "name is notnull")
-    @Schema(name = "主键", requiredMode = RequiredMode.REQUIRED, example = "d1a27abd-56b7-44c5-838c-05e1a50809f6")
+    @Schema(description = "主键", requiredMode = RequiredMode.REQUIRED, example = "d1a27abd-56b7-44c5-838c-05e1a50809f6")
     String id;
 
-    @Schema(name = "名称", requiredMode = RequiredMode.REQUIRED, example = "小明", minLength = 1, maxLength = 10)
+    @Schema(description = "名称", requiredMode = RequiredMode.REQUIRED, example = "小明", minLength = 1, maxLength = 10)
     String name;
 
-    @Schema(name = "年龄", example = "20", minimum = "0", maximum = "200")
+    @Schema(description = "年龄", example = "20", minimum = "0", maximum = "200")
     Integer age;
 
-    @Schema(name = "地址", example = "广州市", pattern = "^.*$")
+    @Schema(description = "地址", example = "广州市", pattern = "^.*$")
     String address;
 
-    @Schema(name = "头像", example = "http://xxx.com/abc.jpg", pattern = "https?://.*")
+    @Schema(description = "头像", example = "http://xxx.com/abc.jpg", pattern = "https?://.*")
     String image;
 
-    @Schema(name = "出生日期", requiredMode = RequiredMode.REQUIRED, example = "2020-1-11")
+    @Schema(description = "出生日期", requiredMode = RequiredMode.REQUIRED, example = "2020-1-11")
     Date birth;
 
-    @Schema(name = "是否启用", requiredMode = RequiredMode.REQUIRED, example = "true")
+    @Schema(description = "是否启用", requiredMode = RequiredMode.REQUIRED, example = "true")
     String enable;
 
 }

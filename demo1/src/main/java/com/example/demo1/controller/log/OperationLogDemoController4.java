@@ -4,7 +4,7 @@ import com.example.demo1.bo.UserInfo;
 import com.example.demo1.config.DemoOperationLogInterceptor;
 import com.example.demo1.dto.OperationRecord;
 import com.example.demo1.util.MockBusinessOperation;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
 import org.shoulder.log.operation.annotation.OperationLog;
 import org.shoulder.log.operation.context.OpLogContextHolder;
 import org.shoulder.log.operation.enums.OperationResult;
@@ -80,7 +80,7 @@ public class OperationLogDemoController4 {
      */
     @OperationLog(operation = "demo4_3", detailKey = "demo4_3.intro")
     @GetMapping("3")
-    @ApiOperation(value = "自定义策略", notes = "比如一条操作日志记录 5 次操作。若操作100条，记录20条操作日志。")
+    @Operation(summary = "自定义策略", description = "比如一条操作日志记录 5 次操作。若操作100条，记录20条操作日志。")
     public void customRecords() {
         int total = 20;
         List<UserInfo> importUserInfo = MockBusinessOperation.newRandomUsers(total);

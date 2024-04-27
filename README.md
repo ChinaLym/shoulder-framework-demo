@@ -54,7 +54,7 @@
 
 感谢小伙伴们的 **[🌟Star](https://gitee.com/ChinaLym/shoulder-framework/star)** 、 **🍴Fork** 、 **🏁PR**~ 
 
-欢迎使用 `issue` 或 [cn_lym@foxmai.com](mailto:cn_lym@foxmai.com) 交流，如 留下你的建议、期待的新功能等~
+欢迎使用 `issue` 或 [cn_lym@foxmail.com](mailto:cn_lym@foxmail.com) 交流，如 留下你的建议、期待的新功能等~
 
 ### 👨‍💼 关于作者
 

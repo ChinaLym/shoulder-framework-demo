@@ -43,7 +43,7 @@
             <artifactId>shoulder-starter-mysql</artifactId>
         </dependency>
         <dependency>
-            <!-- demo 工程使用 h2 链接 -->
+            <!-- demo 工程使用 h2 连接DB -->
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
         </dependency>

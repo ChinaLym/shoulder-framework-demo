@@ -1,7 +1,17 @@
-# **[shoulder-framework](https://gitee.com/ChinaLym/shoulder-framework)** 的示例工程
+<h1 align="center"><img src="doc/img/logo.png" height="40" width="40" /><a href="https://github.com/ChinaLym/shoulder-framework-demo" target="_blank">Shoulder Framework Demo</a></h1>
 
-## 工程介绍
+# 📖介绍
 
+多个使用了 [Shoulder-Framework](https://github.com/ChinaLym/shoulder-framework) 的演示项目，演示了 `Shoulder` 框架提供的常用能力。
+
+# 🚀 快速开始
+三步快速体验：下载、启动、体验
+
+1. `git clone https://gitee.com/ChinaLym/shoulder-framework-demo` 或 `IDEA-new project-from version control` 下载本项目。
+2. 打开对应的工程（如 `demo1`） ，将工程导入 `IDEA`/`ECLIPSE` 将demo运行在本地（默认8080端口）。
+3. 根据其中的 `READE.ME` 或 `代码注释` 或 `.http 脚本`进行测试，跟着 demo 了解 shoulder 的能力
+
+# 🧐 详细介绍
 - [demo1](https://github.com/ChinaLym/shoulder-framework-demo/tree/main/demo1)（`常用能力`）
     - 介绍了 **[Shoulder](https://gitee.com/ChinaLym/shoulder-framework)** 框架基本使用，便于快速入门
     - 通过对比使用 `Shoulder` 与原生的 `Spring Boot` 来展示 Shoulder 提供的能力与快速开发。
@@ -11,8 +21,10 @@
         - 轻松实现监控自己的线程池状态，同步到监控与报警中心 Prometheus，Grafana 展示
 
 - [demo2](https://github.com/ChinaLym/shoulder-framework-demo/tree/main/demo2)（`数据库`）
-    - 演示对数据库的增强和简化
-    - 主要由 `mybatis`、`mybatis-plus`、`pagehelper` 提供能力增强，shoulder 在其之上添加了几个简单的封装
+    - 演示对数据库的增强和简化：仅需要实现接口，无需SQL开发即可获得基本的增删改查
+    - 操作日志-DB存储
+    - 激活并使用`字典`、`标签`、`批处理`、`异步校验&导入`、`导出`能力
+    - 演示内嵌式DB，无需安装Mysql，直接本地使用数据库（H2）
 
 - [demo3](https://github.com/ChinaLym/shoulder-framework-demo/tree/main/demo3)（`spring security`）
     - 演示安全认证相关
@@ -20,6 +32,7 @@
         - 手机短信登录
         - 验证码
         - (认证方式 token/session 一键切换)
+    - 演示内嵌式redis，无需安装redis，直接本地使用
 
 - [demo4](https://github.com/ChinaLym/shoulder-framework-demo/tree/main/demo4)（`spring security`）
     - 演示安全认证相关
@@ -30,79 +43,20 @@
     - 应用间传输加解密【绝密！不可破解、不可伪造、不可抵赖！】
     - 完整的客户端与服务端实现，只需要在 `Spring` 的基础上知道一个 `@Sensitive` 注解即可实现整套功能
 
-- demo6
-    - TODO
-
-## 分支管理模型
-
-- 主干 master 开发，分支发布
-    - 主分支（`main`）上是最新的开发版代码；
-    - 分支名称与 `shoulder-framework 的版本号` 对应
-    - 如：想查看 0.6 版本的使用用例，则切换至 `0.6` 分支
-
-## 下载、部署、运行
-
-- `git clone https://gitee.com/ChinaLym/shoulder-framework-demo` 下载本项目
-- 进入对应的工程，如 `demo1` ，将工程导入 `IDEA`/`ECLIPSE` 将其在本地运行（默认8080端口）
-- 根据其中的 `READE.ME` 或代码注释进行测试，跟着 demo 了解 shoulder 的能力
-
 ---
 
-## 快速创建一个包目录安排好的工程
+# 💗 贡献代码
 
-单模块工程：可以通过 shoulder 提供的
-maven [shoulder-archetype-simple](https://github.com/ChinaLym/shoulder-framework/tree/master/shoulder-archetype-simple)
-快速创建
+欢迎各类型代码提交，不限于`优化代码格式`、`优化注释/JavaDoc`、`修复 BUG`、`新增功能`
+，更多请参考 [如何贡献代码](CONTRIBUTING.MD)
 
-多模块工程：可以通过 shoulder-platform
-提供的 [shoulder-platform-archetype](https://github.com/ChinaLym/shoulder-platform/tree/main/shoulder-platform-common/shoulder-platform-archetype)
+# 📩 反馈 or 联系我
 
-代码生成器（根据数据库表，自动生成 controller、service、entity，带有基本的增删改查、前端界面的web工程）
-[shoulder-generator](https://github.com/ChinaLym/shoulder-platform/tree/main/shoulder-generator)
+感谢小伙伴们的 **[🌟Star](https://gitee.com/ChinaLym/shoulder-framework/star)** 、 **🍴Fork** 、 **🏁PR**~ 
 
----
+欢迎使用 `issue` 或 [cn_lym@foxmai.com](mailto:cn_lym@foxmai.com) 交流，如 留下你的建议、期待的新功能等~
 
-## 推荐的学习目标
+### 👨‍💼 关于作者
 
-- 学会使用 `Spring Boot`/`Shoulder` 创建自己的工程
-- 可以通过框架提供的配置项来更改框架提供的功能
-- 理解实现原理
-- 可以根据 `Spring` 或 `Shoulder` 框架预留的扩展点或接口来实现自己的功能
-- 分享自己的想法和设计，为 `Shoulder`/`Spring Boot` 提交代码
-
-注：可以根据自己的开发经验，选择性跳过一些基础的介绍~
-
-## 推荐的学习顺序
-
-Shoulder 是基于 Spring Boot 的，Shoulder 希望通过本项目帮助各位同学更好的学习 `Spring Boot` 
-
-### Spring Boot 基础知识介绍
-
-为了更好地学习 Spring Boot 的使用，可以从以下开始。
-
-* [Official Apache Maven documentation](https://maven.apache.org/guides/index.html)
-* [Spring Boot Maven Plugin Reference Guide](https://docs.spring.io/spring-boot/docs/2.3.2.RELEASE/maven-plugin/reference/html/)
-* [Create an OCI image](https://docs.spring.io/spring-boot/docs/2.3.2.RELEASE/maven-plugin/reference/html/#build-image)
-* [Spring Web](https://docs.spring.io/spring-boot/docs/2.3.2.RELEASE/reference/htmlsingle/#boot-features-developing-web-applications)
-* [Spring Boot DevTools](https://docs.spring.io/spring-boot/docs/2.3.2.RELEASE/reference/htmlsingle/#using-boot-devtools)
-
-### Spring Boot 指南
-
-Shoulder 框架是基于 Spring Boot 之上的，这里有 Spring 如何创建 Restful Web Service 的指南。
-
-* [Building a RESTful Web Service](https://spring.io/guides/gs/rest-service/)
-
-* [Serving Web Content with Spring MVC](https://spring.io/guides/gs/serving-web-content/)
-
-* [Building REST services with Spring](https://spring.io/guides/tutorials/bookmarks/)
-
----
-
-## 参与贡献
-
-1.  `Fork` 本仓库
-2.  新建 `feat_xxx` 分支，如：演示对数据库使用的封装可以为 `feat_db`
-3.  提交代码
-4.  新建 Pull Request
-
-合并之后就可以看到你新建的工程了~
+多次参与 Alibaba 核心系统重构与设计，主导过多次 D11 级别大促保障，欢迎技术交流与简历投递～
+- 该项目为作者在业余时间独立开发和维护的个人项目，非阿里巴巴官方产品。

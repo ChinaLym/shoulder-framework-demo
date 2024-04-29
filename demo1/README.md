@@ -5,17 +5,37 @@
 - 下载后运行 `demo1` （默认8080端口）
 - 进入 `com.example.demo1.controller` 目录，打开对应的类，参照类上的注解进行测试与查看。（在 IDE 中可按住 `ctrl` 并点击注释内 `url` 即可快速测试）
 
-# 📂 目录指南
+# 📂 示例 Controller 简介
 
-- log   打印日志、请求日志、http客户端日志、操作日志
-- ex    处理异常与错误码
-- response  统一响应格式
-- convert   枚举参数自动转换
-- validate  参数校验
-- i18n      国际化 / 多语言翻译
-- crypto    加解密：传输加解密、存储加解密
-- current   线程相关，延迟任务、线程池增强器
-- apidoc    接口文档
+- [log](src/main/java/com/example/demo1/controller/log)
+  - [无需任何代码，自动打印 HTTP接口清求/响应日志 + 自动打印异常打印](src/main/java/com/example/demo1/controller/log/HttpLogDemoController.java)
+  - [自动打印http接口调用请求/响应日志](src/main/java/com/example/demo1/controller/log/AutoApiLogDemoController.java)
+  - [一个注解自动打印操作日志，轻松审计用户操作](src/main/java/com/example/demo1/controller/log/OperationLogDemoController.java)
+  - [主动打印日志也很简单，轻松打印错误码](src/main/java/com/example/demo1/controller/log/LoggerDemoController.java)
+- [response](src/main/java/com/example/demo1/controller/response)
+  - [默认统一HTTP响应格式](src/main/java/com/example/demo1/controller/response/RestfulResponseDemoController.java)
+- [ex](src/main/java/com/example/demo1/controller/ex)
+  - [自动处理异常，告别繁琐的 try catch](src/main/java/com/example/demo1/controller/ex/ExceptionDemoController.java)
+- [validate](src/main/java/com/example/demo1/controller/validate)
+  - [JSR 303 注解式校验](src/main/java/com/example/demo1/controller/validate/ValidateController.java)
+  - [文件上传也可注解式校验](src/main/java/com/example/demo1/controller/validate/FileUploadController.java)
+- [i18n](src/main/java/com/example/demo1/controller/i18n)
+  - [多语言翻译不在话下](src/main/java/com/example/demo1/controller/i18n/ShoulderI18nDemoController.java)
+- [apidoc](src/main/java/com/example/demo1/controller/apidoc)
+  - [OPENAPI 标准接口文档支持](src/main/java/com/example/demo1/controller/apidoc/OpenAPI3DemoController.java)
+- [concurrent](src/main/java/com/example/demo1/controller/concurrent)
+  - [延迟任务](src/main/java/com/example/demo1/controller/concurrent/DelayTaskDemoController.java)
+  - [增强的线程池](src/main/java/com/example/demo1/controller/concurrent/ThreadEnhancerDemoController.java)
+- [crypto](src/main/java/com/example/demo1/controller/crypto)
+  - [更安全的存储加密](src/main/java/com/example/demo1/controller/crypto/local/LocalCryptoDemoController.java)
+  - [RSA 非对称加密](src/main/java/com/example/demo1/controller/crypto/asymmetric/RsaCryptoDemoController.java)
+  - [Ecc 更先进安全的非对称加密](src/main/java/com/example/demo1/controller/crypto/asymmetric/EccCryptoDemoController.java)
+- [convert](src/main/java/com/example/demo1/controller/convert)
+  - [嵌套枚举也能自动转](src/main/java/com/example/demo1/controller/convert/EnumConvertController.java)
+  - [日期自动转换基本操作](src/main/java/com/example/demo1/controller/convert/DateParamConvertController.java)
+
+
+通过这些例子，相信你已经了解到，`Shoulder` 提供的能力使用上与 `Sping Boot` 如出一辙: 要么什么都不需要做，已经自动实现了，要么只需`@Autowaired`开箱即用，减少您大量的代码量与维护成本~
 
 ---
 

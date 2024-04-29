@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 测试上传文件，合法校验
+ * JSR303 注解式校验
  * <a href="http://localhost:8080/" />
  * 动态校验规则 <a href="http://localhost:8080/api/v1/validate/rule?method=get&uri=/validate/jsr/1" />
  * 动态校验规则 <a href="http://localhost:8080/api/v1/validate/rule/validate/jsr/1?method=get" />
@@ -36,19 +36,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("validate")
 public class ValidateController {
-
-
-    /**
-     * 正常写法举例，框架不会嵌套包装
-     */
-    @GetMapping("0")
-    public BaseResult<String> notRecommended() {
-        BaseResult<String> response = new BaseResult<>();
-        response.setCode("0");
-        response.setMsg("msg");
-        response.setData("data");
-        return response;
-    }
 
     /**
      * 正常写法举例

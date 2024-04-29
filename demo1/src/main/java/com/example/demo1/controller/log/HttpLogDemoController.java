@@ -1,6 +1,7 @@
 package com.example.demo1.controller.log;
 
 import lombok.extern.slf4j.Slf4j;
+import org.shoulder.http.interceptor.RestTemplateColorfulLogInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +25,7 @@ public class HttpLogDemoController {
     /**
      * 使用 http
      *
-     * @see SkipSslVerificationHttpRequestFactory https 需要认证管理器或跳过验证
+     * @see org.springframework.boot.actuate.autoconfigure.cloudfoundry.servlet.SkipSslVerificationHttpRequestFactory https 需要认证管理器或跳过验证
      */
     private static final String DEMO_URL = "http://github.com/chinaLym";
 
@@ -57,7 +58,7 @@ public class HttpLogDemoController {
      * 抛异常 http://localhost:8080/httpLog/3
      */
     @GetMapping("3")
-    public String errorLogDemo() {
+    public String onError() {
         restTemplate.getForObject("http://fakerurl", String.class);
         return TIP;
     }

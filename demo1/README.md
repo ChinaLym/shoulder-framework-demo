@@ -8,8 +8,8 @@
 # 📂 示例 Controller 简介
 
 - [log](src/main/java/com/example/demo1/controller/log)
-  - [无需任何代码，自动打印 HTTP接口清求/响应日志 + 自动打印异常打印](src/main/java/com/example/demo1/controller/log/HttpLogDemoController.java)
-  - [自动打印http接口调用请求/响应日志](src/main/java/com/example/demo1/controller/log/AutoApiLogDemoController.java)
+  - [无需任何代码，自动打印 HTTP接口清求/响应日志 + 自动打印异常打印](src/main/java/com/example/demo1/controller/log/ApiLogDemoController.java)
+  - [自动打印http接口调用请求/响应日志](src/main/java/com/example/demo1/controller/log/HttpLogDemoController.java)
   - [一个注解自动打印操作日志，轻松审计用户操作](src/main/java/com/example/demo1/controller/log/OperationLogDemoController.java)
   - [主动打印日志也很简单，轻松打印错误码](src/main/java/com/example/demo1/controller/log/LoggerDemoController.java)
 - [response](src/main/java/com/example/demo1/controller/response)

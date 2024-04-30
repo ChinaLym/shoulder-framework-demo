@@ -273,3 +273,22 @@ CREATE TABLE IF NOT EXISTS batch_record_detail
     source      text          null comment '导入的原数据'
 )
     comment '批量任务执行详情';
+
+
+CREATE TABLE IF NOT EXISTS dispatch_platform
+(
+    id          int AUTO_INCREMENT COMMENT '主键' PRIMARY KEY,
+    biz_type    varchar(48)   NOT NULL COMMENT '平台类型',
+    display_name varchar(48)   NOT NULL COMMENT 'name',
+    url         varchar(256)   NOT NULL COMMENT 'url',
+    description varchar(64)   NOT NULL COMMENT '平台特点说明',
+    core_value  varchar(256)   NOT NULL COMMENT '用户需求，对该平台内容的追求，平台侧重点',
+    user_tag    varchar(256)   NOT NULL COMMENT '用户群体特征',
+    precautions varchar(256)   NULL COMMENT '发文宣传注意事项',
+    frequency_period varchar(16) NULL COMMENT '推广频率-周期，如天、周、月',
+    suggest_times  int         NULL COMMENT '推广频率-每frequency_period内频次，每周2-3次可以用 2.5，每月一次则为1',
+    care_hotspot   int         NULL COMMENT '该平台是否需要着重考虑热点事件，使用0-5的分数表示，如微博非常需要，用5表示，语雀基本不需要用0表示',
+    need_vpn       int         NOT NULL COMMENT '是否需要vpn访问',
+    area           varchar(32) NOT NULL COMMENT '地区，境内境外'
+    )
+    COMMENT = '推广平台';

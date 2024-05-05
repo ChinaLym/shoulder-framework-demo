@@ -1,4 +1,4 @@
-# 学习 **[shoulder-framework](https://gitee.com/ChinaLym/shoulder-framework)** - Spring Security Oauth2 授权、OIDC 认证
+# 学习 **[shoulder-framework](https://github.com/ChinaLym/shoulder-framework)** - Spring Security Oauth2 授权、OIDC 认证
 
 ## 待开发
 

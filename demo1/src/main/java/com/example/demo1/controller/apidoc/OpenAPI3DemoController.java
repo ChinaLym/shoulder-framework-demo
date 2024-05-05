@@ -31,7 +31,7 @@ public class OpenAPI3DemoController {
     }
 
     @Operation(description = "OpenApi3 带参数")
-    @PostMapping(value = "4", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @PostMapping(value = "4", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public String case4(@RequestBody ApiDocV3 param) {
         return "xxxx";
     }

@@ -87,6 +87,9 @@ public enum DemoErrorCodeEnum implements ErrorCode {
         return logLevel;
     }
 
+    /**
+     * @deprecated 废弃
+     */
     @Override
     public HttpStatus getHttpStatusCode() {
         return httpStatus;

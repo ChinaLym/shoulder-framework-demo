@@ -12,7 +12,7 @@
 
 > 在需要加密保护的接口/字段上加 `@Sensitive` 注解，Shoulder 将在接口请求/响应时对其进行加解密
 
- [Shoulder - 通讯加密方案](https://gitee.com/ChinaLym/shoulder-framework/tree/master/shoulder-build/shoulder-base/shoulder-crypto-negotiation)
+ [Shoulder - 通讯加密方案](https://github.com/ChinaLym/shoulder-framework/tree/master/shoulder-build/shoulder-base/shoulder-crypto-negotiation)
 
 # 🌟扩展
 按照 Shoulder SPI 注入想要的加密算法类即可切换加密算法，如中国要求 SM 算法、美国要求AES算法。

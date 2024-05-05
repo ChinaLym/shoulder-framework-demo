@@ -12,7 +12,7 @@
   
   ```
 
-阅读 [shoulder-security 说明](https://gitee.com/ChinaLym/shoulder-framework/tree/master/shoulder-build/shoulder-starter/shoulder-starter-auth-token)
+阅读 [shoulder-security 说明](https://github.com/ChinaLym/shoulder-framework/tree/master/shoulder-build/shoulder-starter/shoulder-starter-auth-token)
 
 - 学习作为 认证服务器发 token
 - 学习作为资源服务器用 token 保护资源

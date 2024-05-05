@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
  * <p>
  * {@link SLog} 没有自动提示？
  * IDEA 中可以安装 shoulder 提供的 lombok-intellij-plugin 插件
- * <a href="https://gitee.com/ChinaLym/lombok-intellij-plugin" /a>
+ * <a href="https://github.com/ChinaLym/lombok-intellij-plugin" /a>
  * 该插件在原 lombok 插件基础上新增了支持 Shoulder 的扩展，且 100% 支持原有功能
  *
  * @author lym

@@ -18,9 +18,6 @@ import java.util.Date;
 /**
  * 原生 MapStruct， shoulder 未做任何修改
  * <p>
- * 介绍 https://gitee.com/ChinaLym/shoulder-framework/tree/master/shoulder-build/shoulder-starters/shoulder-starter-beanmap
- * 介绍 https://github.com/ChinaLym/shoulder-framework/tree/master/shoulder-build/shoulder-starters/shoulder-starter-beanmap
- *
  * @author lym
  */
 @SkipResponseWrap

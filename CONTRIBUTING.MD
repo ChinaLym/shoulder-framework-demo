@@ -10,7 +10,7 @@
 
 ## 基础知识
 
- 目前使用 `Git` 来控制程序版本，如果你想为 `Shoulder Framework` 贡献源代码，请先大致了解 Git 的使用方法。我们目前把项目托管在 `Gitee` 上，任何 Gitee 用户都可以向我们贡献代码。
+ 目前使用 `Git` 来控制程序版本，如果你想为 `Shoulder Framework` 贡献源代码，请先大致了解 Git 的使用方法。我们目前把项目托管在 `github` 上，任何 github 用户都可以向我们贡献代码。
 
  参与的方式很简单，
  - `fork` 一份 `Shoulder Framework` 的代码到你的仓库中

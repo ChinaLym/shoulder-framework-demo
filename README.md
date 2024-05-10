@@ -56,7 +56,7 @@
 
 欢迎使用 `issue` 或 [cn_lym@foxmail.com](mailto:cn_lym@foxmail.com) 交流，如 留下你的建议、期待的新功能等~
 
-### 👨‍💼 关于作者
+### 👨‍ 相关项目
 
-多次参与 Alibaba 核心系统重构与设计，主导过多次 D11 级别大促保障，欢迎技术交流与简历投递～
-- 该项目为作者在业余时间独立开发和维护的个人项目，非阿里巴巴官方产品。
+![releated_projects.png](doc/img/releated_projects.png)
+

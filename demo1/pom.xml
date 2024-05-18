@@ -6,7 +6,7 @@
     <parent>
         <groupId>cn.itlym</groupId>
         <artifactId>shoulder-parent</artifactId>
-        <version>0.8</version><!-- shoulder-version -->
+        <version>0.8.1-SNAPSHOT</version><!-- shoulder-version -->
     </parent>
 
     <groupId>com.example</groupId>
@@ -57,7 +57,7 @@
         <!-- 操作日志 -->
         <dependency>
             <groupId>cn.itlym</groupId>
-            <artifactId>shoulder-operation-log</artifactId>
+            <artifactId>shoulder-starter-operation-log</artifactId>
         </dependency>
 
         <!-- 对象转换 -->
@@ -74,7 +74,6 @@
         <dependency>
             <groupId>cn.itlym</groupId>
             <artifactId>shoulder-starter-monitor</artifactId>
-            <version>0.8</version>
         </dependency>
 
         <!-- test cluster -->

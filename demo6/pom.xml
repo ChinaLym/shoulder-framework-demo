@@ -3,9 +3,9 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <groupId>cn.itlym</groupId>
-        <artifactId>shoulder-parent</artifactId>
-        <version>0.8</version><!-- shoulder-version -->
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.2.4</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -19,44 +19,14 @@
     <dependencies>
 
         <dependency>
-            <groupId>cn.itlym</groupId>
-            <artifactId>shoulder-starter-web</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>cn.itlym</groupId>
-            <artifactId>shoulder-crypto</artifactId>
-        </dependency>
-
-        <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-redis</artifactId>
+            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
-        <!-- token 认证相关 -->
-        <dependency>
-            <groupId>cn.itlym</groupId>
-            <artifactId>shoulder-starter-auth-token</artifactId>
-        </dependency>
-        <!-- 认证服务器相关 -->
-        <dependency>
-            <groupId>cn.itlym</groupId>
-            <artifactId>shoulder-starter-auth-server</artifactId>
-        </dependency>
-        <!-- resourceServer -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
-        </dependency>
-
-        <!-- spring security: oauth2-client -->
-        <!--<dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-oauth2-client</artifactId>
-        </dependency>-->
 
         <dependency>
             <groupId>cn.itlym</groupId>
-            <artifactId>shoulder-starter-mysql</artifactId>
+            <artifactId>shoulder-starter-operation-log</artifactId>
+            <version>0.8.1-SNAPSHOT</version><!-- shoulder-version -->
         </dependency>
 
     </dependencies>

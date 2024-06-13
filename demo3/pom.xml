@@ -6,13 +6,13 @@
     <!-- 包含了 spring-boot-starter-web，在其之上额外提供了更棒的能力 -->
     <parent>
         <groupId>cn.itlym</groupId>
-        <artifactId>shoulder-parent</artifactId>
-        <version>0.8.1-SNAPSHOT</version><!-- shoulder-version -->
+        <artifactId>demos</artifactId>
+        <version>1.0-SNAPSHOT</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.example</groupId>
+
     <artifactId>demo3</artifactId>
 
     <name>demo3</name>

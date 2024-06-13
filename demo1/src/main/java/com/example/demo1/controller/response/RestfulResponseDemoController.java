@@ -32,7 +32,7 @@ public class RestfulResponseDemoController {
      * 正常写法举例，框架不会嵌套包装   <a href="http://localhost:8080/response/0" />
      */
     @GetMapping("0")
-    public BaseResult<String> notRecommended() {
+    public BaseResult<String> alreadyUnionType() {
         BaseResult<String> response = new BaseResult<>();
         response.setCode("0");
         response.setMsg("success");
@@ -44,8 +44,8 @@ public class RestfulResponseDemoController {
      * 字符类型返回值自动包装   <a href="http://localhost:8080/response/1" />
      */
     @GetMapping("1")
-    public String case1() {
-        return "data";
+    public String autoWrapCase1() {
+        return "myData";
     }
 
 
@@ -53,7 +53,7 @@ public class RestfulResponseDemoController {
      * json 类型返回值自动包装   <a href="http://localhost:8080/response/2" />
      */
     @GetMapping("2")
-    public Map<String, User> case2() {
+    public Map<String, User> autoWrapCase2() {
         Map<String, User> map = new HashMap<>(2);
         map.put("1", new User("id1", "name1"));
         map.put("2", new User("id2", "name2"));
@@ -65,7 +65,7 @@ public class RestfulResponseDemoController {
      */
     @SkipResponseWrap
     @GetMapping("3")
-    public String case3() {
+    public String autoWrapCase3() {
         return "noWarp";
     }
 
@@ -74,7 +74,7 @@ public class RestfulResponseDemoController {
      */
     @SkipResponseWrap
     @GetMapping("4")
-    public CustomizedResponse<String> case4() {
+    public CustomizedResponse<String> autoWrapCase4() {
         CustomizedResponse<String> response = new CustomizedResponse<>();
         response.setCode("0");
         response.setMsg("msg");

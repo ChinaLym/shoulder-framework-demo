@@ -6,11 +6,11 @@
 
     <parent>
         <groupId>cn.itlym</groupId>
-        <artifactId>shoulder-parent</artifactId>
-        <version>0.8.1-SNAPSHOT</version><!-- shoulder-version -->
+        <artifactId>demos</artifactId>
+        <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <groupId>com.example</groupId>
+
     <artifactId>demo2</artifactId>
 
     <name>demo2</name>

@@ -9,7 +9,7 @@
         <dependency>
             <groupId>cn.itlym</groupId>
             <artifactId>shoulder-starter-operation-log</artifactId>
-            <version>0.8.1</version><!-- shoulder-version -->
+            <version>1.0-SNAPSHOT</version>
         </dependency>
 ```
 

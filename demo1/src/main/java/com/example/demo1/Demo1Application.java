@@ -30,7 +30,7 @@ public class Demo1Application implements ApplicationListener<ContextRefreshedEve
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
-        System.out.println("demo1 翻译测试-错误码翻译：" + ContextUtils.getBean(Translator.class).getMessage(CommonErrorCodeEnum.AUTH_401_EXPIRED));
+        System.out.println("demo1 翻译测试（Demo1Application#onApplicationEvent）-错误码翻译：CommonErrorCodeEnum.AUTH_401_EXPIRED ->" + ContextUtils.getBean(Translator.class).getMessage(CommonErrorCodeEnum.AUTH_401_EXPIRED));
         System.out.println("上下文加载完毕");
     }
 

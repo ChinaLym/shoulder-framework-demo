@@ -52,4 +52,6 @@ Content-Type: application/json
 }
 
 ###
+
+# 删除用户
 GET http://localhost:8080/user/logicDelete?id=4

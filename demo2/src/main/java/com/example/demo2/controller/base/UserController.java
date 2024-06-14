@@ -20,10 +20,7 @@ import org.shoulder.web.template.tag.model.TagMappingEntity;
 import org.shoulder.web.template.tag.service.TagCoreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -102,7 +99,7 @@ public class UserController extends CrudController<
      * http://localhost:8080/user/attachTag?uid=1&type=age&name=20_30
      * http://localhost:8080/user/attachTag?uid=2&type=age&name=20_30
      */
-    @GetMapping("attachTag")
+    @PostMapping("attachTag")
     public TagDTO attachTag(@RequestParam("uid") String uid, @RequestParam("type") String type, @RequestParam("name") String name) {
 
         UserEntity userInDb = service.getById(uid);

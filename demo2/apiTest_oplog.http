@@ -1,6 +1,6 @@
 # shoulder 框架内嵌了 tagController，创建对应 tag 表 + 通过配置激活后，可以直接用 tag 相关功能
 
-### 测试生成一条
+### 测试生成一条操作日志
 GET http://localhost:8080/oplog/1
 Content-Type: application/json
 

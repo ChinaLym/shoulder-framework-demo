@@ -49,21 +49,22 @@ GET http://localhost:8080/api/v1/batch/testBatchDataType/record/list
 Content-Type: application/json
 
 ### 列出某次导入详情列表
-GET http://localhost:8080/api/v1/batch/testBatchDataType/record/detail/list?
-    businessType=testBatchDataType&
-    batchId={{import_batch_id}}
-Content-Type: application/json
-
-
-### 导出导入详情
-GET http://localhost:8080/api/v1/batch/testBatchDataType/record/detail/export?
-    businessType=testBatchDataType&
-    batchId={{import_batch_id}}
-Content-Type: application/json
-
-### 导出测试
-GET http://localhost:8080/api/v1/batch/testBatchDataType/export
+GET http://localhost:8080/api/v1/batch/testBatchDataType/record/detail/list
 Content-Type: application/json
 
 {
+  "businessType": "testBatchDataType",
+  "batchId": "{{import_batch_id}}"
 }
+
+### 导出导入详情
+POST http://localhost:8080/api/v1/batch/testBatchDataType/record/detail/export?businessType=testBatchDataType&batchId={{import_batch_id}}
+Content-Type: application/json
+
+{}
+
+### 导出测试
+POST http://localhost:8080/api/v1/batch/testBatchDataType/export
+Content-Type: application/json
+
+{}

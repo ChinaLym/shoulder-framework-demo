@@ -11,8 +11,6 @@
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-
-
     <artifactId>demo3</artifactId>
 
     <name>demo3</name>

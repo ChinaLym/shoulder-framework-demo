@@ -69,10 +69,10 @@ POST http://localhost:8080/user/attachTag?uid=2&type=age&name=20_30
 %}
 
 ### 根据标签 id 搜索
-POST http://localhost:8080/user/searchByTagId?tagId={{userAgeTagId}}
+GET http://localhost:8080/user/searchByTagId?tagId={{userAgeTagId}}
 
 ### 根据标签类型和名称搜索
-POST http://localhost:8080/user/searchByTagName?type=age&name=20_30
+GET http://localhost:8080/user/searchByTagName?type=age&name=20_30
 
 
 ### 删除 byBizId

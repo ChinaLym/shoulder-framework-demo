@@ -4,10 +4,14 @@ Content-Type: application/x-www-form-urlencoded
 
 username=shoulder&password=shoulder
 
+> {%
+    client.global.set("accessToken", response.body.data.access_token);
+%}
+
 ###
 
 # 2. 带token 调用接口：使用http-1的响应 data.access_token 来调用接口
 # 若不先拿 token or token 不对，拒绝本次请求 （org.shoulder.security.authentication.handler.json.Restful401AuthenticationEntryPoint.commence）
-POST http://localhost:8080/user/1
+GET http://localhost:8080/user/1
 Content-Type: application/json
-Authorization: Bearer 3bc40EG5dPkLPamAeafbyd_CQ8U
+Authorization: Bearer {{accessToken}}

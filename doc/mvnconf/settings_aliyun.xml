@@ -7,17 +7,35 @@ This file is only for a person where his/her network is not well to connect mave
 	xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
 	<pluginGroups></pluginGroups>
 	<proxies></proxies>
-    <localRepository>C:\Users\Administrator\.m2\repository</localRepository>
+<!--    <localRepository>C:\Users\Administrator\.m2\repository</localRepository>-->
+<!--    <localRepository>~/.m2/repository</localRepository>-->
 	<servers>
 	</servers>
-	
+
+	<!-- 拉取jar方式：优先从阿里云上高速拉取，若未拉取到则从中央仓库找。 -->
 	<mirrors>
+		<!-- 阿里云仓库，国内加速用 -->
 		<mirror>
 			<id>nexus-aliyun</id>
 			<mirrorOf>*</mirrorOf>
 			<name>Nexus aliyun</name>
-			<url>http://maven.aliyun.com/nexus/content/groups/public</url>
-		</mirror> 
+			<url>https://maven.aliyun.com/repository/public</url>
+		</mirror>
+		<!-- 中央仓库1 -->
+		<mirror>
+			<id>repo1</id>
+			<mirrorOf>central</mirrorOf>
+			<name>Human Readable Name for this Mirror.</name>
+			<url>http://repo1.maven.org/maven2/</url>
+		</mirror>
+
+		<!-- 中央仓库2 -->
+		<mirror>
+			<id>repo2</id>
+			<mirrorOf>central</mirrorOf>
+			<name>Human Readable Name for this Mirror.</name>
+			<url>http://repo2.maven.org/maven2/</url>
+		</mirror>
 	</mirrors>
 	
 	<profiles>

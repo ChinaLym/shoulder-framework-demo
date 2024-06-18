@@ -1,7 +1,9 @@
 package com.example.demo1.controller.log;
 
 import com.example.demo1.bo.ShopBO;
+import com.example.demo1.bo.UserInfo;
 import com.example.demo1.enums.MyColorEnum;
+import com.example.demo1.util.MockBusinessOperation;
 import org.shoulder.core.context.AppContext;
 import org.shoulder.core.context.AppInfo;
 import org.shoulder.core.log.Logger;
@@ -139,9 +141,10 @@ public class OperationLogDemoController {
      * 添加被操作对象信息时，可以使用接口  todo 后续示例需补充==================================================
      */
     @GetMapping("2")
-    @OperationLog(operation = "testOpLogAnnotation")
+    @OperationLog(operation = "mockChangeUser")
     public String case2() {
-        //OpLogContextHolder.setOperableObject();
+        // 设置操作对象
+        OpLogContextHolder.setOperableObject(MockBusinessOperation.newRandomUser());
         return TIP;
     }
 
@@ -153,9 +156,9 @@ public class OperationLogDemoController {
     @OperationLog(operation = "testOpLogAnnotation")
     @GetMapping("4")
     public String case4(
-            @RequestParam(defaultValue = "test") @OperationLogParam String param0, // 加了注解
-            @RequestParam(defaultValue = "test") @OperationLogParam(supportI18n = true, name = "myParam") String param1, // 设置为支持多语言
-            @RequestParam(defaultValue = "test") String param2) { // 未加注解
+            @RequestParam(defaultValue = "value0") @OperationLogParam String param0, // 加了注解
+            @RequestParam(defaultValue = "value1") @OperationLogParam(supportI18n = true, name = "myParam") String param1, // 设置为支持多语言
+            @RequestParam(defaultValue = "value2") String param2) { // 未加注解
         return "ok";
     }
 
@@ -166,9 +169,9 @@ public class OperationLogDemoController {
     @OperationLog(operation = "testOpLogAnnotation", logAllParams = true)
     @GetMapping("5")
     public String case5(
-            @RequestParam(defaultValue = "test") @OperationLogParam String param0, // 加了注解
-            @RequestParam(defaultValue = "test") @OperationLogParam(supportI18n = true, name = "myParam") String param1, // 设置为支持多语言
-            @RequestParam(defaultValue = "test") String param2) { // 未加注解
+            @RequestParam(defaultValue = "value0") @OperationLogParam String param0, // 加了注解
+            @RequestParam(defaultValue = "value1") @OperationLogParam(supportI18n = true, name = "myParam") String param1, // 设置为支持多语言
+            @RequestParam(defaultValue = "value2") String param2) { // 未加注解
         return "ok";
     }
 

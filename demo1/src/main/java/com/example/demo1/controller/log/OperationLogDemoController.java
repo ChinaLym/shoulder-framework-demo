@@ -10,6 +10,7 @@ import org.shoulder.core.util.ContextUtils;
 import org.shoulder.core.util.StringUtils;
 import org.shoulder.log.operation.annotation.OperationLog;
 import org.shoulder.log.operation.annotation.OperationLogParam;
+import org.shoulder.log.operation.context.OpLogContextHolder;
 import org.shoulder.log.operation.enums.OperationResult;
 import org.shoulder.log.operation.enums.TerminalType;
 import org.shoulder.log.operation.logger.OperationLogger;
@@ -100,7 +101,6 @@ public class OperationLogDemoController {
                 .setUserOrgName("UserOrgName-xxx")
 
                 // app / 租户信息
-                .setTenantCode(AppContext.getTenantCode())
                 .setAppId(AppInfo.appId())
                 .setInstanceId(AppInfo.instanceId())
                 .setTenantCode(AppContext.getTenantCode())
@@ -109,7 +109,7 @@ public class OperationLogDemoController {
                 .setResult(OperationResult.SUCCESS)
                 .setOperationTime(Instant.now())
                 .setEndTime(Instant.now())
-                // 可能从调用链中取
+                // 可从调用链中取
                 .setTraceId(AppContext.getTraceId());
 
         // 记录这条日志，关于记录日志的方式也封装了

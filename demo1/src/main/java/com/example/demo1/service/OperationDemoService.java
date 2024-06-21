@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class OperationDemoService {
 
-
     @Async
     public void asyncTest() {
         try {

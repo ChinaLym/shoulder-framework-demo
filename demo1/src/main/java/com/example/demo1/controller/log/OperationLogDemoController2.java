@@ -40,6 +40,7 @@ public class OperationLogDemoController2 {
     }
 
 
+
     /**
      * 如果 OperationLog 注解中有 ObjectType，值时，优先取方法上的
      * <a href="http://localhost:8080/oplog/config/2" />

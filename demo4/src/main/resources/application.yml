@@ -32,7 +32,30 @@ spring:
       host: 127.0.0.1
       port: 6379
       #password: ${REDIS_PWD}
-
+  security:
+    user:
+      name: user
+      password: password
+    oauth2:
+      authorizationserver:
+        client:
+          oidc-client:
+            registration:
+              client-id: "oidc-client"
+              client-secret: "{noop}secret"
+              client-authentication-methods:
+                - "client_secret_basic"
+              authorization-grant-types:
+                - "authorization_code"
+                - "refresh_token"
+              redirect-uris:
+                - "http://127.0.0.1:8080/login/oauth2/code/oidc-client"
+              post-logout-redirect-uris:
+                - "http://127.0.0.1:8080/"
+              scopes:
+                - "openid"
+                - "profile"
+            require-authorization-consent: true
 
 shoulder:
   application:
@@ -47,12 +70,12 @@ shoulder:
   web:
     handleGlobalException: false
   # ---------------------------- 关注这里 ------------------------------
-  security:
-    token:
-      store: jwt
-    auth: # 如果使用者自行实现登录成功、退出成功处理器，则这些配置将失效，使用者实现的优先生效
-      type: token # 测试环境这里设置为 token。session 方式已经可以在页面上尝试了！
-      responseType: json
+#  security:
+#    token:
+#      store: jwt
+#    auth: # 如果使用者自行实现登录成功、退出成功处理器，则这些配置将失效，使用者实现的优先生效
+#      type: token # 测试环境这里设置为 token。session 方式已经可以在页面上尝试了！
+#      responseType: json
 
   instance:
     type: FIXED

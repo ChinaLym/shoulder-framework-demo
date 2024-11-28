@@ -266,7 +266,7 @@ CREATE TABLE IF NOT EXISTS batch_record_detail
     id          int auto_increment comment '主键'
         primary key,
     record_id   varchar(48)   not null comment '批量任务执行表id',
-    `index`     int           not null comment '该任务中，本数据行对应的行号 / 下标值',
+    index_no    int           not null comment '该任务中，本数据行对应的行号 / 下标值',
     operation   varchar(64)   not null comment '业务操作类型，如校验、同步、导入、更新',
     status      int           not null comment '结果 0 执行成功 1 执行失败、2 跳过',
     fail_reason varchar(1024) null comment '失败原因，推荐支持多语言',

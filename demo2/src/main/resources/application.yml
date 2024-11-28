@@ -36,7 +36,8 @@ shoulder:
       tag:
         enable: true
       dictionary:
-          enable: true
+        enable: true
+        storage: ENUM
       oplog:
           enable: true
     filter:

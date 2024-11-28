@@ -58,10 +58,13 @@ Content-Type: application/json
 }
 
 ### 导出导入详情
-POST http://localhost:8080/api/v1/batch/testBatchDataType/record/detail/export?businessType=testBatchDataType&batchId={{import_batch_id}}
+POST http://localhost:8080/api/v1/batch/testBatchDataType/record/detail/export
 Content-Type: application/json
 
-{}
+{
+  "batchId": "{{import_batch_id}}",
+  "businessType": "testBatchDataType"
+}
 
 ### 导出测试
 POST http://localhost:8080/api/v1/batch/testBatchDataType/export

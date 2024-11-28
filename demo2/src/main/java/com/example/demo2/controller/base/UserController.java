@@ -34,6 +34,8 @@ import java.util.List;
  * POST http://localhost:8080/user/page 【注意POST】
  * BODY {}
  *
+ * debug查看所有接口 ContextUtils.getBean(RequestMappingHandlerMapping.class).getHandlerMethods()
+ *
  * @author lym
  * <p>
  * extends {@link CrudController} 会暴露哪些接口？ 见其继承的接口

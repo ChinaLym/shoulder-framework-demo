@@ -4,7 +4,7 @@ import com.example.demo1.controller.crypto.asymmetric.EccCryptoDemoController;
 import org.shoulder.crypto.asymmetric.impl.DefaultAsymmetricCipher;
 import org.shoulder.crypto.asymmetric.store.KeyPairCache;
 import org.shoulder.crypto.local.repository.impl.FileLocalCryptoInfoRepository;
-import org.shoulder.crypto.local.repository.impl.HashMapCryptoInfoRepository;
+import org.shoulder.crypto.local.repository.impl.MemoryCryptoInfoRepository;
 import org.shoulder.crypto.local.repository.impl.JdbcLocalCryptoInfoRepository;
 import org.shoulder.crypto.local.repository.impl.RedisLocalCryptoInfoRepository;
 import org.springframework.context.annotation.Configuration;
@@ -18,7 +18,7 @@ import org.springframework.context.annotation.Configuration;
 public class CryptoConfig {
 
     /**
-     * Note: 这里使用了用于demo测试的 HashMapCryptoInfoRepository（每次运行将重置！）
+     * Note: 这里使用了用于demo测试的 MemoryCryptoInfoRepository（每次运行将重置！）
      * 生产环境需要配置为可持久化的，如使用 mysql 作为持久化！！！！！
      *
      * @see JdbcLocalCryptoInfoRepository
@@ -26,8 +26,8 @@ public class CryptoConfig {
      * @see FileLocalCryptoInfoRepository
      */
     //@Bean
-    public HashMapCryptoInfoRepository hashMapCryptoInfoRepository() {
-        return new HashMapCryptoInfoRepository();
+    public MemoryCryptoInfoRepository MemoryCryptoInfoRepository() {
+        return new MemoryCryptoInfoRepository();
     }
 
 

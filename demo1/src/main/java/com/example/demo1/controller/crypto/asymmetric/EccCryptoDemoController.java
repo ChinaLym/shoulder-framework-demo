@@ -40,7 +40,7 @@ public class EccCryptoDemoController {
      * 非对称加密  <a href="http://localhost:8080/crypto/ecc/crypto?text=123456"/>
      */
     @GetMapping("crypto")
-    public CryptoTestDTO testCrypto(String text) throws AsymmetricCryptoException {
+    public CryptoTestDTO testCrypto(String text) {
         // 2. 加密
         String cipher = asymmetricTextCipher.encrypt(text);
         log.info("text({}) encrypt result: {}", text, cipher);
@@ -54,7 +54,7 @@ public class EccCryptoDemoController {
      * 签名验签  <a href="http://localhost:8080/crypto/ecc/sign?text=123456"/>
      */
     @GetMapping("sign")
-    public String testSign(String text) throws AsymmetricCryptoException {
+    public String testSign(String text) {
         // 2. 验签
         String sign = asymmetricTextCipher.sign(text);
         log.info("text({}) sign result: {}", text, sign);

@@ -23,11 +23,14 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * JSR303 注解式校验
  * <a href="http://localhost:8080/" />
- * 动态校验规则 <a href="http://localhost:8080/api/v1/validate/rule?method=get&uri=/validate/jsr/1" />
- * 动态校验规则 <a href="http://localhost:8080/api/v1/validate/rule/validate/jsr/1?method=get" />
  * <p>
- * 动态校验规则 <a href="http://localhost:8080/api/v1/validate/rule?method=get&uri=/validate/jsr/2" />
- * 动态校验规则 <a href="http://localhost:8080/api/v1/validate/rule?method=get&uri=/validate/jsr/3" />
+ *     另外可通过以下 地址 获取特定接口的校验规则【这里仅支持一次获取单个接口的规则，避免黑客获取该app有哪些接口,或遍历破解】
+ * <p>
+ * 动态校验规则-测试1 <a href="http://localhost:8080/api/v1/validate/rule?method=GET&uri=/validate/jsr/1" />
+ * 动态校验规则-测试2 <a href="http://localhost:8080/api/v1/validate/rule/validate/jsr/1?method=GET" />
+ * <p>
+ * 动态校验规则-测试3 <a href="http://localhost:8080/api/v1/validate/rule?method=GET&uri=/validate/jsr/2" />
+ * 动态校验规则-测试4 <a href="http://localhost:8080/api/v1/validate/rule?method=GETuri=/validate/jsr/3" />
  *
  * @author lym
  * @see ValidateRuleEndPoint 动态获取校验规则
@@ -38,8 +41,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class ValidateController {
 
     /**
-     * 正常写法举例
-     * http://localhost:8080/validate/1?value=x
+     * shoulder 写法举例
+     * http://localhost:8080/validate/1?value=abc
      */
     @GetMapping("1")
     public String caseEnum(@Enum(enums = {"abc", "def"}) String value) {

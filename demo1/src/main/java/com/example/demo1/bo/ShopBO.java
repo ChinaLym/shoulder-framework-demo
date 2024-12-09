@@ -29,7 +29,7 @@ public class ShopBO {
     Date createTime;
 
     /**
-     * 超市拥有者，演示复杂类型转换
+     * 超市拥有者，演示嵌套类型转换
      */
     @Data
     @AllArgsConstructor

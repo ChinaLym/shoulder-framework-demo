@@ -15,5 +15,5 @@ GET http://localhost:8080/simple/coding_client_like_me
 
 ###
 
-# 复杂对象也可以支持
+# 复杂的嵌套对象也可以支持
 GET http://localhost:8080/complex/coding_client_like_me

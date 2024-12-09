@@ -29,7 +29,7 @@ public interface DemoBeanMapping {
     ShopDTO toDTO(ShopBO bo);
 
     /**
-     * 复杂转换
+     * 嵌套转换
      * 若类型、属性名相同则不用写 Mapping，其中注解也可以不用谢
      *
      * @param bo 源

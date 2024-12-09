@@ -39,7 +39,7 @@ public class BeanMapController {
     }
 
     /**
-     * <a href="http://localhost:8080/bean/2"/> 复杂的转换
+     * <a href="http://localhost:8080/bean/2"/> 嵌套转换
      */
     @GetMapping("2")
     public ShopDTO case2() {

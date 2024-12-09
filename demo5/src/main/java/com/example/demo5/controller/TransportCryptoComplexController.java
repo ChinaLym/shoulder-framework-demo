@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 /**
- * 接口加密-复杂 DTO 通信
+ * 接口加密-嵌套 DTO 通信
  *
  * @author lym
  * @see DefaultAsymmetricCipher#ecc256
@@ -49,7 +49,7 @@ public class TransportCryptoComplexController {
 
     /**
      * 客户端代码编写参考：对其他服务发起加密请求【将自动进行密钥交换并加密传输
-     * 嵌套的复杂对象也一样支持，同样是用 {@link Sensitive} 注解标记，见 {@link ComplexParam#innerCipher}
+     * 复杂的嵌套对象也一样支持，同样是用 {@link Sensitive} 注解标记，见 {@link ComplexParam#innerCipher}
      * <a href="http://localhost:80/complex/coding_client_like_me"/>
      *
      * @see SensitiveRequestEncryptMessageConverter#writeInternal 在这打断点，观察参数确实是自动加密处理的

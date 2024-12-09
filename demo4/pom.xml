@@ -46,6 +46,7 @@
             <!-- demo 工程使用 h2 连接DB -->
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
+            <version>2.2.224</version>
         </dependency>
         <dependency>
             <!-- demo 工程 mock redis -->

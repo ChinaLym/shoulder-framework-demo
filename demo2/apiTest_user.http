@@ -60,3 +60,10 @@ GET http://localhost:8080/user/logicDelete?id=111
 
 # 框架-删除用户
 DELETE http://localhost:8080/user/111
+
+###
+# 框架-删除多个用户
+DELETE http://localhost:8080/user
+Content-Type: application/json
+
+[111, 3]

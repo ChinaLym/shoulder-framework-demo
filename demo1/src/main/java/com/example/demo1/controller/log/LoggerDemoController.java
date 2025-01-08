@@ -3,10 +3,13 @@ package com.example.demo1.controller.log;
 import org.shoulder.core.exception.CommonErrorCodeEnum;
 import org.shoulder.core.log.Logger;
 import org.shoulder.core.log.LoggerFactory;
+import org.shoulder.core.log.ShoulderLogger;
 import org.shoulder.web.annotation.SkipResponseWrap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.function.Supplier;
 
 /**
  * 日志使用示例
@@ -39,12 +42,12 @@ public class LoggerDemoController {
     private static final String TIP = "log is in your console.";
 
     /**
-     * <a href="http://localhost:8080/log/0" />
+     * <a href="http://localhost:8080/log/n0" />
      * 普通打印日志，直接使用 Slf4j 定义的方法即可，不需要额外学习。
      * 无需定义 logback.xml，开箱即用，shoulder 提供了默认日志格式（见 shoulder-autoconfiguration 的 logback-spring.xml）
      * 使用彩色展示，优化了 logback 的性能
      */
-    @GetMapping("0")
+    @GetMapping("n0")
     public String notRecommended() {
         log.info("this is a example log. 我是一条日志~~~~");
         return TIP;
@@ -107,6 +110,39 @@ public class LoggerDemoController {
         }
 
         return TIP;
+    }
+
+
+    /**
+     * <a href="http://localhost:8080/log/n1" />
+     * 普通打印日志，直接使用 Slf4j 定义的方法即可，不需要额外学习。
+     * 无需定义 logback.xml，开箱即用，shoulder 提供了默认日志格式（见 shoulder-autoconfiguration 的 logback-spring.xml）
+     * 使用彩色展示，优化了 logback 的性能
+     */
+    @GetMapping("n1")
+    public String notRecommended1() {
+        log.trace("我要打印一个低级别日志，{}。", mockCalculateArgs());
+        return "这个级别没开启打印，也要浪费 CPU 和时间计算参数值";
+    }
+
+    /**
+     * <a href="http://localhost:8080/log/4" />
+     * Shoulder 支持传入 Su
+     */
+    @GetMapping("4")
+    public String recommendedForBigArg() {
+        Supplier<String> s = LoggerDemoController::mockCalculateArgs;
+        log.info("我要打印一个低级别日志，{}。", s);
+        return "这个级别没开启打印，就不会浪费 CPU 和时间计算参数值";
+    }
+
+    public static String mockCalculateArgs() {
+        try {
+            Thread.sleep(5_000);
+            return "日志参数获取时涉及很多耗时操作";
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }

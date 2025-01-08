@@ -1,5 +1,6 @@
 package com.example.demo1;
 
+import org.shoulder.autoconfigure.web.EnableDictionaryItemEnum;
 import org.shoulder.core.exception.CommonErrorCodeEnum;
 import org.shoulder.core.i18.Translator;
 import org.shoulder.core.util.ContextUtils;
@@ -23,6 +24,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  */
 @EnableScheduling
 @SpringBootApplication
+@EnableDictionaryItemEnum("com.example.demo1.enums")
 public class Demo1Application implements ApplicationListener<ContextRefreshedEvent> {
     public static void main(String[] args) {
         SpringApplication.run(Demo1Application.class, args);

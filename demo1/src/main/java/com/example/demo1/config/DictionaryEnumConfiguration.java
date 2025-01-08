@@ -2,15 +2,18 @@ package com.example.demo1.config;
 
 import com.example.demo1.enums.DictionaryTestEnum;
 import org.shoulder.autoconfigure.web.DictionaryEnumRepositoryCustomizer;
+import org.shoulder.autoconfigure.web.EnableDictionaryItemEnum;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 /**
- * 自动生成枚举接口，方便下拉框的开发
- *
+ * 手动指定 Shoulder 对哪些枚举类字典生成查询接口（方便下拉框的开发）
+ * <p>
+ * 注意：该demo中该配置类实际未生效，生效方式见启动类
+ * @see com.example.demo1.Demo1Application
+ * @see EnableDictionaryItemEnum
  * @author lym
  */
-@Configuration
+//@Configuration
 public class DictionaryEnumConfiguration {
 
     /**

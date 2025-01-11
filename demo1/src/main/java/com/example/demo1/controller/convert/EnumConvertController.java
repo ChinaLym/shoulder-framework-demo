@@ -22,7 +22,7 @@ public class EnumConvertController {
     /**
      * <a href="http://localhost:8080/enum/0?color=RED"/> 输入枚举对应的名称可以成功转换
      * <p>
-     * 不优雅的实现，自己写（不推荐）
+     * 【不推荐的方式】 写太多代码，又乱又不好维护
      */
     @GetMapping("0")
     public MyColorEnum notRecommended(String color) {

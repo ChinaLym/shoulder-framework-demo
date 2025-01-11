@@ -1,0 +1,10 @@
+### DTO 字段也能校验，还能借助 Jackson 实现 DTO 接收 String，简化前端传参，减轻网络压力
+POST http://localhost:8080/dictionaryEnum/3
+Content-Type: application/json
+
+{
+  "id": "1",
+  "favoriteColor1": "RED",
+  "favoriteColor2": {"code": "BLUE"},
+  "favoriteColor3": "GREEN"
+}

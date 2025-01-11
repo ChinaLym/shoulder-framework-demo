@@ -1,6 +1,7 @@
 package com.example.demo1.controller.convert;
 
 import com.example.demo1.enums.DictionaryTestEnum;
+import com.example.demo1.enums.MyColorEnum;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import jakarta.validation.Valid;
 import lombok.Data;
@@ -95,12 +96,20 @@ public class DictionaryEnumConvertController {
     }
 
     /**
-     * <a href="http://localhost:8080/dictionaryEnum/2?color=RED"/> DictionaryEnumItem 还可以配合 Java JSR303 标准，轻松支持校验入参是否合法
-     * <a href="http://localhost:8080/dictionaryEnum/2?color=R1ED">传入不合法值就会失败</a>
+     * <a href="http://localhost:8080/dictionaryEnum/2?color=RED"/> 可以自由的使用枚举接收字符串
+     */
+    @RequestMapping("2")
+    public String case2(DictionaryTestEnum color) {
+        return color.name();
+    }
+
+    /**
+     * <a href="http://localhost:8080/dictionaryEnum/3?color=RED"/> DictionaryEnumItem 还可以配合 Java JSR303 标准，轻松支持校验入参是否合法
+     * <a href="http://localhost:8080/dictionaryEnum/3?color=R1ED">传入不合法值就会失败</a>
      */
     @Validated
-    @RequestMapping("2")
-    public String case2(@DictionaryEnumItem(DictionaryTestEnum.class) String color) {
+    @RequestMapping("3")
+    public String case3(@DictionaryEnumItem(DictionaryTestEnum.class) String color) {
         return color;
     }
 
@@ -110,8 +119,8 @@ public class DictionaryEnumConvertController {
      * 甚至用 DTO 接收 String 入参，非常方便，妈妈再也不用担心和我对接的前端不会传值了
      */
     @Validated
-    @PostMapping("3")
-    public UserForDictionary case3(@RequestBody UserForDictionary u) {
+    @PostMapping("4")
+    public UserForDictionary case4(@RequestBody UserForDictionary u) {
         return u;
     }
 

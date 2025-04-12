@@ -45,7 +45,7 @@ public class RestfulResponseDemoController {
      */
     @GetMapping("1")
     public String autoWrapCase1() {
-        return "myData";
+        return "data";
     }
 
 

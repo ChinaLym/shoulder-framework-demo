@@ -8,3 +8,9 @@ Content-Type: application/json
   "favoriteColor2": {"code": "BLUE"},
   "favoriteColor3": "GREEN"
 }
+
+### DTO 校验测试，会返回参数错误
+POST http://localhost:8080/dictionaryEnum/5
+Content-Type: application/json
+
+{"code": "GOLDEN"}

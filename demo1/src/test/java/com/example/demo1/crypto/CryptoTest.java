@@ -11,7 +11,7 @@ public class CryptoTest extends BaseWebTest {
         doGetTest("/crypto/rsa/crypto?text=123456",
                 "{\"code\":\"0\",\"msg\":\"success\",\"data\":{\"text\":\"123456\",\"cipher\":\"");
         doGetTest("/crypto/rsa/sign?text=123456",
-                "{\"code\":\"0\",\"msg\":\"success\",\"data\":\"\"}");
+                "{\"code\":\"0\",\"msg\":\"success\",\"data\":\"ok\"}");
     }
 
     @Test
@@ -19,7 +19,7 @@ public class CryptoTest extends BaseWebTest {
         doGetTest("/crypto/ecc/crypto?text=123456",
                 "{\"code\":\"0\",\"msg\":\"success\",\"data\":{\"text\":\"123456\",\"cipher\":\"");
         doGetTest("/crypto/ecc/sign?text=123456",
-                "{\"code\":\"0\",\"msg\":\"success\",\"data\":\"\"}");
+                "{\"code\":\"0\",\"msg\":\"success\",\"data\":\"ok\"}");
     }
 
     @Test

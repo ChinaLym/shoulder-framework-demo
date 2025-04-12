@@ -24,7 +24,7 @@ public class I18nTest extends BaseWebTest {
     @Test
     public void test0() throws Exception {
         String result = "{\"code\":\"0\",\"msg\":\"success\",\"data\":\"嗨\"}";
-        doGetTest("/i18n/spring?toBeTranslate=shoulder.test.hi", result);
+        doGetTest("/i18n/spring?toBeTranslate=shoulder.test.hi&locale=zh_CN", result);
         doGetTest("/i18n/shoulder?toBeTranslate=shoulder.test.hi", result);
         doGetTest("/i18n/1?toBeTranslate=shoulder.test.hi", result);
     }
@@ -40,8 +40,8 @@ public class I18nTest extends BaseWebTest {
         BaseResult<Map<String, String>> r = JsonUtils.parseObject(jsonResult, new TypeReference<>() {
         });
         Map<String, String> trErrorCodeMap = r.getData();
-        Assertions.assertEquals(trErrorCodeMap.get("0x0000000d"), "认证无效，需要先进行认证");
-        Assertions.assertEquals(trErrorCodeMap.get("0x00000064"), "文件系统错误：创建文件失败");
+        Assertions.assertEquals(trErrorCodeMap.get("0x0000000d"), "Certification invalid. Do-auth please.");
+        Assertions.assertEquals(trErrorCodeMap.get("0x00000064"), "Failed to create the file.");
         Assertions.assertEquals(trErrorCodeMap.get("0x000a0001"), "user locked");
         Assertions.assertEquals(trErrorCodeMap.get("0x000a2711"), "age out of range");
         Assertions.assertEquals(trErrorCodeMap.get("0x000a2712"), "third service error");

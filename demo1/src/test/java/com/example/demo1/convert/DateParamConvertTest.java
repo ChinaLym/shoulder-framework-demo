@@ -20,7 +20,7 @@ class DateParamConvertTest extends BaseWebTest {
     @Test
     public void test3() throws Exception {
         doGetTest("/date/3?date=2020-1-01 12:20:13",
-                "{\"code\":\"0\",\"msg\":\"success\",\"data\":\"2020-01-01T12:20:13\"");
+                "{\"code\":\"0\",\"msg\":\"success\",\"data\":\"2020-01-01 12:20:13\"");
     }
 
     @Test

@@ -113,6 +113,12 @@ public class DictionaryEnumConvertController {
         return color;
     }
 
+    @Validated
+    @RequestMapping("5")
+    public Object validateDictionaryDTO(@RequestBody @DictionaryEnumItem(value=DictionaryTestEnum.class, forbiddenCodes={"GOLDEN"}) DictionaryItemDTO color) {
+        return color;
+    }
+
     /**
      * 进阶能力 即使复杂类型，也可以轻松实现校验
      * <p>

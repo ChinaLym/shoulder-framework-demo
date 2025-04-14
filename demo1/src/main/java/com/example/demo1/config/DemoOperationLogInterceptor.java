@@ -48,7 +48,7 @@ public class DemoOperationLogInterceptor implements OperationLoggerInterceptor {
     // *************************** 可以拦截每条日志记录 ***************************
 
     @Override
-    public void beforeLog(OperationLogDTO opLog) {
+    public boolean beforeLog(OperationLogDTO opLog) {
         log.info("记录操作日志前回调钩子： 可在这里进行校验格式 / 继续填充一些值。可在 " + getClass().getSimpleName() + "#beforeLog 关闭该输出~ ");
 
         // --------------- 这里可以做的事情举例 --------------------
@@ -59,7 +59,11 @@ public class DemoOperationLogInterceptor implements OperationLoggerInterceptor {
             // 比如这里我根据实体类类型，动态去查一次，
 
             //fillMoreInfoFromDB(opLog);
+
+            // 若为false，则不打印日志
+            return false;
         }
+        return true;
     }
 
     @Override

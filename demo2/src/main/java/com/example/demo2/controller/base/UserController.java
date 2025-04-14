@@ -5,6 +5,7 @@ import com.example.demo2.entity.UserEntity;
 import com.example.demo2.repository.UserMapper;
 import com.example.demo2.service.IUserService;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.shoulder.batch.progress.BatchProgress;
 import org.shoulder.core.converter.ShoulderConversionService;
 import org.shoulder.core.dto.response.ListResult;
 import org.shoulder.core.exception.CommonErrorCodeEnum;
@@ -33,7 +34,7 @@ import java.util.List;
  * POST http://localhost:8080/user/listAll?limit=20 【注意POST】
  * POST http://localhost:8080/user/page 【注意POST】
  * BODY {}
- *
+ * <p>
  * debug查看所有接口 ContextUtils.getBean(RequestMappingHandlerMapping.class).getHandlerMethods()
  *
  * @author lym
@@ -121,7 +122,7 @@ public class UserController extends CrudController<
     }
 
     private ListResult<UserEntity> queryUserByTagMapping(List<TagMappingEntity> tagMappingList) {
-        if(CollectionUtils.isEmpty(tagMappingList)) {
+        if (CollectionUtils.isEmpty(tagMappingList)) {
             return ListResult.empty();
         }
         List<Long> userIds = tagMappingList.stream()
@@ -143,13 +144,19 @@ public class UserController extends CrudController<
     }
 
     /**
-     * 查询 name 为 input 的用户信息
-     * http://localhost:8080/user/getOne?name=Shoulder
+     * 逻辑删除
+     * http://localhost:8080/user/logicDelete?id=111
      */
     @GetMapping("logicDelete")
     public String logicDelete(@RequestParam("id") String id) {
         ((UserMapper) service.getBaseMapper()).omitById(id);
         return "";
+    }
+
+    public static void main(String[] args) {
+        BatchProgress batchProgress = new BatchProgress();
+        batchProgress.finish();
+        System.out.println(batchProgress.calculateProgress());
     }
 
 }

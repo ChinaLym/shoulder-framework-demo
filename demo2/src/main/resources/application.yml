@@ -52,6 +52,8 @@ shoulder:
     export-file-config-locations: classpath:exportFileConfig.json
     storage:
       type: jdbc
+    activity:
+      enable: true
 
   log:
     operation:

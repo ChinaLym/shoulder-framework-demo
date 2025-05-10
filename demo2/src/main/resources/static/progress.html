@@ -361,8 +361,9 @@
 </div>
 
 <script th:inline="javascript">
-    const progressId = document.getElementById('progressId').textContent;
-    const activityId = document.getElementById('activityId').textContent;
+    const urlParams = new URLSearchParams(window.location.search);
+    const progressId = urlParams.get('progressId');
+    const activityId = urlParams.get('activityId');
     const endStepName = document.getElementById('endStepName').textContent;
 
     if (!progressId) {
@@ -371,7 +372,7 @@
         const intervalId = setInterval(fetchProgress, 500);
 
         function fetchProgress() {
-            fetch(`/activity/progress?progressId=${progressId}&activityId=${activityId}`)
+            fetch(`/api/v1/activities/progress?progressId=${progressId}&activityId=${activityId}`)
                 .then(response => response.json())
                 .then(data => updateProgress(data, intervalId))
                 .catch(error => console.error('Error fetching progress:', error));

@@ -22,12 +22,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class OperationLogDemoController {
 
     /**
-     * <a href="http://localhost:8080/oplog/1" />
-     * 通过 @OperationLog 注解，快速生成一条操作日志
-     * 只需加个注解、即可记录操作日志
-     *
-     * 查看日志: http://localhost:8080/h2-console
+     * 只需加个 @OperationLog 注解、即可记录操作日志，<a href="http://localhost:8080/oplog/1">点击这里测试</a>
+     * <p>
+     * 若想在 DB 查看日志，可以访问  <a href="http://localhost:8080/h2-console">H2 内置的 console 页面</a>
      * 用户名/密码: shoulder / shoulder
+     * <p>
+     * 在配置启用 shoulder.web.ext.oplog 后，还可通过 <a href="http://localhost:8080/ui/oplogs/page.html">Shoulder 内置的 可视化页面</a> 更方便的查看
      */
     @GetMapping("1")
     @Operation(summary = "日志测试")

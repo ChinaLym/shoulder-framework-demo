@@ -33,9 +33,9 @@ public class DemoOperationLogInterceptor implements OperationLoggerInterceptor {
     @Override
     public List<? extends Operable> beforeAssembleBatchLogs(OperationLogDTO template, List<? extends Operable> operableList) {
 
-        // 批量导入业务中，被操作对象可能有多个，假设操作了 100 条，记成一条可能某些字段超出最大长度限制，记成 100 条又不利于整体查看，这里可以对其进行自定义分隔
+        // 批量导入业务中，被操作对象可能有多个，假设操作了 100 条，这100个对象记录在一条日志中，可能导致某些字段超出最大长度限制，而记录 100 条又不利于查看，这里可以对其进行自定义分隔条数和批次
         if ("batchImportXxx".equals(template.getOperation())) {
-            // 5条操作合成一条操作日志，
+            // 5条操作日志合成一条操作日志，
             List<? extends List<? extends Operable>> partOperableList = CollectionUtil.split(operableList, 5);
             List<Operable> result = new ArrayList<>(partOperableList.size());
             partOperableList.forEach(operables -> result.add(new MultiOperableDecorator(operables)));
@@ -53,10 +53,8 @@ public class DemoOperationLogInterceptor implements OperationLoggerInterceptor {
 
         // --------------- 这里可以做的事情举例 --------------------
         if (StringUtils.isEmpty(opLog.getObjectName())) {
-            // 执行某个业务可能不会拿到被操作对象的全部信息，但希望在展示操作日志时，展示更全的信息
-            // 以删除用户业务为例：删除用户接口的参数可能只有 userId 而没有 userName 。但希望在展示操作日志时，显示被删除的用户昵称、真实姓名，因此需要再查一次数据库补充
-            // 由于再从数据库查一次用户信息仅是为了操作日志展示方便，与 '删除用户' 这个主要业务没关系，不应该阻塞原业务，因此放在这里异步去做，不影响原业务性能和结果
-            // 比如这里我根据实体类类型，动态去查一次，
+            // 删除操作为例：删除用户接口的参数可能只有 userId 而没有 userName
+            // 但希望在展示操作日志时，显示被删除的用户昵称、真实姓名，因此需要再查一次数据库补充
 
             //fillMoreInfoFromDB(opLog);
 
@@ -82,6 +80,7 @@ public class DemoOperationLogInterceptor implements OperationLoggerInterceptor {
 
     }
 
+    // shoulder 支持操作日志异步处理，无需担心会阻塞主处理请求
     private void fillMoreInfoFromDB(OperationLogDTO opLog) {
         String tableName = null;
         String objectId = null;

@@ -3,16 +3,17 @@ package com.example.demo2.config;
 import org.shoulder.batch.progress.BatchActivityEnum;
 
 public enum MyTaskEnum implements BatchActivityEnum<MyTaskEnum> {
-    TASK_BLOCK1_MAIN_1("x", "任务1", 0, 0),
+    TASK_BLOCK1_MAIN_1("1.1.1", "任务1", 0, 0),
 
-    TASK_BLOCK1_MAIN_2("2", "任务2", 0, 0),
-    TASK_BLOCK1_MAIN_3("3", "任务3", 0, 0),
-    TASK_BLOCK1_MAIN_4("3", "任务3", 0, 0),
-    TASK_BLOCK1_MAIN_5("3", "任务3", 0, 0),
-    TASK_BLOCK1_MAIN_6("3", "任务3", 0, 0),
-    TASK_BLOCK1_MAIN_7("3", "任务3", 0, 0),
-    TASK_BLOCK1_MAIN_8("3", "任务3", 0, 0),
-    TASK_BLOCK1_MAIN_9("3", "任务3", 0, 0),
+    TASK_BLOCK1_MAIN_2("1.1.2", "任务2", 0, 0),
+    TASK_BLOCK1_MAIN_3("2.1.1", "任务3", 1, 0),
+    TASK_BLOCK1_MAIN_4("2.2.1", "任务3", 1, 1),
+    TASK_BLOCK1_MAIN_5("2.2.2", "任务3", 1, 1),
+    TASK_BLOCK1_MAIN_6("2.3.1", "任务3", 1, 2),
+    TASK_BLOCK1_MAIN_7("2.3.2", "任务3", 1, 2),
+    TASK_BLOCK1_MAIN_8("2.4.1", "任务3", 1, 3),
+    TASK_BLOCK1_MAIN_9("2.5.1", "任务3", 1, 4),
+    TASK_BLOCK1_MAIN_10("2.5.1", "任务3", 2, 0),
     ;
 
     private final String taskKey;

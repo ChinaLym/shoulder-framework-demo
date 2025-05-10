@@ -39,7 +39,7 @@ shoulder:
         enable: true
         storage: ENUM
       oplog:
-          enable: true
+        enable: true
     filter:
       mockUser:
         enable: true

@@ -3,19 +3,13 @@ package com.example.demo2.config;
 import org.shoulder.batch.progress.BatchActivityEnum;
 
 /**
- * <a href="http://localhost:8080/ui/activities/page.html?progressId=_shoulderMockAndTest&activityId=MyTaskEnum"></a>
+ * <a href="http://localhost:8080/ui/activities/page.html?progressId=_shoulderMockAndTest&activityId=MySimpleTaskEnum"></a>
  */
-public enum MyTaskEnum implements BatchActivityEnum<MyTaskEnum> {
-    TASK_BLOCK1_MAIN_1("1.1.1", "任务1", 1, 1),
-
-    TASK_BLOCK1_MAIN_2("1.1.2", "任务2", 1, 1),
-
-    TASK_BLOCK1_MAIN_3("2.1.1", "任务3.1", 2, 0),
-
-    TASK_BLOCK1_MAIN_4("2.2.1", "任务3.2.1", 2, 1),
-    TASK_BLOCK1_MAIN_5("2.2.2", "任务3.2.2", 2, 1),
-
-    TASK_BLOCK1_MAIN_10("3.1.1", "任务3", 3, 0),
+public enum MySimpleTaskEnum implements BatchActivityEnum<MySimpleTaskEnum> {
+    TASK1("👂", "识别用户意图", 0, 0),
+    TASK2("🧠", "改写查询、扩写查询", 0, 0),
+    TASK3("🔍", "查找相关数据", 0, 0),
+    TASK4("🧠", "总结信息", 0, 0),
     ;
 
     private final String taskKey;
@@ -24,7 +18,7 @@ public enum MyTaskEnum implements BatchActivityEnum<MyTaskEnum> {
     private final int getDisplayColumnNum;
     private final String displayEmoji;
 
-    MyTaskEnum(String displayEmoji, String description, int displayBlockNum, int getDisplayColumnNum) {
+    MySimpleTaskEnum(String displayEmoji, String description, int displayBlockNum, int getDisplayColumnNum) {
         this.taskKey = name();
         this.displayEmoji = displayEmoji;
         this.description = description;

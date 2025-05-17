@@ -10,7 +10,8 @@ public class BatchConfiguration {
     @Bean
     public BatchActivityEnumRepositoryCustomizer batch() {
         return repository -> {
-            repository.register(MyTaskEnum.class, "TEST");
+            repository.register(MyTaskEnum.class, "并行任务");
+            repository.register(MySimpleTaskEnum.class, "AI 思考过程");
         };
     }
 }

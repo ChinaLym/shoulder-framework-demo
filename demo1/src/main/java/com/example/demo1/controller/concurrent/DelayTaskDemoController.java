@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.BiFunction;
 
 /**
  * 延迟任务使用示例
@@ -67,11 +68,19 @@ public class DelayTaskDemoController {
      */
     @GetMapping("2")
     public String case2() {
-        AtomicInteger count = new AtomicInteger(0);
-        Threads.schedule("demo-scheduleTest",
-                () -> log.warn("I'am a shoulder scheduleTask, run time=" + count.addAndGet(1) + "/5"),
-                Instant.now(),
-                (now, executionTimes) -> executionTimes == 5 ? PeriodicTask.NO_NEED_EXECUTE : now.plus(Duration.ofMillis(1000))
+        final AtomicInteger count = new AtomicInteger(0);
+
+        // 每 1000ms 执行一次，执行5 次
+        BiFunction<Instant, Integer, Instant> exe5TimesPerSecond =
+                (now, executionTimes) ->
+                        count.get() == 5 ? PeriodicTask.NO_NEED_EXECUTE :
+                                now.plus(Duration.ofMillis(1000));
+
+        Runnable task = () -> log.warn("I'am a shoulder scheduleTask, run time=" + count.addAndGet(1) + "/5");
+
+        Threads.schedule(
+                PeriodicTask.create("demo-scheduleTest2", task,
+                        null, exe5TimesPerSecond)
         );
 
         return "周期性任务测试（Shoulder功能）：每秒执行一次，共执行5次后停止";
@@ -83,8 +92,8 @@ public class DelayTaskDemoController {
      */
     @GetMapping("3")
     public String case3() {
-        // 个性化周期执行规则：每次执行延迟都不一样，
-        Duration[] retryDurations = new Duration[]{
+        // 个性化周期执行规则：每次执行延迟都不一样
+        Duration[] triggerDurations = new Duration[]{
                 Duration.ofMillis(0),
                 Duration.ofMillis(1000),
                 Duration.ofMillis(2000),
@@ -96,11 +105,15 @@ public class DelayTaskDemoController {
                 Duration.ofMillis(200),
                 Duration.ofMillis(3000)
         };
+        // 每 triggerDurations[i] 执行一次
+        BiFunction<Instant, Integer, Instant> nextExecutionTimeCalculator = (now, executionTimes) ->
+                executionTimes == triggerDurations.length ? PeriodicTask.NO_NEED_EXECUTE : now.plus(triggerDurations[executionTimes]);
         AtomicInteger count = new AtomicInteger(0);
-        Threads.schedule("demo-scheduleTest",
-                () -> log.warn("I'am a shoulder scheduleTask, run time=" + count.addAndGet(1) + "/10"),
-                Instant.now().plus(retryDurations[0]),
-                (now, executionTimes) -> executionTimes == retryDurations.length ? PeriodicTask.NO_NEED_EXECUTE : now.plus(retryDurations[executionTimes])
+        Threads.schedule(
+                PeriodicTask.create("demo-scheduleTest3",
+                        () -> log.warn("I'am a shoulder scheduleTask, run time=" + count.addAndGet(1) + "/10"),
+                        null, nextExecutionTimeCalculator
+                )
         );
 
         return "个性化周期性任务测试（Shoulder功能）：重试间隔先变长后变快再变长，共执行10次后停止";

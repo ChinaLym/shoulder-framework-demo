@@ -31,7 +31,7 @@ public class AuthorizationServerConfiguration {
      * 传统授权服务器不支持用户参数的自定义名称，因此我们需要扩展默认值。默认情况下，它使用属性{@code user_name}，不过最好遵循 jwt 规范
      * <a target="_blank" href="https://tools.ietf.org/html/rfc7519">JWT Specification</a>.
      */
-    public static class SubjectAttributeUserTokenConverter extends DefaultUserAuthenticationConverter {
+    public static class SubjectAttributeUserTokenConverter  extends DefaultUserAuthenticationConverter {
         @Override
         public Map<String, ?> convertUserAuthentication(Authentication authentication) {
             Map<String, Object> response = new LinkedHashMap<>();

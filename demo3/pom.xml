@@ -76,6 +76,10 @@
             <artifactId>shoulder-starter-auth-token</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>cn.itlym</groupId>
+            <artifactId>shoulder-cluster</artifactId>
+        </dependency>
 
         <!-- 热更新插件，修改代码无需重启 -->
         <dependency>

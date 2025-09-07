@@ -1,5 +1,6 @@
 package com.example.demo4;
 
+import jakarta.annotation.Nonnull;
 import org.apache.commons.collections4.MapUtils;
 import org.shoulder.core.util.JsonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 
-import javax.annotation.Nonnull;
 import java.util.Collections;
 import java.util.Map;
 

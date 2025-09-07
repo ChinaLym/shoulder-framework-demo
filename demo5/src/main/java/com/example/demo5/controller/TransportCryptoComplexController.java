@@ -38,7 +38,7 @@ import org.springframework.web.client.RestTemplate;
 @RequestMapping("complex")
 public class TransportCryptoComplexController {
 
-    /**
+     /**
      * 用法与 Spring {@link RestTemplate} 完全相同
      */
     @Autowired

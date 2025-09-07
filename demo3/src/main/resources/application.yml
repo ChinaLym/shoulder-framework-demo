@@ -28,6 +28,10 @@ spring:
 shoulder:
   application:
     errorCodePrefix: '0x000b'
+    cluster: true
+  redis:
+    embedded:
+      enable: true
   crypto:
     local:
-      repository: redis # 将加密元数据放入 redis，避免集群情况下（cluster: true），每次重启导致非对称密钥对的解密失败
+      repository: jdbc # 将加密元数据放入 redis，避免集群情况下（cluster: true），每次重启导致非对称密钥对的解密失败

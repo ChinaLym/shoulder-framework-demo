@@ -1,0 +1,40 @@
+<svg width="200" height="300" viewBox="0 0 200 300" xmlns="http://www.w3.org/2000/svg">
+    <!-- 阴影 -->
+    <ellipse id="shadow" cx="100" cy="285" rx="35" ry="8" fill="#aaa" opacity="0.5">
+        <animate attributeName="rx"
+                 values="20;35;20"
+                 keyTimes="0;0.3;1"
+                 dur="1s"
+                 repeatCount="indefinite"/>
+        <animate attributeName="opacity"
+                 values="0.3;0.5;0.3"
+                 keyTimes="0;0.3;1"
+                 dur="1s"
+                 repeatCount="indefinite"/>
+    </ellipse>
+
+    <!-- 橡胶球（带挤压效果）-->
+    <g>
+        <animate attributeName="transform"
+                 type="scale"
+                 values="1,1; 1.1,0.7; 1,1"
+                 keyTimes="0;0.3;1"
+                 dur="1s"
+                 repeatCount="indefinite"
+                 additive="sum"
+                 transform-origin="100 250"/>
+
+
+        <circle cx="100" cy="50" r="30" fill="#FF5252">
+            <animate attributeName="cy"
+                     values="50;250;50"
+                     keyTimes="0;0.3;1"
+                     dur="1s"
+                     repeatCount="indefinite"
+                     calcMode="spline"
+                     keySplines="0.1 0.8 0.2 1; 0.5 0 0.9 0.5"/>
+
+        </circle>
+
+    </g>
+</svg>

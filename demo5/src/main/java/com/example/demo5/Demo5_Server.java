@@ -12,7 +12,6 @@ import org.springframework.context.annotation.PropertySource;
  * @author lym
  */
 @SpringBootApplication
-@EnableEmbeddedRedis // Shoulder 内嵌 redis
 @PropertySource("classpath:/application-common.properties")
 @PropertySource("classpath:/application-server.properties")// 指定配置文件，模拟 Server 端（占用 80端口）
 public class Demo5_Server {
